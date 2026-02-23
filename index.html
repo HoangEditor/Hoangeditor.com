@@ -8,90 +8,37 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Font chữ phong cách Không gian/Công nghệ */
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        body { 
-            font-family: 'Space Grotesk', sans-serif; 
-            color: #e2e8f0; 
-            overflow-x: hidden;
-        }
+        body { font-family: 'Space Grotesk', sans-serif; color: #e2e8f0; overflow-x: hidden; }
         
-        /* 1. Nền không gian sâu (Deep Space) */
-        .space-bg {
-            position: fixed; inset: 0;
-            background: radial-gradient(ellipse at bottom, #11092b 0%, #030014 80%);
-            z-index: -50;
-        }
-
-        /* 2. Hiệu ứng Sao trôi (Animated Stars) */
+        .space-bg { position: fixed; inset: 0; background: radial-gradient(ellipse at bottom, #11092b 0%, #030014 80%); z-index: -50; }
         .stars-container {
-            position: fixed; inset: -50%;
-            width: 200%; height: 200%;
-            background-image: 
-                radial-gradient(2px 2px at 40px 60px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 90px 140px, rgba(255,255,255,0.7), rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 150px 30px, rgba(56, 189, 248, 0.8), rgba(0,0,0,0)),
-                radial-gradient(1.5px 1.5px at 250px 180px, #ffffff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 320px 80px, rgba(167, 139, 250, 0.6), rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 350px 350px;
-            animation: drift 120s linear infinite;
-            z-index: -40;
-            opacity: 0.6;
+            position: fixed; inset: -50%; width: 200%; height: 200%;
+            background-image: radial-gradient(2px 2px at 40px 60px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 90px 140px, rgba(255,255,255,0.7), rgba(0,0,0,0)), radial-gradient(2px 2px at 150px 30px, rgba(56, 189, 248, 0.8), rgba(0,0,0,0)), radial-gradient(1.5px 1.5px at 250px 180px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 320px 80px, rgba(167, 139, 250, 0.6), rgba(0,0,0,0));
+            background-repeat: repeat; background-size: 350px 350px; animation: drift 120s linear infinite; z-index: -40; opacity: 0.6;
         }
-        @keyframes drift {
-            from { transform: translateY(0) rotate(0deg); }
-            to { transform: translateY(-20%) rotate(2deg); }
-        }
+        @keyframes drift { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-20%) rotate(2deg); } }
 
-        /* 3. Tinh vân trôi nổi (Floating Nebulas) */
-        .nebula {
-            position: fixed; border-radius: 50%; filter: blur(100px); z-index: -30;
-            animation: float 20s infinite alternate;
-        }
+        .nebula { position: fixed; border-radius: 50%; filter: blur(100px); z-index: -30; animation: float 20s infinite alternate; }
         .nebula-1 { width: 50vw; height: 50vw; background: rgba(139, 92, 246, 0.15); top: -20%; left: -10%; }
         .nebula-2 { width: 60vw; height: 60vw; background: rgba(56, 189, 248, 0.1); bottom: -20%; right: -10%; animation-direction: alternate-reverse; animation-duration: 25s; }
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(5%, 5%) scale(1.1); }
-        }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(5%, 5%) scale(1.1); } }
 
-        /* Thẻ Kính phong cách Phi thuyền (Sci-fi Glass Cards) */
-        .glass-card {
-            background: rgba(10, 10, 25, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(56, 189, 248, 0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .glass-card:hover {
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2), inset 0 0 20px rgba(56, 189, 248, 0.1);
-            transform: translateY(-5px);
-        }
+        .glass-card { background: rgba(10, 10, 25, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(56, 189, 248, 0.15); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(56, 189, 248, 0.05); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .glass-card:hover { border: 1px solid rgba(56, 189, 248, 0.4); box-shadow: 0 0 30px rgba(56, 189, 248, 0.2), inset 0 0 20px rgba(56, 189, 248, 0.1); transform: translateY(-5px); }
+        
+        /* Loại bỏ hiệu ứng hover nảy lên cho header và mobile menu để tránh giật lag */
+        .no-hover-jump:hover { transform: none !important; }
 
-        /* Text phát sáng */
-        .text-neon {
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 20px rgba(56, 189, 248, 0.3);
-        }
-        .text-gradient {
-            background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .text-neon { text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 20px rgba(56, 189, 248, 0.3); }
+        .text-gradient { background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* Nút phong cách HUD */
-        .btn-sci-fi {
-            position: relative; overflow: hidden;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4), inset 0 0 10px rgba(56, 189, 248, 0.2);
-            border: 1px solid rgba(56, 189, 248, 0.8);
-        }
-        .btn-sci-fi::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: skewX(-20deg); transition: 0.5s;
-        }
+        .btn-sci-fi { position: relative; overflow: hidden; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4), inset 0 0 10px rgba(56, 189, 248, 0.2); border: 1px solid rgba(56, 189, 248, 0.8); }
+        .btn-sci-fi::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transform: skewX(-20deg); transition: 0.5s; }
         .btn-sci-fi:hover::before { left: 150%; }
+
+        /* Animation cho Mobile Menu */
+        #mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; }
     </style>
 </head>
 <body class="antialiased selection:bg-sky-500/40">
@@ -101,12 +48,13 @@
     <div class="nebula nebula-1"></div>
     <div class="nebula nebula-2"></div>
 
-    <header class="fixed w-full z-50 glass-card border-x-0 border-t-0 rounded-none">
+    <header class="fixed w-full z-50 glass-card no-hover-jump border-x-0 border-t-0 rounded-none">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="text-2xl font-bold tracking-widest text-white flex items-center gap-2 uppercase">
                 <i class="fas fa-satellite-dish text-sky-400"></i>
                 Hoang<span class="text-sky-400 font-light text-neon">Editor</span>
             </div>
+            
             <nav class="hidden lg:flex space-x-10 text-sm font-semibold tracking-wider text-slate-300 uppercase">
                 <a href="#philosophy" class="hover:text-sky-400 transition">Our Approach</a>
                 <a href="#services" class="hover:text-sky-400 transition">Services</a>
@@ -116,6 +64,20 @@
             <a href="#onboarding" class="hidden md:inline-flex bg-sky-500/20 text-sky-400 border border-sky-400 px-6 py-2.5 rounded text-sm font-bold tracking-widest hover:bg-sky-500 hover:text-white transition shadow-[0_0_15px_rgba(56,189,248,0.3)] uppercase">
                 Initialize <i class="fas fa-power-off ml-2"></i>
             </a>
+
+            <button id="menu-btn" class="lg:hidden text-sky-400 hover:text-white focus:outline-none text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="lg:hidden max-h-0 opacity-0 overflow-hidden bg-[#030014]/90 backdrop-blur-xl border-b border-sky-500/30">
+            <div class="px-6 py-4 flex flex-col space-y-4 font-mono text-sm tracking-widest text-center uppercase">
+                <a href="#philosophy" class="mobile-link text-slate-300 hover:text-sky-400 border-b border-slate-800 pb-2">Our Approach</a>
+                <a href="#services" class="mobile-link text-slate-300 hover:text-sky-400 border-b border-slate-800 pb-2">Services</a>
+                <a href="#workflow" class="mobile-link text-slate-300 hover:text-sky-400 border-b border-slate-800 pb-2">System</a>
+                <a href="#pricing" class="mobile-link text-slate-300 hover:text-sky-400 border-b border-slate-800 pb-2">Pricing</a>
+                <a href="#onboarding" class="mobile-link text-sky-400 font-bold mt-2 pt-2">Initialize <i class="fas fa-power-off ml-2"></i></a>
+            </div>
         </div>
     </header>
 
@@ -306,7 +268,7 @@
                         <li class="flex items-start gap-3"><i class="fas fa-caret-right text-purple-500 mt-1"></i> Advanced Color Grading</li>
                         <li class="flex items-start gap-3"><i class="fas fa-caret-right text-purple-500 mt-1"></i> Speed Ramps & Smooth Transitions</li>
                         <li class="flex items-start gap-3"><i class="fas fa-caret-right text-purple-500 mt-1"></i> Ambient Sound Design</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-caret-right text-purple-500 mt-1"></i> All basic effects are free: Drop house, Sky Replacements, Masking, Day to night...</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-caret-right text-purple-500 mt-1"></i> Free Drop house, Sky Replacements...</li>
                     </ul>
                 </div>
 
@@ -376,5 +338,34 @@
         <p>SYSTEM ONLINE © 2026 HOANGEDITOR.COM | ALL PROTOCOLS SECURED</p>
     </footer>
 
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('max-h-0', 'opacity-0');
+                mobileMenu.classList.add('max-h-96', 'opacity-100');
+                menuBtn.innerHTML = '<i class="fas fa-times"></i>'; // Đổi icon thành dấu X
+            } else {
+                mobileMenu.classList.remove('max-h-96', 'opacity-100');
+                mobileMenu.classList.add('max-h-0', 'opacity-0');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>'; // Đổi lại icon 3 gạch
+            }
+        }
+
+        // Bấm vào nút để mở/đóng
+        menuBtn.addEventListener('click', toggleMenu);
+
+        // Tự động đóng menu khi bấm vào bất kỳ link nào
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) toggleMenu();
+            });
+        });
+    </script>
 </body>
 </html>
