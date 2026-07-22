@@ -1,1365 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Hoang Editor — Bảng Điều Khiển</title>
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" type="image/png" href="../Hoangeditor.PNG">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root{--bg:#f5f5f7;--panel:#fff;--text:#111;--text2:#404040;--text3:#595959;--accent:#f59e0b;--red:#ef4444;--green:#10b981;--blue:#3b82f6;--border:rgba(0,0,0,.08);--radius:10px}
-        [data-theme="dark"]{--bg:#0a0a0a;--panel:#111;--text:#fafafa;--text2:#b0b0b0;--text3:#888;--border:rgba(255,255,255,.08)}
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-        .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border-radius:6px;font-size:.8125rem;font-weight:600;cursor:pointer;border:1px solid var(--border);transition:all .2s;font-family:inherit;text-decoration:none;background:transparent;color:var(--text2)}
-        .btn:hover{background:rgba(0,0,0,.04)}[data-theme="dark"] .btn:hover{background:rgba(255,255,255,.04)}
-        .btn-solid{background:var(--text);color:var(--bg);border-color:var(--text)}.btn-solid:hover{opacity:.85}
-        .btn-accent{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700}.btn-accent:hover{opacity:.9}
-        .btn-danger{background:var(--red);color:#fff;border-color:var(--red)}.btn-danger:hover{opacity:.9}
-        .btn-sm{padding:.3rem .65rem;font-size:.7rem}
-        input,textarea,select{width:100%;padding:.6rem .75rem;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:.875rem;color:var(--text);background:var(--panel);transition:border-color .2s}
-        input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
-        textarea{resize:vertical;font-family:'SF Mono',Monaco,monospace;font-size:.8125rem;line-height:1.7}
-        label{display:block;font-size:.75rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem}
-        .form-group{margin-bottom:1.25rem}.hint{font-size:.6875rem;color:var(--text3);margin-top:.25rem}
-        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-        @media(max-width:768px){.form-row{grid-template-columns:1fr}}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Hoang Editor — Admin Dashboard</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../Hoangeditor.PNG">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+<style>
+:root{--bg:#f5f5f7;--panel:#fff;--text:#111;--t2:#404040;--t3:#595959;--accent:#f59e0b;--red:#ef4444;--green:#10b981;--blue:#3b82f6;--border:rgba(0,0,0,.08);--r:10px}
+[data-theme=dark]{--bg:#0a0a0a;--panel:#111;--text:#fafafa;--t2:#b0b0b0;--t3:#888;--border:rgba(255,255,255,.08)}
+*,:before,:after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border-radius:6px;font-size:.8125rem;font-weight:600;cursor:pointer;border:1px solid var(--border);transition:all .2s;font-family:inherit;text-decoration:none;background:0 0;color:var(--t2)}
+.btn:hover{background:rgba(0,0,0,.04)}[data-theme=dark] .btn:hover{background:rgba(255,255,255,.04)}
+.btn-solid{background:var(--text);color:var(--bg);border-color:var(--text)}.btn-solid:hover{opacity:.85}
+.btn-accent{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700}.btn-accent:hover{opacity:.9}
+.btn-danger{background:var(--red);color:#fff;border-color:var(--red)}.btn-danger:hover{opacity:.9}
+.btn-sm{padding:.3rem .65rem;font-size:.7rem}
+input,textarea,select{width:100%;padding:.6rem .75rem;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:.875rem;color:var(--text);background:var(--panel)}
+input:focus,textarea:focus,select:focus{outline:0;border-color:var(--accent)}
+textarea{resize:vertical;font-family:SF Mono,Monaco,monospace;font-size:.8125rem;line-height:1.7}
+label{display:block;font-size:.75rem;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem}
+.fg{margin-bottom:1.25rem}.hint{font-size:.6875rem;color:var(--t3);margin-top:.25rem}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media(max-width:768px){.fr{grid-template-columns:1fr}}
 
-        /* Login */
-        .login-overlay{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;align-items:center;justify-content:center}
-        .login-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;width:100%;max-width:380px;text-align:center}
-        .login-card h1{font-size:1.25rem;font-weight:700;margin-bottom:.25rem;letter-spacing:-.02em}
-        .login-card .sub{font-size:.8rem;color:var(--text3);margin-bottom:1.5rem}
-        .login-card .error{font-size:.75rem;color:var(--red);margin-top:.75rem;display:none}
+.login-overlay{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;align-items:center;justify-content:center}
+.login-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:2.5rem;width:100%;max-width:380px;text-align:center}
+.login-card h1{font-size:1.25rem;font-weight:700;margin-bottom:.25rem;letter-spacing:-.02em}
+.login-card .sub{font-size:.8rem;color:var(--t3);margin-bottom:1.5rem}
+.login-card .error{font-size:.75rem;color:var(--red);margin-top:.75rem;display:none}
 
-        /* Tổng Quan layout */
-        .app{display:none;min-height:100vh}
-        .app.active{display:flex}
-        .sidebar{width:220px;background:var(--panel);border-right:1px solid var(--border);padding:1.25rem;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100}
-        .sidebar-logo{font-weight:700;font-size:.95rem;letter-spacing:-.02em;margin-bottom:2rem;display:flex;align-items:center;gap:.5rem}
-        .sidebar-logo span{color:var(--accent)}
-        .sidebar-nav{display:flex;flex-direction:column;gap:.25rem;flex:1}
-        .sidebar-nav a{display:flex;align-items:center;gap:.5rem;padding:.55rem .75rem;border-radius:6px;font-size:.8125rem;font-weight:500;color:var(--text2);text-decoration:none;transition:all .15s}
-        .sidebar-nav a:hover,.sidebar-nav a.active{background:rgba(0,0,0,.04);color:var(--text)}[data-theme="dark"] .sidebar-nav a:hover,[data-theme="dark"] .sidebar-nav a.active{background:rgba(255,255,255,.04)}
-        .sidebar-nav a.active{color:var(--accent);font-weight:600}
-        .sidebar-nav .badge{background:var(--accent);color:#000;font-size:.6rem;font-weight:700;padding:.1rem .4rem;border-radius:9999px;margin-left:auto}
-        .main-content{flex:1;margin-left:220px;padding:2rem;max-width:1100px}
-        .page{display:none}.page.active{display:block}
-        .page-header{margin-bottom:2rem}.page-header h2{font-size:1.35rem;font-weight:700;letter-spacing:-.02em}
-        .page-header p{font-size:.85rem;color:var(--text3);margin-top:.25rem}
+.app{display:none;min-height:100vh}.app.active{display:flex}
+.sidebar{width:220px;background:var(--panel);border-right:1px solid var(--border);padding:1.25rem;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100}
+.sidebar-logo{font-weight:700;font-size:.95rem;letter-spacing:-.02em;margin-bottom:2rem;display:flex;align-items:center;gap:.5rem}
+.sidebar-logo span{color:var(--accent)}
+.sidenav{display:flex;flex-direction:column;gap:.25rem;flex:1}
+.sidenav a{display:flex;align-items:center;gap:.5rem;padding:.55rem .75rem;border-radius:6px;font-size:.8125rem;font-weight:500;color:var(--t2);text-decoration:none;transition:all .15s}
+.sidenav a:hover,.sidenav a.active{background:rgba(0,0,0,.04);color:var(--text)}[data-theme=dark] .sidenav a:hover,[data-theme=dark] .sidenav a.active{background:rgba(255,255,255,.04)}
+.sidenav a.active{color:var(--accent);font-weight:600}
+.sidenav .badge{background:var(--accent);color:#000;font-size:.6rem;font-weight:700;padding:.1rem .4rem;border-radius:9999px;margin-left:auto}
+.main{flex:1;margin-left:220px;padding:2rem;max-width:1100px}
+.page{display:none}.page.active{display:block}
+.ph{margin-bottom:2rem}.ph h2{font-size:1.35rem;font-weight:700;letter-spacing:-.02em}.ph p{font-size:.85rem;color:var(--t3);margin-top:.25rem}
 
-        /* Stats cards */
-        .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
-        .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem}
-        .stat-card .num{font-size:2rem;font-weight:800;letter-spacing:-.03em}
-        .stat-card .lbl{font-size:.75rem;color:var(--text3);margin-top:.25rem}
-        @media(max-width:768px){.stats-grid{grid-template-columns:1fr}}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.sc{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem}
+.sc .num{font-size:2rem;font-weight:800;letter-spacing:-.03em}.sc .lbl{font-size:.75rem;color:var(--t3);margin-top:.25rem}
+@media(max-width:768px){.sg{grid-template-columns:1fr}}
 
-        /* Post list */
-        .post-table{width:100%;border-collapse:collapse}
-        .post-table th{text-align:left;padding:.6rem .75rem;font-size:.7rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
-        .post-table td{padding:.7rem .75rem;font-size:.8125rem;border-bottom:1px solid var(--border)}
-        .post-table tr:hover td{background:rgba(0,0,0,.01)}[data-theme="dark"] .post-table tr:hover td{background:rgba(255,255,255,.01)}
-        .post-table .title-cell{font-weight:600;color:var(--text);max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-        .post-table .actions{display:flex;gap:.35rem}
+.pt{width:100%;border-collapse:collapse}
+.pt th{text-align:left;padding:.6rem .75rem;font-size:.7rem;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.pt td{padding:.7rem .75rem;font-size:.8125rem;border-bottom:1px solid var(--border)}
+.pt tr:hover td{background:rgba(0,0,0,.01)}[data-theme=dark] .pt tr:hover td{background:rgba(255,255,255,.01)}
+.pt .tc{font-weight:600;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pt .acts{display:flex;gap:.35rem}
 
-        /* Editor toolbar */
-        .editor-toolbar{display:flex;gap:.125rem;padding:.5rem;background:var(--bg);border:1px solid var(--border);border-bottom:none;border-radius:6px 6px 0 0;flex-wrap:wrap}
-        .tool-btn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;color:var(--text2);border-radius:4px;cursor:pointer;font-size:.75rem;transition:all .15s}
-        .tool-btn:hover{background:rgba(0,0,0,.06);color:var(--text)}[data-theme="dark"] .tool-btn:hover{background:rgba(255,255,255,.06)}
-        .editor-textarea{width:100%;min-height:300px;padding:1rem;border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;font-family:'SF Mono',Monaco,monospace;font-size:.8125rem;line-height:1.7;color:var(--text);background:var(--panel);resize:vertical}
+.etb{display:flex;gap:.125rem;padding:.5rem;background:var(--bg);border:1px solid var(--border);border-bottom:none;border-radius:6px 6px 0 0;flex-wrap:wrap}
+.tb{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:none;background:0 0;color:var(--t2);border-radius:4px;cursor:pointer;font-size:.75rem;transition:all .15s}
+.tb:hover{background:rgba(0,0,0,.06);color:var(--text)}[data-theme=dark] .tb:hover{background:rgba(255,255,255,.06)}
+.eta{width:100%;min-height:300px;padding:1rem;border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;font-family:SF Mono,Monaco,monospace;font-size:.8125rem;line-height:1.7;color:var(--text);background:var(--panel);resize:vertical}
 
-        /* Preview */
-        .preview-panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-top:1rem}
-        .preview-panel h3{font-size:.8rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem}
-        .preview-frame{font-family:'Inter',sans-serif;font-size:.85rem;line-height:1.7;max-height:400px;overflow-y:auto}
-        .preview-frame h1{font-size:1.5rem;font-weight:800;margin-bottom:.5rem}
-        .preview-frame h2{font-size:1.15rem;font-weight:700;margin:1.5rem 0 .5rem}
-        .preview-frame p{margin-bottom:.75rem}
-        .preview-frame strong{color:var(--text)}
-        .preview-frame blockquote{border-left:3px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic;color:var(--text3)}
+.preview-panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-top:1rem}
+.preview-panel h3{font-size:.8rem;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem}
+.pv{font-family:Inter,sans-serif;font-size:.85rem;line-height:1.7;max-height:400px;overflow-y:auto}
+.pv h1{font-size:1.5rem;font-weight:800;margin-bottom:.5rem}.pv h2{font-size:1.15rem;font-weight:700;margin:1.5rem 0 .5rem}
+.pv p{margin-bottom:.75rem}.pv strong{color:var(--text)}
+.pv blockquote{border-left:3px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic;color:var(--t3)}
 
-        /* SEO checklist */
-        .seo-list{display:flex;flex-direction:column;gap:.3rem;margin-top:.75rem}
-        .seo-item{display:flex;align-items:center;gap:.4rem;font-size:.7rem;padding:.25rem .5rem;border-radius:4px}
-        .seo-item.pass{background:rgba(16,185,129,.08);color:var(--green)}.seo-item.warn{background:rgba(239,68,68,.08);color:var(--red)}
-        .seo-item i{font-size:.6rem}
+.seo-list{display:flex;flex-direction:column;gap:.3rem;margin-top:.75rem}
+.seo-i{display:flex;align-items:center;gap:.4rem;font-size:.7rem;padding:.25rem .5rem;border-radius:4px}
+.seo-i.pass{background:rgba(16,185,129,.08);color:var(--green)}.seo-i.warn{background:rgba(239,68,68,.08);color:var(--red)}
+.seo-i i{font-size:.6rem}
 
-        /* Toast */
-        .toast{position:fixed;bottom:2rem;right:2rem;background:var(--text);color:var(--bg);padding:.75rem 1.25rem;border-radius:8px;font-size:.8125rem;font-weight:600;opacity:0;transform:translateY(10px);transition:all .3s;z-index:999;pointer-events:none}
-        .toast.show{opacity:1;transform:translateY(0)}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--text);color:var(--bg);padding:.75rem 1.25rem;border-radius:8px;font-size:.8125rem;font-weight:600;opacity:0;transform:translateY(10px);transition:all .3s;z-index:999;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
 
-        /* Modal */
-        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center}
-        .modal-overlay.show{display:flex}
-        .modal{background:var(--panel);border-radius:var(--radius);padding:1.5rem;max-width:500px;width:100%;margin:1rem}
-        .modal h3{font-size:1rem;font-weight:700;margin-bottom:.5rem}.modal p{font-size:.85rem;color:var(--text3);margin-bottom:1rem}
-        .modal-actions{display:flex;gap:.5rem;justify-content:flex-end}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal{background:var(--panel);border-radius:var(--r);padding:1.5rem;max-width:500px;width:100%;margin:1rem}
+.modal h3{font-size:1rem;font-weight:700;margin-bottom:.5rem}.modal p{font-size:.85rem;color:var(--t3);margin-bottom:1rem}
+.ma{display:flex;gap:.5rem;justify-content:flex-end}
 
-        /* AI Panel */
-        .ai-panel{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(168,85,247,.04));border:1px solid rgba(245,158,11,.15);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.5rem}
-        .ai-panel h3{font-size:.85rem;font-weight:700;margin-bottom:.25rem;display:flex;align-items:center;gap:.5rem}
-        .ai-panel h3 .ai-badge{font-size:.55rem;background:linear-gradient(135deg,#f59e0b,#a855f7);color:#fff;padding:.15rem .5rem;border-radius:9999px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-        .ai-panel .ai-desc{font-size:.75rem;color:var(--text3);margin-bottom:.75rem}
-        .ai-input-row{display:flex;gap:.5rem}
-        .ai-input-row input{flex:1}
-        .ai-keywords{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem}
-        .ai-kw{font-size:.65rem;padding:.2rem .55rem;border-radius:9999px;background:var(--bg);border:1px solid var(--border);color:var(--text3);cursor:pointer;transition:all .15s}
-        .ai-kw:hover{border-color:var(--accent);color:var(--accent)}
-        .ai-loading{display:none;align-items:center;gap:.5rem;color:var(--accent);font-size:.8rem;font-weight:600;margin-top:.5rem}
-        .ai-loading .spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
-        @keyframes spin{to{transform:rotate(360deg)}}
-        .ai-prompt-box{display:none;margin-top:.75rem}
-        .ai-prompt-box textarea{font-size:.7rem;min-height:120px}
-    </style>
+.ai-panel{background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(168,85,247,.04));border:1px solid rgba(245,158,11,.15);border-radius:var(--r);padding:1.25rem;margin-bottom:1.5rem}
+.ai-panel h3{font-size:.85rem;font-weight:700;margin-bottom:.25rem;display:flex;align-items:center;gap:.5rem}
+.ai-badge{font-size:.55rem;background:linear-gradient(135deg,#f59e0b,#a855f7);color:#fff;padding:.15rem .5rem;border-radius:9999px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.ai-panel .ai-desc{font-size:.75rem;color:var(--t3);margin-bottom:.75rem}
+.ai-keys{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem}
+.ai-kw{font-size:.65rem;padding:.2rem .55rem;border-radius:9999px;background:var(--bg);border:1px solid var(--border);color:var(--t3);cursor:pointer;transition:all .15s}
+.ai-kw:hover{border-color:var(--accent);color:var(--accent)}
+.ai-loading{display:none;align-items:center;gap:.5rem;color:var(--accent);font-size:.8rem;font-weight:600;margin-top:.5rem}
+.spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
 </head>
 <body>
 
-    <!-- ═══ LOGIN ═══ -->
-    <div class="login-overlay" id="loginScreen">
-        <div class="login-card">
-            <div style="font-size:2rem;margin-bottom:1rem">🔐</div>
-            <h1>Hoang Editor Admin</h1>
-            <p class="sub">Nhập thông tin đăng nhập để tiếp tục</p>
-            <form id="loginForm" onsubmit="return handleLogin()">
-                <div class="form-group"><label>Tên đăng nhập</label><input type="text" id="loginUser" placeholder="admin" required autofocus></div>
-                <div class="form-group"><label>Mật khẩu</label><input type="password" id="loginPass" placeholder="••••••••" required></div>
-                <button type="submit" class="btn btn-accent" style="width:100%;justify-content:center;padding:.7rem">Đăng Nhập <i class="fas fa-arrow-right"></i></button>
-                <p class="error" id="loginError">Sai tên đăng nhập hoặc mật khẩu</p>
-            </form>
-        </div>
-    </div>
-
-    <!-- ═══ DASHBOARD ═══ -->
-    <div class="app" id="app">
-        <aside class="sidebar">
-            <div class="sidebar-logo"><i class="fas fa-pen-to-square" style="color:var(--accent)"></i> Hoang <span>Admin</span></div>
-            <nav class="sidebar-nav">
-                <a href="#" class="active" data-page="dashboard"><i class="fas fa-gauge-high"></i> Tổng Quan</a>
-                <a href="#" data-page="write"><i class="fas fa-plus-circle"></i> Viết Bài Mới</a>
-                <a href="#" data-page="manage"><i class="fas fa-list-check"></i> Quản Lý Bài Viết <span class="badge" id="postCount">0</span></a>
-                <a href="#" data-page="schedule"><i class="fas fa-calendar-check"></i> Schedule</a>
-                <a href="#" data-page="settings"><i class="fas fa-gear"></i> Cài Đặt API</a>
-            </nav>
-            <div style="border-top:1px solid var(--border);padding-top:.75rem;display:flex;flex-direction:column;gap:.25rem">
-                <a href="#" onclick="toggleTheme()" style="display:flex;align-items:center;gap:.5rem;padding:.55rem .75rem;border-radius:6px;font-size:.8125rem;font-weight:500;color:var(--text2);text-decoration:none"><i class="fas fa-moon" id="themeIcon"></i> <span id="themeLabel">Chế Độ Tối</span></a>
-                <a href="#" onclick="handleLogout()" style="display:flex;align-items:center;gap:.5rem;padding:.55rem .75rem;border-radius:6px;font-size:.8125rem;font-weight:500;color:var(--red);text-decoration:none"><i class="fas fa-right-from-bracket"></i> Đăng Xuất</a>
-            </div>
-        </aside>
-
-        <main class="main-content">
-            <!-- Tổng Quan Page -->
-            <div class="page active" id="page-dashboard">
-                <div class="page-header"><h2>Tổng Quan</h2><p>Chào mừng trở lại. Tổng quan blog của bạn.</p></div>
-                <div class="stats-grid">
-                    <div class="stat-card"><div class="num" id="statTotal">0</div><div class="lbl">Tổng Số Bài</div></div>
-                    <div class="stat-card"><div class="num" id="statMonth">0</div><div class="lbl">Tháng Này</div></div>
-                    <div class="stat-card"><div class="num" id="statRecent">—</div><div class="lbl">Bài Mới Nhất</div></div>
-                </div>
-                <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem">
-                    <h3 style="font-size:.85rem;font-weight:600;margin-bottom:.75rem">Thao Tác Nhanh</h3>
-                    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-                        <button class="btn btn-accent" onclick="navigateTo('write')"><i class="fas fa-plus"></i> Bài Mới</button>
-                        <button class="btn" onclick="navigateTo('manage')"><i class="fas fa-list"></i> Quản Lý Bài Viết</button>
-                        <button class="btn" onclick="window.open('index.html','_blank')"><i class="fas fa-eye"></i> Xem Blog</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Write Page -->
-            <div class="page" id="page-write">
-                <div class="page-header"><h2>Viết Bài Mới</h2><p id="editModeLabel">Tạo bài viết mới với đầy đủ metadata SEO.</p></div>
-
-                <!-- ═══ AI WRITER ═══ -->
-                <div class="ai-panel" id="aiPanel">
-                    <h3><i class="fas fa-robot" style="color:#a855f7"></i> AI Viết Blog <span class="ai-badge">SEO + GEO</span></h3>
-                    <p class="ai-desc">Nhập chủ đề bên dưới. AI sẽ tạo bài viết hoàn chỉnh, tối ưu từ khóa cho người quay video bất động sản.</p>
-                    <div class="ai-input-row">
-                        <input type="text" id="aiTopic" placeholder='vd: "cách định giá dịch vụ quay video bđs" hoặc "góc drone bán biệt thự"'>
-                        <button class="btn btn-accent" onclick="generateWithAI()" id="aiTạoBtn"><i class="fas fa-wand-magic-sparkles"></i> Tạo</button>
-                    </div>
-                    <div class="ai-keywords" id="aiKeywords">
-                        <span class="ai-kw" onclick="document.getElementById('aiTopic').value=this.textContent;generateWithAI()">định giá video bất động sản</span>
-                        <span class="ai-kw" onclick="document.getElementById('aiTopic').value=this.textContent;generateWithAI()">thuê ngoài dựng video</span>
-                        <span class="ai-kw" onclick="document.getElementById('aiTopic').value=this.textContent;generateWithAI()">mở rộng kinh doanh sản xuất video</span>
-                        <span class="ai-kw" onclick="document.getElementById('aiTopic').value=this.textContent;generateWithAI()">mẹo chỉnh màu cho BĐS cao cấp</span>
-                        <span class="ai-kw" onclick="document.getElementById('aiTopic').value=this.textContent;generateWithAI()">xu hướng quay phim BĐS 2026</span>
-                        <span class="ai-kw" onclick="document.getElementById('aiTopic').value=this.textContent;generateWithAI()">mẹo dựng video drone</span>
-                    </div>
-                    <div class="ai-loading" id="aiLoading"><div class="spinner"></div> AI đang viết bài blog của bạn...</div>
-                    <div class="ai-prompt-box" id="aiPromptBox">
-                        <p style="font-size:.7rem;color:var(--text3);margin-bottom:.3rem"><i class="fas fa-lightbulb" style="color:var(--accent)"></i> Bước 1: Sao chép prompt → Dán vào ChatGPT hoặc Claude</p>
-                        <textarea id="aiPromptText" readonly onclick="this.select()" style="min-height:100px"></textarea>
-                        <button class="btn btn-sm" style="margin-top:.35rem" onclick="navigator.clipboard.writeText(document.getElementById('aiPromptText').value);showToast('Prompt copied! Paste into ChatGPT or Claude, then paste the JSON result back below.')"><i class="fas fa-copy"></i> Sao Chép Prompt</button>
-                        <p style="font-size:.7rem;color:var(--text3);margin:1rem 0 .3rem"><i class="fas fa-paste" style="color:var(--accent)"></i> Bước 2: Dán phản hồi từ AI (JSON hoặc HTML) vào đây:</p>
-                        <textarea id="aiResponseText" placeholder='Dán toàn bộ phản hồi từ ChatGPT hoặc Claude vào đây...' style="min-height:120px;font-size:.75rem"></textarea>
-                        <button class="btn btn-accent btn-sm" style="margin-top:.35rem" onclick="parseAIResponse(document.getElementById('aiResponseText').value);showToast('Đã tải nội dung! Xem lại và đăng bài.');document.getElementById('aiPromptBox').style.display='none';"><i class="fas fa-check"></i> Áp Dụng Vào Editor</button>
-                    </div>
-                </div>
-
-                <input type="hidden" id="editId">
-                <div class="form-row">
-                    <div class="form-group"><label>Tiêu đề *</label><input type="text" id="postTitle" placeholder="vd: Cách Mở Rộng Kinh Doanh Video Của Bạn" oninput="updateSlug();updatePreview()"></div>
-                    <div class="form-group"><label>Slug</label><input type="text" id="postSlug" placeholder="tự động tạo"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label>Mô Tả Meta *</label><textarea id="postDesc" rows="2" placeholder="120-160 ký tự cho công cụ tìm kiếm" oninput="updateSeo()"></textarea><div class="hint"><span id="descCount">0</span>/160 ký tự</div></div>
-                    <div class="form-group"><label>Thẻ</label><input type="text" id="postTags" placeholder="Scaling, Video Sửaing, Outsourcing"></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label>Ngày</label><input type="date" id="postDate"></div>
-                    <div class="form-group"><label>Thời Gian Đọc</label><select id="postReadTime"><option value="3 min read">3 min read</option><option value="4 min read" selected>4 min read</option><option value="5 min read">5 min read</option><option value="6 min read">6 min read</option></select></div>
-                </div>
-                <div class="form-group">
-                    <label>Nội dung *</label>
-                    <div class="editor-toolbar">
-                        <button class="tool-btn" title="Bold" onclick="wrapTag('strong')"><b>B</b></button>
-                        <button class="tool-btn" title="Italic" onclick="wrapTag('em')"><i>I</i></button>
-                        <button class="tool-btn" title="Heading 2" onclick="wrapTag('h2')">H2</button>
-                        <button class="tool-btn" title="Heading 3" onclick="wrapTag('h3')">H3</button>
-                        <button class="tool-btn" title="Paragraph" onclick="wrapTag('p')">¶</button>
-                        <button class="tool-btn" title="List" onclick="wrapList('ul')"><i class="fas fa-list-ul"></i></button>
-                        <button class="tool-btn" title="Numbered List" onclick="wrapList('ol')"><i class="fas fa-list-ol"></i></button>
-                        <button class="tool-btn" title="Blockquote" onclick="wrapTag('blockquote')"><i class="fas fa-quote-right"></i></button>
-                        <button class="tool-btn" title="Link" onclick="insertLink()"><i class="fas fa-link"></i></button>
-                    </div>
-                    <textarea class="editor-textarea" id="postContent" placeholder="Viết nội dung bài blog bằng HTML..." oninput="updatePreview();updateSeo()"></textarea>
-                </div>
-                <div style="display:flex;gap:.5rem;align-items:center">
-                    <button class="btn btn-accent" onclick="savePost()"><i class="fas fa-save"></i> <span id="saveBtnLabel">Đăng Bài</span></button>
-                    <button class="btn" id="cancelEditBtn" style="display:none" onclick="cancelEdit()">Hủy Sửa</button>
-                </div>
-
-                <!-- Preview -->
-                <div class="preview-panel"><h3>Xem Trước</h3><div class="preview-frame" id="previewFrame"><p style="color:#999">Bắt đầu viết để xem trước...</p></div></div>
-
-                <!-- SEO -->
-                <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-top:1rem">
-                    <h3 style="font-size:.8rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">Danh Sách SEO</h3>
-                    <div class="seo-list" id="seoList"></div>
-                </div>
-            </div>
-
-            <!-- Manage Page -->
-            <div class="page" id="page-manage">
-                <div class="page-header"><h2>Quản Lý Bài Viết</h2><p>Sửa, xóa hoặc tạo HTML cho các bài viết đã đăng.</p></div>
-                <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
-                    <table class="post-table">
-                        <thead><tr><th>Tiêu Đề</th><th>Ngày</th><th>Thẻ</th><th>SEO</th><th style="width:120px">Thao Tác</th></tr></thead>
-                        <tbody id="postTableBody"><tr><td colspan="5" style="text-align:center;color:var(--text3);padding:2rem">Chưa có bài viết nào. <a href="#" style="color:var(--accent)" onclick="navigateTo('write')">Viết bài đầu tiên</a>.</td></tr></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Schedule Page -->
-            <div class="page" id="page-schedule">
-                <div class="page-header"><h2><i class="fas fa-calendar-check" style="color:var(--accent)"></i> Lịch Đăng Tự Động</h2><p>AI tự động viết và đăng bài theo lịch của bạn.</p></div>
-
-                <div class="stats-grid" style="margin-bottom:1.5rem">
-                    <div class="stat-card"><div class="num" id="schedQueued">0</div><div class="lbl">Bài Đang Chờ</div></div>
-                    <div class="stat-card"><div class="num" id="schedĐã Đăng">0</div><div class="lbl">Đã Tự Đăng</div></div>
-                    <div class="stat-card"><div class="num" id="schedTopics">0</div><div class="lbl">Ý Tưởng Chủ Đề</div></div>
-                </div>
-
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
-                    <!-- Left: Schedule Config -->
-                    <div>
-                        <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem">
-                            <h3 style="font-size:.85rem;font-weight:700;margin-bottom:1rem">Cài Đặt Lịch</h3>
-                            <div class="form-group"><label>Tần Suất Đăng</label>
-                                <select id="schedFrequency" onchange="saveScheduleConfig()">
-                                    <option value="manual">Thủ công (tôi nhấn tạo)</option>
-                                    <option value="daily">Hàng ngày (1 bài/ngày)</option>
-                                    <option value="every2days">Mỗi 2 ngày</option>
-                                    <option value="weekly">Hàng tuần (1 bài/tuần)</option>
-                                </select>
-                            </div>
-                            <div class="form-group"><label>Giờ Đăng Tốt Nhất (múi giờ của bạn)</label>
-                                <select id="schedTime" onchange="saveScheduleConfig()">
-                                    <option value="08:00">8:00 AM</option>
-                                    <option value="09:00" selected>9:00 AM</option>
-                                    <option value="10:00">10:00 AM</option>
-                                    <option value="12:00">12:00 PM</option>
-                                </select>
-                            </div>
-                            <div class="form-group"><label>Posts to Tạo Per Run</label>
-                                <select id="schedBatchSize" onchange="saveScheduleConfig()">
-                                    <option value="1" selected>1 post</option>
-                                    <option value="2">2 posts</option>
-                                    <option value="3">3 posts</option>
-                                </select>
-                            </div>
-                            <p style="font-size:.7rem;color:var(--text3);margin-top:.5rem"><i class="fas fa-circle-info"></i> <strong>Manual mode:</strong> You click "Tạo Tiếp Theo Post" whenever you want. <strong>Auto modes:</strong> Requires the Cloudflare Worker for full automation (see below).</p>
-                        </div>
-
-                        <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem">
-                            <h3 style="font-size:.85rem;font-weight:700;margin-bottom:.75rem"><i class="fas fa-lightbulb" style="color:var(--accent)"></i> Kho Chủ Đề</h3>
-                            <p style="font-size:.75rem;color:var(--text3);margin-bottom:.75rem">Ý tưởng chủ đề do AI tạo. Tự động đánh dấu đã dùng sau khi đăng.</p>
-                            <div style="max-height:250px;overflow-y:auto;margin-bottom:.75rem" id="topicPool">
-                                <p style="font-size:.75rem;color:var(--text3);text-align:center;padding:1rem">No topics yet. Click "Tạo Topics" below.</p>
-                            </div>
-                            <div style="display:flex;gap:.5rem">
-                                <button class="btn btn-accent btn-sm" onclick="generateTopics()"><i class="fas fa-robot"></i> Tạo 30 Topics</button>
-                                <button class="btn btn-sm" onclick="clearTopics()"><i class="fas fa-trash"></i> Xóa</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Queue & Thao Tác -->
-                    <div>
-                        <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem">
-                            <h3 style="font-size:.85rem;font-weight:700;margin-bottom:1rem">Hàng Đợi Sắp Tới</h3>
-                            <div id="schedQueue" style="max-height:300px;overflow-y:auto">
-                                <p style="font-size:.75rem;color:var(--text3);text-align:center;padding:1rem">Queue is empty. Tạo topics and posts to fill the queue.</p>
-                            </div>
-                        </div>
-                        <button class="btn btn-accent" style="width:100%;padding:.75rem" onclick="generateNextPost()" id="btnGenerateNext">
-                            <i class="fas fa-wand-magic-sparkles"></i> Tạo Tiếp Theo Post Now
-                        </button>
-                        <button class="btn" style="width:100%;margin-top:.5rem" onclick="generateBatchPosts()" id="btnTạoBatch">
-                            <i class="fas fa-layer-group"></i> Tạo Batch of Posts
-                        </button>
-
-                        <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-top:1rem">
-                            <h3 style="font-size:.8rem;font-weight:700;margin-bottom:.5rem"><i class="fas fa-cloud" style="color:var(--blue)"></i> Tự Động Hoàn Toàn</h3>
-                            <p style="font-size:.7rem;color:var(--text3);line-height:1.5;margin-bottom:.75rem">Để tự động hoá "cài đặt và quên đi", triển khai Cloudflare Worker bên dưới. Nó chạy theo lịch cron — không cần mở admin.</p>
-                            <button class="btn btn-sm" onclick="showWorkerCode()"><i class="fas fa-code"></i> Xem Mã Worker</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Worker Code Modal -->
-            <div class="modal-overlay" id="workerModal">
-                <div class="modal" style="max-width:800px;max-height:85vh;display:flex;flex-direction:column">
-                    <h3>Cloudflare Worker — Cron Job Tự Đăng Bài</h3>
-                    <p style="font-size:.75rem;color:var(--text3);margin-bottom:.75rem">Triển khai worker này lên Cloudflare với cron trigger. Nó sẽ tự động tạo và đăng bài theo lịch của bạn.</p>
-                    <textarea id="workerCode" readonly style="min-height:350px;font-size:.6rem;font-family:'SF Mono',Monaco,monospace;margin-bottom:.75rem;overflow-y:auto" onclick="this.select()"></textarea>
-                    <div class="modal-actions">
-                        <button class="btn btn-accent btn-sm" onclick="copyWorkerCode()"><i class="fas fa-copy"></i> Sao Chép Code</button>
-                        <button class="btn btn-sm" onclick="closeWorkerModal()">Đóng</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings Page -->
-            <div class="page" id="page-settings">
-                <div class="page-header"><h2>Cài Đặt API</h2><p>Cấu hình nhà cung cấp AI để bật tạo blog một chạm.</p></div>
-                <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;max-width:600px">
-                    <div class="form-group"><label>Khóa API DeepSeek</label><input type="password" id="apiKey" placeholder="sk-..."><div class="hint">Lấy khóa tại <a href="https://platform.deepseek.com/api_keys" target="_blank" style="color:var(--accent)">platform.deepseek.com</a>. Chỉ lưu trong trình duyệt của bạn.</div></div>
-                    <div class="form-group"><label>Endpoint API</label><input type="text" id="apiUrl" placeholder="https://api.deepseek.com/v1/chat/completions"><div class="hint">Mặc định: DeepSeek. Cũng hoạt động với endpoint tương thích OpenAI.</div></div>
-                    <div class="form-group"><label>Mô Hình</label><select id="apiMô Hình"><option value="deepseek-chat">DeepSeek-V3 (nhanh, tốt cho viết lách)</option><option value="deepseek-reasoner">DeepSeek-R1 (suy luận sâu)</option></select></div>
-                    <button class="btn btn-accent" onclick="saveApiSettings()"><i class="fas fa-save"></i> Lưu Cài Đặt</button>
-                    <button class="btn" style="margin-left:.5rem" onclick="clearApiSettings()">Xóa</button>
-                    <p id="apiStatus" style="font-size:.75rem;margin-top:.75rem"></p>
-                </div>
-                <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;max-width:600px;margin-top:1rem">
-                    <h3 style="font-size:.8rem;font-weight:600;margin-bottom:.5rem"><i class="fas fa-circle-info" style="color:var(--blue)"></i> Cách hoạt động</h3>
-                    <p style="font-size:.75rem;color:var(--text3);line-height:1.6"><strong>Với khóa API DeepSeek:</strong> Enter a topic → click Tạo → AI writes the full post automatically. DeepSeek-V3 costs ~$0.27/1M input tokens — about 100 blog posts for a few cents.<br><strong>Không có API key:</strong> Enter a topic → click Tạo → copy the prompt → paste into ChatGPT/Claude/DeepSeek → paste the JSON response back.</p>
-                </div>
-
-                <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;max-width:600px;margin-top:1rem">
-                    <h3 style="font-size:.85rem;font-weight:700;margin-bottom:.75rem"><i class="fas fa-rocket" style="color:var(--accent)"></i> Tự Động Deploy Lên GitHub</h3>
-                    <p style="font-size:.75rem;color:var(--text3);margin-bottom:1rem;line-height:1.6">Đăng bài trực tiếp lên GitHub. Cloudflare Pages tự deploy khi push — không cần tải file thủ công.</p>
-                    <div class="form-group"><label>GitHub Tên đăng nhập</label><input type="text" id="ghUser" placeholder="ten-cua-ban"></div>
-                    <div class="form-group"><label>Tên Repo</label><input type="text" id="ghRepo" placeholder="hoangeditor.com"></div>
-                    <div class="form-group"><label>Token GitHub</label><input type="password" id="ghToken" placeholder="ghp_..."><div class="hint">Tạo tại <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--accent)">github.com/settings/tokens</a> — chỉ cần quyền <strong>repo</strong>.</div></div>
-                    <div class="form-group"><label>Nhánh</label><input type="text" id="ghBranch" placeholder="main"></div>
-                    <button class="btn btn-accent" onclick="saveGitHubSettings()"><i class="fas fa-save"></i> Lưu Cài Đặt GitHub</button>
-                    <button class="btn" style="margin-left:.5rem" onclick="testGitHubConnection()"><i class="fas fa-plug"></i> Kiểm Tra Kết Nối</button>
-                    <span id="ghStatus" style="font-size:.75rem;margin-left:.75rem"></span>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Xóa confirm modal -->
-    <div class="modal-overlay" id="deleteModal">
-        <div class="modal">
-            <h3>Xóa Post?</h3>
-            <p>Hành động này không thể hoàn tác. Bài viết sẽ bị xóa vĩnh viễn.</p>
-            <div class="modal-actions">
-                <button class="btn" onclick="closeDeleteModal()">Hủy</button>
-                <button class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Output modal -->
-    <div class="modal-overlay" id="outputModal">
-        <div class="modal" style="max-width:800px;max-height:80vh;display:flex;flex-direction:column">
-            <h3>Tạod HTML — Lưu as blog/posts/<span id="outputFilename">post</span>.html</h3>
-            <textarea id="outputCode" readonly style="min-height:300px;font-size:.65rem;margin-bottom:1rem" onclick="this.select()"></textarea>
-            <div class="modal-actions" style="border:none">
-                <button class="btn btn-accent" onclick="copyOutput()"><i class="fas fa-copy"></i> Sao Chép</button>
-                <button class="btn btn-solid" onclick="downloadOutput()"><i class="fas fa-download"></i> Tải Xuống</button>
-                <button class="btn" onclick="closeOutputModal()">Đóng</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="toast" id="toast"></div>
-
-    <script>
-    /* ═══════════════════════════════════════════════════════════
-       CONFIG
-       ═══════════════════════════════════════════════════════════ */
-    var AUTH_USER = 'admin';
-    // SHA-256 hash — your password is NOT visible in source code
-    var AUTH_HASH = 'f37f8f54889a1d8c4f454a4fb05a1ca4eee6562ffbe18d66422082c25cf4b788';
-    var STORAGE_KEY = 'he_blog_posts';
-
-    /* ═══════════════════════════════════════════════════════════
-       AUTH (SHA-256 hashed — plaintext password never in source)
-       ═══════════════════════════════════════════════════════════ */
-    function sha256(text) {
-        // Pure-JS SHA-256 implementation (works on http, https, file://)
-        function rotr(x,n){return(x>>>n)|(x<<(32-n))}
-        function ch(x,y,z){return(x&y)^(~x&z)}
-        function maj(x,y,z){return(x&y)^(x&z)^(y&z)}
-        function bs0(x){return rotr(x,2)^rotr(x,13)^rotr(x,22)}
-        function bs1(x){return rotr(x,6)^rotr(x,11)^rotr(x,25)}
-        function ss0(x){return rotr(x,7)^rotr(x,18)^(x>>>3)}
-        function ss1(x){return rotr(x,17)^rotr(x,19)^(x>>>10)}
-        var K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
-        var msg=[],len=text.length,bits=len*8;
-        for(var i=0;i<len;i++)msg[i>>2]|=(text.charCodeAt(i)&0xff)<<(24-(i%4)*8);
-        msg[len>>2]|=0x80<<(24-(len%4)*8);
-        msg[((len+8>>6)+1)*16-1]=bits;
-        var H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
-        for(var blk=0;blk<msg.length;blk+=16){
-            var W=[],a=H[0],b=H[1],c=H[2],d=H[3],e=H[4],f=H[5],g=H[6],h=H[7];
-            for(var t=0;t<64;t++){
-                W[t]=t<16?msg[blk+t]:ss1(W[t-2])+W[t-7]+ss0(W[t-15])+W[t-16]|0;
-                var T1=h+bs1(e)+ch(e,f,g)+K[t]+W[t]|0;
-                var T2=bs0(a)+maj(a,b,c)|0;
-                h=g;g=f;f=e;e=d+T1|0;d=c;c=b;b=a;a=T1+T2|0;
-            }
-            H[0]=H[0]+a|0;H[1]=H[1]+b|0;H[2]=H[2]+c|0;H[3]=H[3]+d|0;
-            H[4]=H[4]+e|0;H[5]=H[5]+f|0;H[6]=H[6]+g|0;H[7]=H[7]+h|0;
-        }
-        var hex='';
-        for(var i=0;i<8;i++){var v=H[i]>>>0;hex+=('0000000'+v.toString(16)).slice(-8);}
-        return Promise.resolve(hex);
-    }
-
-    function handleLogin() {
-        var u = document.getElementById('loginUser').value.trim();
-        var p = document.getElementById('loginPass').value.trim();
-        if (u !== AUTH_USER) { document.getElementById('loginError').style.display = 'block'; return false; }
-        sha256(p).then(function(hash) {
-            if (hash === AUTH_HASH) {
-                sessionStorage.setItem('he_admin_auth', '1');
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('app').classList.add('active');
-                document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
-                refreshAll();
-            } else {
-                document.getElementById('loginError').style.display = 'block';
-            }
-        });
-        return false;
-    }
-
-    function handleLogout() {
-        sessionStorage.removeItem('he_admin_auth');
-        location.reload();
-    }
-
-    function toggleTheme() {
-        var h = document.documentElement, isDark = h.getAttribute('data-theme') === 'dark';
-        var icon = document.getElementById('themeIcon'), label = document.getElementById('themeLabel');
-        if (isDark) { h.removeAttribute('data-theme'); icon.className = 'fas fa-moon'; label.textContent = 'Chế Độ Tối'; localStorage.setItem('theme','light'); }
-        else { h.setAttribute('data-theme','dark'); icon.className = 'fas fa-sun'; label.textContent = 'Chế Độ Sáng'; localStorage.setItem('theme','dark'); }
-    }
-
-    // Init auth
-    (function() {
-        if (sessionStorage.getItem('he_admin_auth') === '1') {
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('app').classList.add('active');
-            document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
-            refreshAll();
-        }
-        var h = document.documentElement;
-        if (localStorage.getItem('theme') === 'dark') { h.setAttribute('data-theme','dark'); document.getElementById('themeIcon').className = 'fas fa-sun'; document.getElementById('themeLabel').textContent = 'Chế Độ Sáng'; }
-    })();
-
-    /* ═══════════════════════════════════════════════════════════
-       DATA
-       ═══════════════════════════════════════════════════════════ */
-    function getPosts() {
-        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-        catch(e) { return []; }
-    }
-
-    function savePosts(posts) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       NAVIGATION
-       ═══════════════════════════════════════════════════════════ */
-    function navigateTo(page) {
-        document.querySelectorAll('.sidebar-nav a').forEach(function(a) { a.classList.remove('active'); });
-        document.querySelector('[data-page="'+page+'"]').classList.add('active');
-        document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-        document.getElementById('page-'+page).classList.add('active');
-        if (page === 'manage') renderPostTable();
-        if (page === 'dashboard') refreshDashboard();
-        if (page === 'write') { document.getElementById('postDate').value = new Date().toISOString().split('T')[0]; updateSeo(); }
-    }
-
-    document.querySelectorAll('.sidebar-nav a[data-page]').forEach(function(a) {
-        a.addEventListener('click', function(e) { e.preventDefault(); navigateTo(this.getAttribute('data-page')); });
-    });
-
-    /* ═══════════════════════════════════════════════════════════
-       DASHBOARD
-       ═══════════════════════════════════════════════════════════ */
-    function refreshDashboard() {
-        var posts = getPosts();
-        document.getElementById('statTotal').textContent = posts.length;
-        var now = new Date(), monthCount = 0;
-        posts.forEach(function(p) { var d = new Date(p.date); if (d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()) monthCount++; });
-        document.getElementById('statMonth').textContent = monthCount;
-        document.getElementById('statRecent').textContent = posts.length ? posts[0].title : '—';
-        document.getElementById('postCount').textContent = posts.length;
-    }
-
-    function refreshAll() { refreshDashboard(); updateSeo(); updatePreview(); }
-
-    /* ═══════════════════════════════════════════════════════════
-       MANAGE POSTS
-       ═══════════════════════════════════════════════════════════ */
-    function renderPostTable() {
-        var posts = getPosts();
-        var tbody = document.getElementById('postTableBody');
-        if (!posts.length) {
-            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:2rem">Chưa có bài viết nào. <a href="#" style="color:var(--accent)" onclick="navigateTo(\'write\')">Viết bài đầu tiên</a>.</td></tr>';
-            document.getElementById('postCount').textContent = '0';
-            return;
-        }
-        document.getElementById('postCount').textContent = posts.length;
-        var html = '';
-        posts.forEach(function(p, i) {
-            var d = new Date(p.date + 'T00:00:00');
-            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            var dateStr = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-            var seoStatus = p.staticFile
-                ? '<span style="color:var(--green);font-size:.65rem;font-weight:600" title="Đã có file HTML — Google index được"><i class="fas fa-check-circle"></i> Có Thể Index</span>'
-                : '<span style="color:#f59e0b;font-size:.65rem;font-weight:600" title="Chỉ trong localStorage — tải HTML để Google index được"><i class="fas fa-exclamation-triangle"></i> Cần File</span>';
-            html += '<tr>';
-            html += '<td class="title-cell">' + escHtml(p.title) + '</td>';
-            html += '<td style="white-space:nowrap">' + dateStr + '</td>';
-            html += '<td style="font-size:.7rem;color:var(--text3)">' + escHtml(p.tags.split(',')[0] || '—') + '</td>';
-            html += '<td>' + seoStatus + '</td>';
-            html += '<td class="actions">';
-            html += '<button class="btn btn-sm" onclick="editPost(' + i + ')" title="Sửa"><i class="fas fa-pen"></i></button>';
-            html += '<button class="btn btn-sm" onclick="deploySinglePost(' + i + ')" title="Deploy Lên GitHub"><i class="fas fa-rocket"></i></button>';
-            html += '<button class="btn btn-sm" onclick="generatePost(' + i + ')" title="Tải HTML"><i class="fas fa-download"></i></button>';
-            html += '<button class="btn btn-sm" style="color:var(--red)" onclick="confirmDelete(' + i + ')" title="Xóa"><i class="fas fa-trash"></i></button>';
-            html += '</td></tr>';
-        });
-        tbody.innerHTML = html;
-    }
-
-    function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-
-    /* ═══════════════════════════════════════════════════════════
-       DEPLOY SINGLE POST
-       ═══════════════════════════════════════════════════════════ */
-    function deploySinglePost(i) {
-        var post = getPosts()[i];
-        if (!post) return;
-        showToast('Đang deploy lên GitHub...');
-        deployToGitHub(post, false).then(function() {
-            post.staticFile = true;
-            var all = getPosts(); all[i].staticFile = true; savePosts(all);
-            renderPostTable();
-            showToast('Đã deploy! Cloudflare sẽ cập nhật trong ~1 phút.');
-        }).catch(function(e) {
-            showToast('Deploy thất bại: ' + e.message);
-        });
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       DELETE
-       ═══════════════════════════════════════════════════════════ */
-    var deleteIndex = -1;
-    function confirmDelete(i) { deleteIndex = i; document.getElementById('deleteModal').classList.add('show'); }
-    function closeDeleteModal() { document.getElementById('deleteModal').classList.remove('show'); deleteIndex = -1; }
-    document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
-        if (deleteIndex < 0) return;
-        var posts = getPosts(); posts.splice(deleteIndex, 1); savePosts(posts);
-        closeDeleteModal(); renderPostTable(); refreshDashboard(); showToast('Đã xóa bài');
-    });
-
-    /* ═══════════════════════════════════════════════════════════
-       WRITE / EDIT
-       ═══════════════════════════════════════════════════════════ */
-    function editPost(index) {
-        var posts = getPosts(), p = posts[index];
-        document.getElementById('editId').value = index;
-        document.getElementById('postTitle').value = p.title;
-        document.getElementById('postSlug').value = p.slug;
-        document.getElementById('postDesc').value = p.description;
-        document.getElementById('postTags').value = p.tags;
-        document.getElementById('postDate').value = p.date;
-        document.getElementById('postReadTime').value = p.readTime;
-        document.getElementById('postContent').value = p.content;
-        document.getElementById('editModeLabel').textContent = 'Đang sửa: ' + p.title;
-        document.getElementById('saveBtnLabel').textContent = 'Cập Nhật Bài';
-        document.getElementById('cancelEditBtn').style.display = '';
-        navigateTo('write');
-        updatePreview(); updateSeo();
-    }
-
-    function cancelEdit() {
-        document.getElementById('editId').value = '';
-        document.getElementById('postTitle').value = '';
-        document.getElementById('postSlug').value = '';
-        document.getElementById('postDesc').value = '';
-        document.getElementById('postTags').value = '';
-        document.getElementById('postContent').value = '';
-        document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
-        document.getElementById('editModeLabel').textContent = 'Tạo bài viết mới với đầy đủ metadata SEO.';
-        document.getElementById('saveBtnLabel').textContent = 'Đăng Bài';
-        document.getElementById('cancelEditBtn').style.display = 'none';
-        updatePreview(); updateSeo();
-    }
-
-    function savePost() {
-        var title = document.getElementById('postTitle').value.trim();
-        var slug = document.getElementById('postSlug').value.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-        var desc = document.getElementById('postDesc').value.trim();
-        var tags = document.getElementById('postTags').value.trim();
-        var date = document.getElementById('postDate').value;
-        var readTime = document.getElementById('postReadTime').value;
-        var content = document.getElementById('postContent').value.trim();
-        if (!title) { showToast('Vui lòng nhập tiêu đề'); return; }
-        var post = { title:title, slug:slug, description:desc, tags:tags, date:date, readTime:readTime, content:content, staticFile:false };
-        var posts = getPosts();
-        var editId = document.getElementById('editId').value;
-        if (editId !== '') {
-            post.staticFile = posts[parseInt(editId)].staticFile || false;
-            posts[parseInt(editId)] = post;
-            showToast('Đã cập nhật bài! Click Tạo HTML to update the static file.');
-        } else {
-            posts.unshift(post);
-            savePosts(posts);
-            cancelEdit();
-            refreshAll();
-            navigateTo('manage');
-            // Auto-deploy to GitHub
-            var cfg = getGhConfig();
-            if (cfg.token) {
-                showToast('Đang đăng lên GitHub...');
-                deployToGitHub(post, false).then(function() {
-                    post.staticFile = true;
-                    var all = getPosts();
-                    for (var i = 0; i < all.length; i++) { if (all[i].slug === post.slug) { all[i].staticFile = true; break; } }
-                    savePosts(all);
-                    renderPostTable();
-                    showToast('Đã Đăng & deployed! Cloudflare will auto-deploy in ~1 min.');
-                }).catch(function(e) {
-                    showToast('Đã Đăng locally. GitHub deploy failed: ' + e.message + '. Use Tạo HTML to download manually.');
-                });
-            } else {
-                showToast('Đã đăng bài! Configure GitHub in Settings for auto-deploy, or use Tạo HTML to download.');
-                // Auto-download as fallback
-                setTimeout(function() { generatePost(0); }, 500);
-            }
-            return;
-        }
-        savePosts(posts);
-        cancelEdit();
-        refreshAll();
-        navigateTo('manage');
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       GENERATE HTML
-       ═══════════════════════════════════════════════════════════ */
-    function generatePost(index) {
-        var p = getPosts()[index];
-        var d = new Date(p.date + 'T00:00:00');
-        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        var dateStr = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-        var jsonDate = p.date;
-        var out = '<!DOCTYPE html>\n<html lang="en">\n<head>\n';
-        out += '    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width,initial-scale=1.0">\n';
-        out += '    <title>'+escHtml(p.title)+' — Hoang Editor Blog</title>\n';
-        out += '    <meta name="description" content="'+escHtml(p.description)+'">\n';
-        out += '    <meta name="robots" content="index, follow">\n';
-        out += '    <link rel="canonical" href="https://hoangeditor.com/blog/posts/'+p.slug+'.html">\n';
-        out += '    <meta property="og:type" content="article">\n';
-        out += '    <meta property="og:title" content="'+escHtml(p.title)+'">\n';
-        out += '    <meta property="og:description" content="'+escHtml(p.description)+'">\n';
-        out += '    <meta property="og:url" content="https://hoangeditor.com/blog/posts/'+p.slug+'.html">\n';
-        out += '    <meta property="og:image" content="https://hoangeditor.com/Hoangeditor.PNG">\n';
-        out += '    <meta name="twitter:card" content="summary">\n';
-        out += '    <link rel="icon" type="image/png" href="../../Hoangeditor.PNG">\n';
-        out += '    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">\n';
-        out += '    <link rel="stylesheet" href="../styles.css">\n';
-        out += '    <script type="application/ld+json">\n    {"@context":"https://schema.org","@type":"BlogPosting","headline":"'+escHtml(p.title)+'","url":"https://hoangeditor.com/blog/posts/'+p.slug+'.html","datePublished":"'+jsonDate+'","dateModified":"'+jsonDate+'","author":{"@type":"Person","name":"Hoang Editor Team"},"publisher":{"@type":"Organization","name":"Hoang Editor"}}\n    <\/script>\n';
-        out += '</head>\n<body>\n\n';
-        out += '    <div class="bg-gradient" aria-hidden="true"></div>\n    <div class="bg-grain" aria-hidden="true"></div>\n\n';
-        out += '    <header class="site-header">\n        <div class="header-inner">\n            <div class="header-pill">\n                <a href="https://hoangeditor.com" class="logo"><span class="logo-mark"><i class="fas fa-play"></i></span><span class="logo-text">Hoang Editor</span></a>\n                <nav><ul class="nav-links">\n                    <li><a href="https://hoangeditor.com/#services">Services</a></li>\n                    <li><a href="https://hoangeditor.com/#workflow">Process</a></li>\n                    <li><a href="https://hoangeditor.com/#pricing">Pricing</a></li>\n                    <li><a href="../index.html" class="nav-active">Blog</a></li>\n                    <li><a href="https://hoangeditor.com/#contact">Contact</a></li>\n                </ul></nav>\n                <a href="https://hoangeditor.com/#contact" class="btn-pill">Get Started <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i></a>\n                <button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>\n                <button class="menu-toggle"><i class="fas fa-bars"></i></button>\n            </div>\n        </div>\n        <div class="mobile-menu">\n            <a href="https://hoangeditor.com/#services">Services</a>\n            <a href="https://hoangeditor.com/#workflow">Process</a>\n            <a href="https://hoangeditor.com/#pricing">Pricing</a>\n            <a href="../index.html">Blog</a>\n            <a href="https://hoangeditor.com/#contact">Contact</a>\n        </div>\n    </header>\n\n';
-        out += '    <article class="post-article">\n        <div class="post-meta">\n            <a href="../index.html" class="post-back"><i class="fas fa-arrow-left"></i> Back to Blog</a>\n            <div class="post-date">'+dateStr+' · '+p.readTime+'</div>\n            <h1>'+escHtml(p.title)+'</h1>\n            <div class="post-author"><div class="post-author-avatar">HE</div><div class="post-author-name">Hoang Editor Team</div></div>\n        </div>\n        <div class="post-body">\n            '+p.content.replace(/\n/g,'\n            ')+'\n        </div>\n        <div class="post-cta"><h3>Ready to scale your video business?</h3><p>We edit real estate videos so you can focus on shooting and growing your client base.</p><a href="https://hoangeditor.com/#contact"><i class="fas fa-arrow-right"></i> Start a Project</a></div>\n    </article>\n\n';
-        out += '    <footer class="blog-footer"><p>&copy; '+d.getFullYear()+' Hoang Editor Blog. <a href="https://hoangeditor.com" style="color:var(--gold-400);text-decoration:none;">hoangeditor.com</a></p></footer>\n\n';
-        out += '    <script>\n    (function(){var tt=document.getElementById("theme-toggle");if(tt){var h=document.documentElement,ti=tt.querySelector("i");if(localStorage.getItem("theme")==="dark"){h.setAttribute("data-theme","dark");ti.className="fas fa-sun";}tt.onclick=function(){var d=h.getAttribute("data-theme")==="dark";if(d){h.removeAttribute("data-theme");ti.className="fas fa-moon";localStorage.setItem("theme","light");}else{h.setAttribute("data-theme","dark");ti.className="fas fa-sun";localStorage.setItem("theme","dark");}};}var hd=document.querySelector(".site-header");if(hd)window.addEventListener("scroll",function(){hd.classList.toggle("scrolled",window.scrollY>40)},{passive:true});var tg=document.querySelector(".menu-toggle"),mn=document.querySelector(".mobile-menu");if(tg&&mn){var op=false;tg.addEventListener("click",function(){op=!op;mn.classList.toggle("open",op);tg.innerHTML=op?"<i class=\\"fas fa-times\\"></i>":"<i class=\\"fas fa-bars\\"></i>";tg.setAttribute("aria-expanded",String(op));document.body.style.overflow=op?"hidden":""});mn.querySelectorAll("a").forEach(function(l){l.addEventListener("click",function(){op=false;mn.classList.remove("open");tg.innerHTML="<i class=\\"fas fa-bars\\"></i>";document.body.style.overflow=""})})}})();\n    <\/script>\n';
-        out += '</body>\n</html>';
-
-        document.getElementById('outputCode').value = out;
-        document.getElementById('outputFilename').textContent = p.slug;
-        document.getElementById('outputModal').classList.add('show');
-    }
-
-    function closeOutputModal() { document.getElementById('outputModal').classList.remove('show'); }
-    function copyOutput() { var ta = document.getElementById('outputCode'); ta.select(); navigator.clipboard.writeText(ta.value).then(function() { showToast('Đã sao chép!'); }); }
-    function downloadOutput() {
-        var slug = document.getElementById('outputFilename').textContent;
-        var blob = new Blob([document.getElementById('outputCode').value], {type:'text/html'});
-        var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = slug + '.html';
-        a.click();
-        // Mark as having static file
-        var posts = getPosts();
-        for (var i = 0; i < posts.length; i++) {
-            if (posts[i].slug === slug) { posts[i].staticFile = true; break; }
-        }
-        savePosts(posts);
-        renderPostTable();
-        showToast('Tải Xuốnged: ' + slug + '.html — place it in blog/posts/ for SEO');
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       AI BLOG WRITER
-       ═══════════════════════════════════════════════════════════ */
-    function generateWithAI() {
-        var topic = document.getElementById('aiTopic').value.trim();
-        if (!topic) { showToast('Please enter a topic'); return; }
-
-        // Try direct API if key is configured
-        var apiKey = localStorage.getItem('he_ai_key');
-        var apiUrl = localStorage.getItem('he_ai_url') || 'https://api.deepseek.com/v1/chat/completions';
-
-        if (apiKey) {
-            callAIAPI(topic, apiKey, apiUrl);
-        } else {
-            generatePromptFallback(topic);
-        }
-    }
-
-    function callAIAPI(topic, apiKey, apiUrl) {
-        var btn = document.getElementById('aiTạoBtn');
-        var loading = document.getElementById('aiLoading');
-        btn.disabled = true; loading.style.display = 'flex';
-        document.getElementById('aiPromptBox').style.display = 'none';
-
-        var systemPrompt = buildSystemPrompt();
-        var userPrompt = 'Write a complete, SEO-optimized blog post about: ' + topic;
-
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
-            body: JSON.stringify({
-                model: localStorage.getItem('he_ai_model') || 'deepseek-chat',
-                messages: [
-                    { role: 'system', content: systemPrompt },
-                    { role: 'user', content: userPrompt }
-                ],
-                temperature: 0.7,
-                max_tokens: 3000
-            })
-        })
-        .then(function(r) { if (!r.ok) throw new Error('API error: ' + r.status); return r.json(); })
-        .then(function(data) {
-            var text = data.choices[0].message.content;
-            parseAIResponse(text);
-            showToast('AI đã tạo bài! Xem lại và đăng.');
-        })
-        .catch(function(err) {
-            showToast('API thất bại: ' + err.message + '. Using prompt fallback.');
-            generatePromptFallback(topic);
-        })
-        .finally(function() {
-            btn.disabled = false; loading.style.display = 'none';
-        });
-    }
-
-    function generatePromptFallback(topic) {
-        var prompt = buildSystemPrompt() + '\n\n---\n\nWrite a complete, SEO-optimized blog post about: ' + topic + '\n\nOutput the result in this exact JSON format:\n{"title":"...","description":"...","tags":"...","date":"YYYY-MM-DD","readTime":"4 min read","content":"<full HTML content>"}';
-        document.getElementById('aiPromptText').value = prompt;
-        document.getElementById('aiPromptBox').style.display = 'block';
-        showToast('Prompt ready! Sao Chép and paste into ChatGPT or Claude, then paste the JSON result back.');
-    }
-
-    function buildSystemPrompt() {
-        return 'You are an expert SEO content writer for Hoang Editor, a professional real estate video editing service. Our target audience is real estate video shooters, videographers, and production teams who want to outsource their post-production.\n\n' +
-            'IMPORTANT RULES:\n' +
-            '1. Write 500-800 words. Use clear, professional English.\n' +
-            '2. Title: 50-65 characters, include primary keyword naturally.\n' +
-            '3. Meta description: 120-155 characters with primary keyword.\n' +
-            '4. Content must use proper HTML: <h2> for sections, <h3> for subsections, <p> for paragraphs, <ul><li> for bullet lists, <blockquote> for quotes, <strong> for emphasis.\n' +
-            '5. Include 3-5 of these keywords naturally: real estate video editing, video post-production, property tour editing, real estate videographer, outsourced video editing, video editing partner, video editing for shooters, production team editing, real estate media, professional color grading, drone footage editing, luxury listing video.\n' +
-            '6. Include at least one bullet list and one blockquote.\n' +
-            '7. End with a call-to-action linking to https://hoangeditor.com/#contact: "Ready to scale your video business? We edit real estate videos so you can focus on shooting."\n' +
-            '8. Do NOT use markdown. Output pure HTML body content only (no <body>, no <html>).\n' +
-            '9. Thẻ: 2-3 comma-separated relevant tags.\n' +
-            '10. Output as valid JSON with keys: title, description, tags, date, readTime, content.\n' +
-            '11. Ngày must be today\'s date: ' + new Date().toISOString().split('T')[0] + '\n' +
-            '12. The content field must contain the full HTML body (h2, p, ul, blockquote, etc).';
-    }
-
-    function parseAIResponse(text) {
-        // Try to parse JSON from the response
-        try {
-            // Find JSON block
-            var jsonMatch = text.match(/\{[\s\S]*"title"[\s\S]*"content"[\s\S]*\}/);
-            var json = JSON.parse(jsonMatch ? jsonMatch[0] : text);
-            document.getElementById('postTitle').value = json.title || '';
-            document.getElementById('postSlug').value = (json.title || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,60);
-            document.getElementById('postDesc').value = json.description || '';
-            document.getElementById('postTags').value = json.tags || '';
-            document.getElementById('postDate').value = json.date || new Date().toISOString().split('T')[0];
-            document.getElementById('postReadTime').value = json.readTime || '4 min read';
-            document.getElementById('postContent').value = json.content || '';
-        } catch(e) {
-            // Fallback: try to extract content from free-text response
-            var content = text;
-            // Remove markdown code fences
-            content = content.replace(/```html\n?/g,'').replace(/```json\n?/g,'').replace(/```\n?/g,'');
-            // Try to find and remove JSON wrapper
-            var m = content.match(/"content"\s*:\s*"([\s\S]*?)"\s*\}/);
-            if (m) content = m[1].replace(/\\"/g,'"').replace(/\\n/g,'\n');
-            document.getElementById('postContent').value = content;
-        }
-        updatePreview();
-        updateSeo();
-        document.getElementById('editModeLabel').textContent = 'Bản nháp từ AI — xem lại và chỉnh sửa trước khi đăng.';
-        document.getElementById('saveBtnLabel').textContent = 'Xem Lại & Đăng';
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       AUTO-UPDATE SITEMAP
-       ═══════════════════════════════════════════════════════════ */
-    function buildSitemapXML() {
-        var today = new Date().toISOString().split('T')[0];
-        var posts = getPosts();
-        var xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n\n';
-        xml += '    <url>\n        <loc>https://hoangeditor.com/</loc>\n        <lastmod>'+today+'</lastmod>\n        <changefreq>weekly</changefreq>\n        <priority>1.0</priority>\n    </url>\n\n';
-        xml += '    <url>\n        <loc>https://hoangeditor.com/blog/</loc>\n        <lastmod>'+today+'</lastmod>\n        <changefreq>weekly</changefreq>\n        <priority>0.9</priority>\n    </url>\n\n';
-
-        // Static posts (always included)
-        var staticPosts = [
-            {slug:'scale-video-business',date:'2026-07-15'},
-            {slug:'outsourcing-video-editing-guide',date:'2026-07-08'},
-            {slug:'color-grading-trends-luxury',date:'2026-06-28'}
-        ];
-
-        // Add all static posts
-        staticPosts.forEach(function(sp) {
-            xml += '    <url>\n        <loc>https://hoangeditor.com/blog/posts/'+sp.slug+'.html</loc>\n        <lastmod>'+sp.date+'</lastmod>\n        <changefreq>monthly</changefreq>\n        <priority>0.8</priority>\n    </url>\n\n';
-        });
-
-        // Add admin posts that have static files
-        posts.forEach(function(p) {
-            if (p.staticFile) {
-                xml += '    <url>\n        <loc>https://hoangeditor.com/blog/posts/'+p.slug+'.html</loc>\n        <lastmod>'+p.date+'</lastmod>\n        <changefreq>monthly</changefreq>\n        <priority>0.8</priority>\n    </url>\n\n';
-            }
-        });
-
-        xml += '</urlset>\n';
-        return xml;
-    }
-
-    function deploySitemap() {
-        var cfg = getGhConfig();
-        if (!cfg.token) return Promise.reject('not configured');
-
-        var xml = buildSitemapXML();
-        var base64 = btoa(unescape(encodeURIComponent(xml)));
-
-        return fetch('https://api.github.com/repos/' + cfg.user + '/' + cfg.repo + '/contents/sitemap.xml', {
-            method: 'PUT',
-            headers: {
-                'Authorization': 'Bearer ' + cfg.token,
-                'Accept': 'application/vnd.github+json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                message: 'Update sitemap.xml',
-                content: base64,
-                branch: cfg.branch
-            })
-        });
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       GITHUB AUTO-DEPLOY
-       ═══════════════════════════════════════════════════════════ */
-    function getGhConfig() {
-        return {
-            user: localStorage.getItem('he_gh_user') || '',
-            repo: localStorage.getItem('he_gh_repo') || '',
-            token: localStorage.getItem('he_gh_token') || '',
-            branch: localStorage.getItem('he_gh_branch') || 'main'
-        };
-    }
-
-    function saveGitHubSettings() {
-        var user = document.getElementById('ghUser').value.trim();
-        var repo = document.getElementById('ghRepo').value.trim();
-        var token = document.getElementById('ghToken').value.trim();
-        var branch = document.getElementById('ghNhánh').value.trim() || 'main';
-        if (user) localStorage.setItem('he_gh_user', user);
-        if (repo) localStorage.setItem('he_gh_repo', repo);
-        if (token) localStorage.setItem('he_gh_token', token);
-        localStorage.setItem('he_gh_branch', branch);
-        document.getElementById('ghStatus').textContent = '✓ Đã lưu cài đặt GitHub';
-        document.getElementById('ghStatus').style.color = 'var(--green)';
-        showToast('Đã lưu cài đặt GitHub!');
-    }
-
-    function testGitHubConnection() {
-        var cfg = getGhConfig();
-        if (!cfg.token || !cfg.user || !cfg.repo) {
-            document.getElementById('ghStatus').textContent = '✗ Điền đầy đủ thông tin trước';
-            document.getElementById('ghStatus').style.color = 'var(--red)';
-            return;
-        }
-        document.getElementById('ghStatus').textContent = 'Đang kiểm tra...';
-        document.getElementById('ghStatus').style.color = 'var(--text3)';
-        fetch('https://api.github.com/repos/' + cfg.user + '/' + cfg.repo, {
-            headers: { 'Authorization': 'Bearer ' + cfg.token, 'Accept': 'application/vnd.github+json' }
-        })
-        .then(function(r) {
-            if (r.ok) {
-                document.getElementById('ghStatus').textContent = '✓ Đã kết nối! Sẵn sàng auto-deploy.';
-                document.getElementById('ghStatus').style.color = 'var(--green)';
-                showToast('Kết nối GitHub thành công!');
-            } else {
-                document.getElementById('ghStatus').textContent = '✗ Thất bại (HTTP ' + r.status + '). Kiểm tra quyền token.';
-                document.getElementById('ghStatus').style.color = 'var(--red)';
-            }
-        })
-        .catch(function() {
-            document.getElementById('ghStatus').textContent = '✗ Lỗi mạng. Kiểm tra token.';
-            document.getElementById('ghStatus').style.color = 'var(--red)';
-        });
-    }
-
-    function deployToGitHub(post, silent) {
-        var cfg = getGhConfig();
-        if (!cfg.token || !cfg.user || !cfg.repo) {
-            if (!silent) showToast('Cấu hình GitHub trước (Cài Đặt → Auto-Deploy)');
-            return Promise.reject('not configured');
-        }
-
-        var html = buildStaticHTML(post);
-        var path = 'blog/posts/' + post.slug + '.html';
-        var url = 'https://api.github.com/repos/' + cfg.user + '/' + cfg.repo + '/contents/' + path;
-
-        // Base64 encode the HTML content
-        var base64 = btoa(unescape(encodeURIComponent(html)));
-
-        return fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Authorization': 'Bearer ' + cfg.token,
-                'Accept': 'application/vnd.github+json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                message: 'Publish: ' + post.title,
-                content: base64,
-                branch: cfg.branch
-            })
-        })
-        .then(function(r) {
-            if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'HTTP ' + r.status); });
-            return r.json();
-        })
-        .then(function() {
-            // Also update sitemap
-            return deploySitemap().catch(function() { /* sitemap update is best-effort */ });
-        });
-    }
-
-    function buildStaticHTML(post) {
-        var d = new Date(post.date + 'T00:00:00');
-        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        var dateStr = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-        var jsonDate = post.date;
-        var primaryTag = (post.tags.split(',')[0] || 'Chung').trim();
-        var h = '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width,initial-scale=1.0">\n';
-        h += '<title>'+escHtml(post.title)+' — Hoang Editor Blog</title>\n';
-        h += '<meta name="description" content="'+escHtml(post.description)+'">\n<link rel="canonical" href="https://hoangeditor.com/blog/posts/'+post.slug+'.html">\n';
-        h += '<meta property="og:type" content="article"><meta property="og:title" content="'+escHtml(post.title)+'"><meta property="og:description" content="'+escHtml(post.description)+'"><meta property="og:url" content="https://hoangeditor.com/blog/posts/'+post.slug+'.html"><meta property="og:image" content="https://hoangeditor.com/Hoangeditor.PNG"><meta name="twitter:card" content="summary">\n';
-        h += '<link rel="icon" type="image/png" href="https://hoangeditor.com/Hoangeditor.PNG">\n<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">\n<link rel="stylesheet" href="../styles.css">\n';
-        h += '<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"'+escHtml(post.title)+'","url":"https://hoangeditor.com/blog/posts/'+post.slug+'.html","datePublished":"'+jsonDate+'","dateModified":"'+jsonDate+'","author":{"@type":"Person","name":"Hoang Editor Team"},"publisher":{"@type":"Organization","name":"Hoang Editor"}}<\/script>\n';
-        h += '</head>\n<body>\n<div class="bg-gradient" aria-hidden="true"></div>\n<div class="bg-grain" aria-hidden="true"></div>\n';
-        h += '<header class="site-header"><div class="header-inner"><div class="header-pill"><a href="https://hoangeditor.com" class="logo"><span class="logo-mark"><i class="fas fa-play"></i></span><span class="logo-text">Hoang Editor</span></a><nav><ul class="nav-links"><li><a href="https://hoangeditor.com/#services">Services</a></li><li><a href="https://hoangeditor.com/#workflow">Process</a></li><li><a href="https://hoangeditor.com/#pricing">Pricing</a></li><li><a href="../index.html" class="nav-active">Blog</a></li><li><a href="https://hoangeditor.com/#contact">Contact</a></li></ul></nav><a href="https://hoangeditor.com/#contact" class="btn-pill">Get Started <i class="fas fa-arrow-right" style="font-size:.7rem"></i></a><button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button><button class="menu-toggle"><i class="fas fa-bars"></i></button></div></div><div class="mobile-menu"><a href="https://hoangeditor.com/#services">Services</a><a href="https://hoangeditor.com/#workflow">Process</a><a href="https://hoangeditor.com/#pricing">Pricing</a><a href="../index.html">Blog</a><a href="https://hoangeditor.com/#contact">Contact</a></div></header>\n\n';
-        h += '<article class="post-article">\n<div class="breadcrumbs"><a href="https://hoangeditor.com">Home</a><span class="sep">/</span><a href="../index.html">Blog</a><span class="sep">/</span><span>'+escHtml(post.title)+'</span></div>\n';
-        h += '<header class="post-header"><a href="../index.html" class="post-category">'+escHtml(primaryTag)+'</a>\n<h1>'+escHtml(post.title)+'</h1>\n<div class="post-meta-row"><div class="author-info"><div class="author-avatar">HE</div><div><span class="author-name">Hoang Editor Team</span><br><span>'+dateStr+'</span></div></div><span class="meta-sep"></span><span>'+post.readTime+'</span></div></header>\n';
-        h += '<div class="post-body">\n'+post.content.replace(/\n/g,'\n')+'\n</div>\n';
-        h += '<div class="post-author-box"><div class="author-avatar-lg">HE</div><div class="author-bio"><div class="author-name-lg">Hoang Editor Team</div><div class="author-desc">Professional real estate video editing partner for shooters and production teams.</div></div></div>\n';
-        h += '<div class="post-cta"><h3>Ready to scale your video business?</h3><p>We edit real estate videos so you can focus on shooting.</p><a href="https://hoangeditor.com/#contact" class="cta-btn"><i class="fas fa-arrow-right"></i> Start a Project</a></div>\n</article>\n';
-        h += '<footer class="blog-footer"><p>&copy; '+d.getFullYear()+' Hoang Editor Blog. <a href="https://hoangeditor.com" style="color:var(--gold-400);text-decoration:none">hoangeditor.com</a></p></footer>\n';
-        h += '<script>(function(){var tt=document.getElementById("theme-toggle");if(tt){var hd=document.documentElement,ti=tt.querySelector("i");if(localStorage.getItem("theme")==="dark"){hd.setAttribute("data-theme","dark");ti.className="fas fa-sun";}tt.onclick=function(){var dk=hd.getAttribute("data-theme")==="dark";if(dk){hd.removeAttribute("data-theme");ti.className="fas fa-moon";localStorage.setItem("theme","light")}else{hd.setAttribute("data-theme","dark");ti.className="fas fa-sun";localStorage.setItem("theme","dark")}}}var hd2=document.querySelector(".site-header");if(hd2)window.addEventListener("scroll",function(){hd2.classList.toggle("scrolled",window.scrollY>40)},{passive:true});var tg=document.querySelector(".menu-toggle"),mn=document.querySelector(".mobile-menu");if(tg&&mn){var op=false;tg.addEventListener("click",function(){op=!op;mn.classList.toggle("open",op);tg.innerHTML=op?\'<i class="fas fa-times">\':\'<i class="fas fa-bars">\';document.body.style.overflow=op?"hidden":""});mn.querySelectorAll("a").forEach(function(l){l.addEventListener("click",function(){op=false;mn.classList.remove("open");tg.innerHTML=\'<i class="fas fa-bars">\';document.body.style.overflow=""})})}})();<\/script>\n</body>\n</html>';
-        return h;
-    }
-
-    // Init GitHub settings fields
-    (function() {
-        var cfg = getGhConfig();
-        if (cfg.user) document.getElementById('ghUser').value = cfg.user;
-        if (cfg.repo) document.getElementById('ghRepo').value = cfg.repo;
-        if (cfg.token) document.getElementById('ghToken').value = cfg.token;
-        if (cfg.branch) document.getElementById('ghNhánh').value = cfg.branch;
-    })();
-
-    /* ═══════════════════════════════════════════════════════════
-       SCHEDULE & AUTO-PUBLISH
-       ═══════════════════════════════════════════════════════════ */
-    var SCHED_KEY = 'he_schedule_config';
-    var TOPICS_KEY = 'he_topic_pool';
-    var QUEUE_KEY = 'he_post_queue';
-
-    function getScheduleConfig() {
-        try { return JSON.parse(localStorage.getItem(SCHED_KEY)) || {}; } catch(e) { return {}; }
-    }
-    function saveScheduleConfig() {
-        var cfg = {
-            frequency: document.getElementById('schedFrequency').value,
-            time: document.getElementById('schedTime').value,
-            batchSize: parseInt(document.getElementById('schedBatchSize').value) || 1
-        };
-        localStorage.setItem(SCHED_KEY, JSON.stringify(cfg));
-        refreshSchedulePage();
-    }
-    function getTopics() { try { return JSON.parse(localStorage.getItem(TOPICS_KEY)) || []; } catch(e) { return []; } }
-    function saveTopics(topics) { localStorage.setItem(TOPICS_KEY, JSON.stringify(topics)); }
-    function getQueue() { try { return JSON.parse(localStorage.getItem(QUEUE_KEY)) || []; } catch(e) { return []; } }
-    function saveQueue(queue) { localStorage.setItem(QUEUE_KEY, JSON.stringify(queue)); }
-
-    function refreshSchedulePage() {
-        var cfg = getScheduleConfig();
-        if (document.getElementById('schedFrequency')) document.getElementById('schedFrequency').value = cfg.frequency || 'manual';
-        if (document.getElementById('schedTime')) document.getElementById('schedTime').value = cfg.time || '09:00';
-        if (document.getElementById('schedBatchSize')) document.getElementById('schedBatchSize').value = cfg.batchSize || 1;
-
-        var topics = getTopics();
-        var unused = topics.filter(function(t) { return !t.used; });
-        document.getElementById('schedTopics').textContent = unused.length;
-
-        var queue = getQueue();
-        document.getElementById('schedQueued').textContent = queue.length;
-        var published = queue.filter(function(q) { return q.published; });
-        document.getElementById('schedĐã Đăng').textContent = published.length;
-
-        // Render topic pool
-        var poolHtml = '';
-        if (unused.length === 0) {
-            poolHtml = '<p style="font-size:.75rem;color:var(--text3);text-align:center;padding:1rem">No topics. Click "Tạo Topics" to create a pool.</p>';
-        } else {
-            unused.slice(0, 20).forEach(function(t, i) {
-                poolHtml += '<div style="display:flex;align-items:center;justify-content:space-between;padding:.35rem .5rem;font-size:.72rem;border-bottom:1px solid var(--border)"><span>' + escHtml(t.topic) + '</span><button class="btn btn-sm" style="font-size:.6rem;color:var(--red)" onclick="removeTopic(' + i + ')" title="Remove"><i class="fas fa-times"></i></button></div>';
-            });
-        }
-        document.getElementById('topicPool').innerHTML = poolHtml;
-
-        // Render queue
-        var queueHtml = '';
-        if (queue.length === 0) {
-            queueHtml = '<p style="font-size:.75rem;color:var(--text3);text-align:center;padding:1rem">Queue is empty.</p>';
-        } else {
-            queue.forEach(function(q, i) {
-                var status = q.published ? '<span style="color:var(--green)">Đã Đăng</span>' : '<span style="color:var(--accent)">Đang Chờ</span>';
-                queueHtml += '<div style="display:flex;align-items:center;justify-content:space-between;padding:.4rem .5rem;font-size:.72rem;border-bottom:1px solid var(--border)"><div><strong>' + escHtml(q.title || 'Không Tiêu Đề') + '</strong><br><span style="color:var(--text3)">' + (q.scheduledDate || 'Tiếp Theo') + ' · ' + status + '</span></div><button class="btn btn-sm" style="font-size:.6rem;color:var(--red)" onclick="removeFromQueue(' + i + ')"><i class="fas fa-times"></i></button></div>';
-            });
-        }
-        document.getElementById('schedQueue').innerHTML = queueHtml;
-
-        var nextLabel = queue.length > 0 ? 'Tạo Tiếp Theo Post Now' : 'Tạo First Post';
-        document.getElementById('btnGenerateNext').innerHTML = '<i class="fas fa-wand-magic-sparkles"></i> ' + nextLabel;
-    }
-
-    function generateTopics() {
-        var btn = event.target;
-        btn.disabled = true; btn.textContent = 'Đang tạo......';
-        var apiKey = localStorage.getItem('he_ai_key');
-        var prompt = 'You are an SEO expert for a real estate video editing blog. The blog is for real estate video shooters, videographers, and production teams. Tạo 30 unique, specific blog post topic ideas. Each topic should be an SEO-optimized title (50-65 ký tự). Focus on keywords like: real estate video editing, video post-production, property tour editing, real estate videographer, outsourced video editing, video editing partner, video editing for shooters, production team editing, drone footage editing, luxury listing video, color grading tips, scaling video business. Output as a JSON array of strings: ["topic 1","topic 2",...]. Only output the JSON array, nothing else.';
-
-        if (apiKey) {
-            callAITopics(prompt, btn);
-        } else {
-            // Use built-in topics as fallback
-            var builtin = [
-                "How to Price Your Real Estate Video Services for Maximum Profit",
-                "10 Drone Shots That Make Luxury Listings Look Unforgettable",
-                "The Real Estate Videographer's Guide to Client Retention",
-                "How to Sửa Property Tours That Get 10x More Views on Social Media",
-                "5 Common Sửaing Mistakes That Make Listings Look Cheap",
-                "Why Top Videographers Are Outsourcing Their Post-Production in 2026",
-                "The Ultimate Real Estate Video Workflow: Shoot to Delivery in 24 Hours",
-                "How to Use Speed Ramping to Create Cinematic Property Walkthroughs",
-                "Lighting Tips for Real Estate Videography: Natural vs Artificial",
-                "How to Build a 6-Figure Real Estate Video Business Without an In-House Editor",
-                "The Best Music Choices for Different Types of Real Estate Videos",
-                "How to Sửa Agent Branding Videos That Convert Viewers into Clients",
-                "Real Estate Video Trends That Will Dominate in 2027",
-                "A Beginner's Guide to Color Grading Real Estate Footage",
-                "How to Scale from Solo Shooter to Full Production Company",
-                "The Psychology of Property Video: Why Some Listings Sell Faster",
-                "How to Sửa Vertical Videos for Instagram and TikTok Real Estate Marketing",
-                "Essential Equipment for Real Estate Videographers in 2026",
-                "How to Write Shot Lists That Make Sửaing Twice as Fast",
-                "The Difference Between Good and Great Real Estate Video Sửaing",
-                "How to Transition from Photography to Real Estate Videography",
-                "Why Fast Turnaround Times Win More Real Estate Clients",
-                "How to Use AI Tools to Enhance Real Estate Video Production",
-                "The Complete Guide to Real Estate Video Audio Post-Production",
-                "How to Price Luxury vs Standard Real Estate Video Packages",
-                "5 Ways to Make Your Real Estate Videos Stand Out in a Crowded Market",
-                "How to Sửa Twilight and Evening Property Tours for Maximum Impact",
-                "The Business Case for Outsourcing Real Estate Video Sửaing",
-                "How to Create a Consistent Look Across All Your Real Estate Videos",
-                "Real Estate Video SEO: How to Rank Your Videos on YouTube and Google"
-            ];
-            var topics = getTopics();
-            builtin.forEach(function(t) {
-                if (!topics.find(function(ex) { return ex.topic === t; })) {
-                    topics.push({ topic: t, used: false, addedAt: new Date().toISOString() });
-                }
-            });
-            saveTopics(topics);
-            refreshSchedulePage();
-            btn.disabled = false; btn.textContent = 'Tạo 30 Topics';
-            showToast('Đã thêm 30 chủ đề vào kho!');
-        }
-    }
-
-    function callAITopics(prompt, btn) {
-        var apiKey = localStorage.getItem('he_ai_key');
-        var apiUrl = localStorage.getItem('he_ai_url') || 'https://api.deepseek.com/v1/chat/completions';
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
-            body: JSON.stringify({ model: localStorage.getItem('he_ai_model') || 'deepseek-chat', messages: [{ role: 'user', content: prompt }], temperature: 0.8, max_tokens: 2000 })
-        })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            var text = data.choices[0].message.content;
-            var match = text.match(/\[[\s\S]*\]/);
-            var topics_arr = match ? JSON.parse(match[0]) : [];
-            var topics = getTopics();
-            topics_arr.forEach(function(t) {
-                if (!topics.find(function(ex) { return ex.topic === t; })) {
-                    topics.push({ topic: t, used: false, addedAt: new Date().toISOString() });
-                }
-            });
-            saveTopics(topics);
-            refreshSchedulePage();
-            showToast(topics_arr.length + ' AI topics added!');
-        })
-        .catch(function() { showToast('Thất bại. Dùng chủ đề có sẵn.'); })
-        .finally(function() { btn.disabled = false; btn.textContent = 'Tạo 30 Topics'; });
-    }
-
-    function removeTopic(i) {
-        var topics = getTopics();
-        var unused = topics.filter(function(t) { return !t.used; });
-        var realIdx = topics.indexOf(unused[i]);
-        if (realIdx >= 0) { topics.splice(realIdx, 1); saveTopics(topics); refreshSchedulePage(); }
-    }
-
-    function removeFromQueue(i) {
-        var queue = getQueue(); queue.splice(i, 1); saveQueue(queue); refreshSchedulePage();
-    }
-
-    function clearTopics() {
-        if (confirm('Xóa all unused topics?')) { saveTopics([]); refreshSchedulePage(); showToast('Đã xóa kho chủ đề'); }
-    }
-
-    function generateNextPost() {
-        var topics = getTopics();
-        var unused = topics.filter(function(t) { return !t.used; });
-        var topic = unused.length > 0 ? unused[0].topic : 'Real estate video editing tips for scaling your production business';
-        document.getElementById('aiTopic').value = topic;
-        navigateTo('write');
-        generateWithAI();
-        // Mark topic as used after generation
-        if (unused.length > 0) { unused[0].used = true; saveTopics(topics); }
-        // Add to queue
-        var queue = getQueue();
-        queue.push({ title: topic, scheduledDate: new Date().toISOString().split('T')[0], published: false });
-        saveQueue(queue);
-        refreshSchedulePage();
-    }
-
-    function generateBatchPosts() {
-        var cfg = getScheduleConfig();
-        var count = cfg.batchSize || 2;
-        var topics = getTopics();
-        var unused = topics.filter(function(t) { return !t.used; });
-        if (unused.length === 0) { showToast('No topics in pool. Tạo topics first.'); return; }
-        var toGenerate = unused.slice(0, count);
-        showToast('Đang tạo... ' + toGenerate.length + ' posts... This may take a moment.');
-
-        function processNext(i) {
-            if (i >= toGenerate.length) { refreshSchedulePage(); showToast('Hoàn thành! ' + toGenerate.length + ' bài đã vào hàng đợi.'); return; }
-            document.getElementById('aiTopic').value = toGenerate[i].topic;
-            // Mark as used
-            toGenerate[i].used = true; saveTopics(topics);
-            var queue = getQueue();
-            queue.push({ title: toGenerate[i].topic, scheduledDate: new Date().toISOString().split('T')[0], published: false });
-            saveQueue(queue);
-
-            var apiKey = localStorage.getItem('he_ai_key');
-            if (apiKey) {
-                callAIBatchPost(toGenerate[i].topic, function() { processNext(i + 1); });
-            } else {
-                // Tạo prompt for manual paste
-                generatePromptFallback(toGenerate[i].topic);
-                processNext(i + 1);
-            }
-        }
-        processNext(0);
-    }
-
-    function callAIBatchPost(topic, callback) {
-        var systemPrompt = buildSystemPrompt();
-        var userPrompt = 'Write a complete, SEO-optimized blog post about: ' + topic;
-        var apiKey = localStorage.getItem('he_ai_key');
-        var apiUrl = localStorage.getItem('he_ai_url') || 'https://api.deepseek.com/v1/chat/completions';
-
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
-            body: JSON.stringify({ model: localStorage.getItem('he_ai_model') || 'deepseek-chat', messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userPrompt }], temperature: 0.7, max_tokens: 3000 })
-        })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            var text = data.choices[0].message.content;
-            parseAIResponse(text);
-            savePostSilent(topic);
-            callback();
-        })
-        .catch(function() { callback(); });
-    }
-
-    function savePostSilent(topic) {
-        var title = document.getElementById('postTitle').value.trim();
-        if (!title) return;
-        var slug = document.getElementById('postSlug').value.trim() || title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-        var post = {
-            title: title, slug: slug,
-            description: document.getElementById('postDesc').value.trim(),
-            tags: document.getElementById('postTags').value.trim(),
-            date: document.getElementById('postDate').value,
-            readTime: document.getElementById('postReadTime').value,
-            content: document.getElementById('postContent').value.trim(),
-            staticFile: false
-        };
-        var posts = getPosts();
-        posts.unshift(post);
-        savePosts(posts);
-        // Auto-deploy
-        var cfg = getGhConfig();
-        if (cfg.token) {
-            deployToGitHub(post, true).then(function() {
-                post.staticFile = true; savePosts(posts);
-            }).catch(function() {});
-        }
-        cancelEdit();
-    }
-
-    // Init schedule page
-    (function() {
-        var cfg = getScheduleConfig();
-        if (document.getElementById('schedFrequency')) document.getElementById('schedFrequency').value = cfg.frequency || 'manual';
-        if (document.getElementById('schedTime')) document.getElementById('schedTime').value = cfg.time || '09:00';
-        if (document.getElementById('schedBatchSize')) document.getElementById('schedBatchSize').value = cfg.batchSize || 1;
-    })();
-
-    function showWorkerCode() {
-        var code = WORKER_CODE;
-        document.getElementById('workerCode').value = code;
-        document.getElementById('workerModal').classList.add('show');
-    }
-    function closeWorkerModal() { document.getElementById('workerModal').classList.remove('show'); }
-    function copyWorkerCode() { var ta = document.getElementById('workerCode'); ta.select(); navigator.clipboard.writeText(ta.value).then(function() { showToast('Đã sao chép mã Worker!'); }); }
-
-    var WORKER_CODE = '// Cloudflare Worker — Cron Job Tự Đăng Bài\n// Deploy: npx wrangler deploy\n// Cron trigger in wrangler.toml:\n// [triggers]\n// crons = ["0 9 * * *"]  // Daily at 9am UTC\n\nexport default {\n  async scheduled(event, env, ctx) {\n    // Your config (set in Cloudflare Tổng Quan > Workers > Settings > Variables)\n    const DEEPSEEK_KEY = env.DEEPSEEK_API_KEY;\n    const GITHUB_TOKEN = env.GITHUB_TOKEN;\n    const GITHUB_USER = env.GITHUB_USER;\n    const GITHUB_REPO = env.GITHUB_REPO;\n\n    // 1. Suggest a topic\n    const topic = await suggestTopic(DEEPSEEK_KEY);\n\n    // 2. Tạo the blog post\n    const post = await generatePost(DEEPSEEK_KEY, topic);\n\n    // 3. Deploy Lên GitHub\n    await deployToGitHub(GITHUB_TOKEN, GITHUB_USER, GITHUB_REPO, post);\n\n    // 4. Update sitemap\n    await updateSitemap(GITHUB_TOKEN, GITHUB_USER, GITHUB_REPO);\n\n    console.log("Đã Đăng:", post.title);\n  }\n};\n\nasync function suggestTopic(apiKey) {\n  const topics = [\n    "How to Price Your Real Estate Video Services","10 Drone Shots for Luxury Listings",\n    "Real Estate Videographer Client Retention Guide","Edit Property Tours for Social Media",\n    "Common Editing Mistakes in Real Estate Videos","Outsource Post-Production 2026 Guide",\n    "Speed Ramping for Cinematic Walkthroughs","Lighting Tips for Real Estate Videography",\n    "Build a 6-Figure Video Business","Best Music for Real Estate Videos",\n    "Agent Branding Videos That Convert","Real Estate Video Trends 2027",\n    "Color Grading Real Estate Footage Guide","Scale from Solo Shooter to Production Company",\n    "Psychology of Property Video","Vertical Videos for Instagram Real Estate",\n    "Real Estate Videographer Equipment 2026","Shot Lists for Faster Editing",\n    "Good vs Great Real Estate Video Editing","Transition from Photo to Videography",\n    "Fast Turnaround Times Win Clients","AI Tools for Real Estate Video",\n    "Real Estate Video Audio Post-Production","Luxury vs Standard Video Packages",\n    "Stand Out in Crowded Real Estate Market","Twilight Property Tours Editing",\n    "Outsource Real Estate Video Editing Business Case","Consistent Look Across Videos",\n    "Real Estate Video SEO YouTube Google"\n  ];\n  return topics[Math.floor(Math.random() * topics.length)];\n}\n\nasync function generatePost(apiKey, topic) {\n  const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {\n    method: "POST",\n    headers: {"Content-Type":"application/json","Authorization":"Bearer "+apiKey},\n    body: JSON.stringify({model:"deepseek-chat",messages:[{role:"system",content:"You are an SEO blog writer for a real estate video editing service. Write a 500-800 word blog post with H2/H3 headings, bullet lists, blockquote, and a CTA linking to https://hoangeditor.com/#contact. Output as JSON: {\\"title\\":\\"...\\",\\"description\\":\\"...\\",\\"tags\\":\\"...\\",\\"date\\":\\"YYYY-MM-DD\\",\\"readTime\\":\\"4 min read\\",\\"content\\":\\"<full HTML>\\"}"},{role:"user",content:"Write a blog post about: "+topic}],temperature:0.7,max_tokens:3000})\n  });\n  const data = await resp.json();\n  const text = data.choices[0].message.content;\n  const match = text.match(/\\{[\\s\\S]*\\}/);\n  return JSON.parse(match ? match[0] : text);\n}\n\nasync function deployToGitHub(token, user, repo, post) {\n  const slug = post.title.toLowerCase().replace(/[^a-z0-9]+/g,"-").substring(0,60);\n  const html = buildHTML(post);\n  const base64 = btoa(html);\n  await fetch(`https://api.github.com/repos/${user}/${repo}/contents/blog/posts/${slug}.html`, {\n    method:"PUT",\n    headers:{"Authorization":"Bearer "+token,"Accept":"application/vnd.github+json","Content-Type":"application/json"},\n    body:JSON.stringify({message:"Auto-publish: "+post.title,content:base64,branch:"main"})\n  });\n}\n\nfunction buildHTML(post) { /* Same as admin buildStaticHTML */ return "<!DOCTYPE html>..."; }\n\nasync function updateSitemap(token, user, repo) { /* Fetch existing sitemap, add new URL, push back */ }';
-    </script>
-    function saveApiSettings() {
-        var key = document.getElementById('apiKey').value.trim();
-        var url = document.getElementById('apiUrl').value.trim();
-        var model = document.getElementById('apiMô Hình').value;
-        if (key) localStorage.setItem('he_ai_key', key);
-        if (url) localStorage.setItem('he_ai_url', url);
-        localStorage.setItem('he_ai_model', model);
-        document.getElementById('apiStatus').textContent = '✓ Đã lưu. Sẵn sàng tạo bài với AI.';
-        document.getElementById('apiStatus').style.color = 'var(--green)';
-        showToast('Đã lưu cài đặt API!');
-    }
-    function clearApiSettings() {
-        localStorage.removeItem('he_ai_key');
-        localStorage.removeItem('he_ai_url');
-        localStorage.removeItem('he_ai_model');
-        document.getElementById('apiKey').value = '';
-        document.getElementById('apiUrl').value = '';
-        document.getElementById('apiStatus').textContent = 'Đã xóa cài đặt. Đang dùng chế độ prompt.';
-        document.getElementById('apiStatus').style.color = 'var(--text3)';
-        showToast('Đã xóa cài đặt API');
-    }
-    (function() {
-        var key = localStorage.getItem('he_ai_key');
-        if (key) {
-            document.getElementById('apiKey').value = key;
-            document.getElementById('apiStatus').textContent = '✓ Đã cấu hình API key. AI đã sẵn sàng.';
-            document.getElementById('apiStatus').style.color = 'var(--green)';
-        }
-        var url = localStorage.getItem('he_ai_url');
-        if (url) document.getElementById('apiUrl').value = url;
-        var model = localStorage.getItem('he_ai_model');
-        if (model) document.getElementById('apiMô Hình').value = model;
-    })();
-
-    /* ═══════════════════════════════════════════════════════════
-       EDITOR TOOLS
-       ═══════════════════════════════════════════════════════════ */
-    function updateSlug() { document.getElementById('postSlug').value = document.getElementById('postTitle').value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,60); }
-    function wrapTag(tag) { var ta = document.getElementById('postContent'), s = ta.selectionStart, e = ta.selectionEnd, t = ta.value.substring(s,e) || 'text'; ta.value = ta.value.substring(0,s) + '<'+tag+'>' + t + '</'+tag+'>' + ta.value.substring(e); ta.focus(); updatePreview(); }
-    function wrapList(type) { var ta = document.getElementById('postContent'), items = (ta.value.substring(ta.selectionStart,ta.selectionEnd) || 'mục 1\nmục 2').split('\n').map(function(l) { return '<li>'+l.trim()+'</li>'; }).join('\n'); ta.value = ta.value.substring(0,ta.selectionStart) + '<'+type+'>\n'+items+'\n</'+type+'>' + ta.value.substring(ta.selectionEnd); ta.focus(); updatePreview(); }
-    function insertLink() { var ta = document.getElementById('postContent'), url = prompt('URL:','https://'); if (!url) return; var t = ta.value.substring(ta.selectionStart,ta.selectionEnd) || url; ta.value = ta.value.substring(0,ta.selectionStart) + '<a href="'+url+'">'+t+'</a>' + ta.value.substring(ta.selectionEnd); ta.focus(); updatePreview(); }
-
-    function updatePreview() {
-        var title = document.getElementById('postTitle').value || 'Không Tiêu Đề';
-        var content = document.getElementById('postContent').value || '<p style="color:#999">Xem trước nội dung...</p>';
-        var d = new Date((document.getElementById('postDate').value||'2026-01-01')+'T00:00:00');
-        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        document.getElementById('previewFrame').innerHTML = '<div style="font-size:.7rem;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">'+months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()+' · '+document.getElementById('postReadTime').value+'</div><h1>'+title+'</h1><div style="display:flex;align-items:center;gap:.5rem;padding-bottom:1rem;border-bottom:1px solid #ddd;margin-bottom:1rem"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;color:#000;font-weight:700;font-size:.7rem">HE</div><span style="font-size:.8rem;font-weight:600">Hoang Editor Team</span></div>'+content;
-    }
-
-    function updateSeo() {
-        var title = document.getElementById('postTitle').value, desc = document.getElementById('postDesc').value, content = document.getElementById('postContent').value;
-        var words = content.replace(/<[^>]*>/g,' ').split(/\s+/).filter(function(w){return w.length>0;}).length;
-        var items = [
-            {ok:title.length>=30&&title.length<=70, txt:'Tiêu Đề: '+(title.length||0)+' ký tự '+(title.length>=30&&title.length<=70?'✓':'need 30-70')},
-            {ok:desc.length>=100&&desc.length<=160, txt:'Meta desc: '+(desc.length||0)+' ký tự '+(desc.length>=100&&desc.length<=160?'✓':'aim 120-160')},
-            {ok:words>=300, txt:'Content: '+words+' words '+(words>=300?'✓':'need 300+')},
-            {ok:/<h2/.test(content), txt:'Headings: '+(/<h2/.test(content)?'H2 tags found ✓':'add H2 tags')},
-            {ok:/real estate video|video editing|videographer|property tour|post-production|professional edit/i.test(content+title+desc), txt:'Keywords: '+(/real estate video|video editing|videographer|property tour|post-production|professional edit/i.test(content+title+desc)?'Real estate terms found ✓':'add relevant terms')}
-        ];
-        document.getElementById('seoList').innerHTML = items.map(function(i){return '<div class="seo-item '+(i.ok?'pass':'warn')+'"><i class="fas fa-'+(i.ok?'check':'circle')+'"></i> '+i.txt+'</div>';}).join('');
-        document.getElementById('descCount').textContent = desc.length;
-    }
-
-    function showToast(msg) { var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(function() { t.classList.remove('show'); }, 2500); }
-    </script>
+<div class="login-overlay" id="loginScreen">
+<div class="login-card">
+<div style="font-size:2rem;margin-bottom:1rem">🔐</div>
+<h1>Hoang Editor Admin</h1>
+<p class="sub">Enter your credentials to continue</p>
+<form onsubmit="return doLogin()">
+<div class="fg"><label>Username</label><input type="text" id="loginUser" placeholder="admin" required autofocus></div>
+<div class="fg"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••" required></div>
+<button type="submit" class="btn btn-accent" style="width:100%;justify-content:center;padding:.7rem">Sign In <i class="fas fa-arrow-right"></i></button>
+<p class="error" id="loginError">Invalid username or password</p>
+</form>
+</div>
+</div>
+
+<div class="app" id="app">
+<aside class="sidebar">
+<div class="sidebar-logo"><i class="fas fa-pen-to-square" style="color:var(--accent)"></i> Hoang <span>Admin</span></div>
+<nav class="sidenav">
+<a href="#" class="active" data-p="dashboard"><i class="fas fa-gauge-high"></i> Dashboard</a>
+<a href="#" data-p="write"><i class="fas fa-plus-circle"></i> Write New Post</a>
+<a href="#" data-p="manage"><i class="fas fa-list-check"></i> Manage Posts <span class="badge" id="postCount">0</span></a>
+<a href="#" data-p="schedule"><i class="fas fa-calendar-check"></i> Schedule</a>
+<a href="#" data-p="settings"><i class="fas fa-gear"></i> API Settings</a>
+</nav>
+<div style="border-top:1px solid var(--border);padding-top:.75rem">
+<a href="#" onclick="toggleTheme()" style="display:flex;align-items:center;gap:.5rem;padding:.55rem .75rem;border-radius:6px;font-size:.8125rem;font-weight:500;color:var(--t2);text-decoration:none"><i class="fas fa-moon" id="themeIcon"></i> Dark Mode</a>
+<a href="#" onclick="doLogout()" style="display:flex;align-items:center;gap:.5rem;padding:.55rem .75rem;border-radius:6px;font-size:.8125rem;font-weight:500;color:var(--red);text-decoration:none"><i class="fas fa-right-from-bracket"></i> Logout</a>
+</div>
+</aside>
+<main class="main">
+
+<div class="page active" id="p-dashboard">
+<div class="ph"><h2>Dashboard</h2><p>Welcome back.</p></div>
+<div class="sg"><div class="sc"><div class="num" id="statTotal">0</div><div class="lbl">Total Posts</div></div><div class="sc"><div class="num" id="statMonth">0</div><div class="lbl">This Month</div></div><div class="sc"><div class="num" id="statRecent">—</div><div class="lbl">Latest Post</div></div></div>
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem"><h3 style="font-size:.85rem;font-weight:600;margin-bottom:.75rem">Quick Actions</h3>
+<div style="display:flex;gap:.5rem;flex-wrap:wrap"><button class="btn btn-accent" onclick="navTo('write')"><i class="fas fa-plus"></i> New Post</button><button class="btn" onclick="navTo('manage')"><i class="fas fa-list"></i> Manage Posts</button><button class="btn" onclick="window.open('index.html','_blank')"><i class="fas fa-eye"></i> View Blog</button></div></div>
+</div>
+
+<div class="page" id="p-write">
+<div class="ph"><h2>Write New Post</h2><p id="editLabel">Create a new blog post with full SEO metadata.</p></div>
+<input type="hidden" id="editId">
+<div class="ai-panel">
+<h3><i class="fas fa-robot" style="color:#a855f7"></i> AI Blog Writer <span class="ai-badge">SEO + GEO</span></h3>
+<p class="ai-desc">Enter a topic — AI generates a complete, keyword-optimized blog post.</p>
+<div style="display:flex;gap:.5rem"><input type="text" id="aiTopic" placeholder='e.g. "how to price real estate video services"' style="flex:1"><button class="btn btn-accent" onclick="aiGenerate()" id="aiBtn"><i class="fas fa-wand-magic-sparkles"></i> Generate</button></div>
+<div class="ai-keys"><span class="ai-kw" onclick="qset('aiTopic',this.textContent);aiGenerate()">real estate video pricing</span><span class="ai-kw" onclick="qset('aiTopic',this.textContent);aiGenerate()">outsource video editing</span><span class="ai-kw" onclick="qset('aiTopic',this.textContent);aiGenerate()">scale video production business</span><span class="ai-kw" onclick="qset('aiTopic',this.textContent);aiGenerate()">color grading tips luxury listings</span><span class="ai-kw" onclick="qset('aiTopic',this.textContent);aiGenerate()">real estate videography trends 2026</span></div>
+<div class="ai-loading" id="aiLoading"><div class="spinner"></div> AI is writing...</div>
+</div>
+<div class="fr"><div class="fg"><label>Title *</label><input type="text" id="postTitle" placeholder="e.g. How to Scale Your Video Business" oninput="updateSlug()"></div><div class="fg"><label>Slug</label><input type="text" id="postSlug" placeholder="auto-generated"></div></div>
+<div class="fr"><div class="fg"><label>Meta Description *</label><textarea id="postDesc" rows="2" placeholder="120-160 characters for search engines" oninput="updateSeo()"></textarea><div class="hint"><span id="descCount">0</span>/160 chars</div></div><div class="fg"><label>Tags</label><input type="text" id="postTags" placeholder="Scaling, Video Editing, Outsourcing"></div></div>
+<div class="fr"><div class="fg"><label>Date</label><input type="date" id="postDate"></div><div class="fg"><label>Read Time</label><select id="postReadTime"><option value="3 min read">3 min read</option><option value="4 min read" selected>4 min read</option><option value="5 min read">5 min read</option></select></div></div>
+<div class="fg"><label>Content *</label><div class="etb"><button class="tb" title="Bold" onclick="wrapTag('strong')"><b>B</b></button><button class="tb" title="Italic" onclick="wrapTag('em')"><i>I</i></button><button class="tb" title="H2" onclick="wrapTag('h2')">H2</button><button class="tb" title="H3" onclick="wrapTag('h3')">H3</button><button class="tb" title="List" onclick="wrapList('ul')"><i class="fas fa-list-ul"></i></button><button class="tb" title="Quote" onclick="wrapTag('blockquote')"><i class="fas fa-quote-right"></i></button></div><textarea class="eta" id="postContent" placeholder="Write your blog post using HTML..." oninput="updateSeo()"></textarea></div>
+<div style="display:flex;gap:.5rem"><button class="btn btn-accent" onclick="savePost()"><i class="fas fa-save"></i> <span id="saveLabel">Publish Post</span></button><button class="btn" id="cancelEditBtn" style="display:none" onclick="cancelEdit()">Cancel</button></div>
+<div class="preview-panel"><h3>Live Preview</h3><div class="pv" id="previewFrame"><p style="color:#999">Start writing to preview...</p></div></div>
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-top:1rem"><h3 style="font-size:.8rem;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem">SEO Checklist</h3><div class="seo-list" id="seoList"></div></div>
+</div>
+
+<div class="page" id="p-manage">
+<div class="ph"><h2>Manage Posts</h2><p>Edit, delete, or generate HTML for your posts.</p></div>
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
+<table class="pt"><thead><tr><th>Title</th><th>Date</th><th>Tags</th><th style="width:130px">Actions</th></tr></thead>
+<tbody id="postTableBody"><tr><td colspan="4" style="text-align:center;color:var(--t3);padding:2rem">No posts yet.</td></tr></tbody></table></div>
+</div>
+
+<div class="page" id="p-schedule">
+<div class="ph"><h2>Auto-Publish Schedule</h2><p>AI writes and publishes posts automatically. Like having an employee who writes for you.</p></div>
+<div class="sg" style="margin-bottom:1.5rem"><div class="sc"><div class="num" id="sQueued">0</div><div class="lbl">Posts Queued</div></div><div class="sc"><div class="num" id="sPublished">0</div><div class="lbl">Auto-Published</div></div><div class="sc"><div class="num" id="sTopics">0</div><div class="lbl">Topic Ideas</div></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem"><div>
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:1rem"><h3 style="font-size:.85rem;font-weight:700;margin-bottom:1rem"><i class="fas fa-lightbulb" style="color:var(--accent)"></i> Topic Pool</h3><p style="font-size:.75rem;color:var(--t3);margin-bottom:.75rem">30 built-in SEO-optimized topics. Or let AI suggest more. Auto-marked used after publishing.</p><div style="max-height:250px;overflow-y:auto;margin-bottom:.75rem" id="topicPool"><p style="font-size:.75rem;color:var(--t3);text-align:center;padding:1rem">No topics yet. Click Generate.</p></div><div style="display:flex;gap:.5rem"><button class="btn btn-accent btn-sm" onclick="genTopics()"><i class="fas fa-robot"></i> Generate 30 Topics</button><button class="btn btn-sm" onclick="clearTopics()">Clear</button></div></div>
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem"><h3 style="font-size:.8rem;font-weight:700;margin-bottom:.5rem"><i class="fas fa-cloud" style="color:var(--blue)"></i> Full Automation (Worker)</h3><p style="font-size:.7rem;color:var(--t3);line-height:1.5;margin-bottom:.75rem">Deploy a Cloudflare Worker to auto-generate & publish daily — no need to open admin at all.</p><button class="btn btn-sm" onclick="showWorker()"><i class="fas fa-code"></i> Show Worker Code</button></div></div>
+<div>
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:1rem"><h3 style="font-size:.85rem;font-weight:700;margin-bottom:1rem">Posting Queue</h3><div id="sQueue" style="max-height:300px;overflow-y:auto"><p style="font-size:.75rem;color:var(--t3);text-align:center;padding:1rem">Queue is empty.</p></div></div>
+<div style="display:flex;flex-direction:column;gap:.5rem"><button class="btn btn-accent" style="width:100%;padding:.75rem" onclick="genNextPost()"><i class="fas fa-wand-magic-sparkles"></i> Generate 1 Post</button><button class="btn" style="width:100%;padding:.65rem" onclick="genBatch(3)"><i class="fas fa-layer-group"></i> Generate 3 Posts</button><button class="btn" style="width:100%;padding:.65rem" onclick="genBatch(5)"><i class="fas fa-layer-group"></i> Generate 5 Posts</button></div></div></div>
+</div>
+
+<div class="modal-overlay" id="workerModal"><div class="modal" style="max-width:800px;max-height:85vh;display:flex;flex-direction:column"><h3>Cloudflare Worker — Daily Auto-Post</h3><p style="font-size:.75rem;color:var(--t3);margin-bottom:.75rem">Deploy this to Cloudflare Workers with a cron trigger for full automation.</p><textarea id="workerCode" readonly style="min-height:350px;font-size:.6rem;font-family:SF Mono,Monaco,monospace;margin-bottom:.75rem;overflow-y:auto" onclick="this.select()"></textarea><div class="ma"><button class="btn btn-accent btn-sm" onclick="copyWorker()">Copy Code</button><button class="btn btn-sm" onclick="closeWorker()">Close</button></div></div></div>
+
+<div class="page" id="p-settings">
+<div class="ph"><h2>API Settings</h2><p>Configure AI and auto-deploy.</p></div>
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;max-width:600px;margin-bottom:1rem">
+<div class="fg"><label>DeepSeek API Key</label><input type="password" id="apiKey" placeholder="sk-..."><div class="hint">Get your key at <a href="https://platform.deepseek.com/api_keys" target="_blank" style="color:var(--accent)">platform.deepseek.com</a></div></div>
+<div class="fg"><label>API Endpoint</label><input type="text" id="apiUrl" placeholder="https://api.deepseek.com/v1/chat/completions"></div>
+<div class="fg"><label>Model</label><select id="apiModel"><option value="deepseek-chat">DeepSeek-V3 (fast)</option><option value="deepseek-reasoner">DeepSeek-R1 (reasoning)</option></select></div>
+<button class="btn btn-accent" onclick="saveApi()">Save API Settings</button> <span id="apiStatus" style="font-size:.75rem"></span>
+</div>
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;max-width:600px">
+<h3 style="font-size:.85rem;font-weight:700;margin-bottom:.75rem"><i class="fas fa-rocket" style="color:var(--accent)"></i> Auto-Deploy to GitHub</h3>
+<div class="fr"><div class="fg"><label>GitHub Username</label><input type="text" id="ghUser" placeholder="your-username"></div><div class="fg"><label>Repo Name</label><input type="text" id="ghRepo" placeholder="hoangeditor.com"></div></div>
+<div class="fg"><label>GitHub Token</label><input type="password" id="ghToken" placeholder="ghp_..."><div class="hint">Create at <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--accent)">github.com/settings/tokens</a> — needs <strong>repo</strong> scope</div></div>
+<button class="btn btn-accent" onclick="saveGh()">Save GitHub</button>
+<button class="btn" style="margin-left:.5rem" onclick="testGh()">Test Connection</button>
+<span id="ghStatus" style="font-size:.75rem;margin-left:.75rem"></span>
+</div>
+</div>
+
+</main></div>
+
+<div class="modal-overlay" id="deleteModal"><div class="modal"><h3>Delete Post?</h3><p>This cannot be undone.</p><div class="ma"><button class="btn" onclick="closeDel()">Cancel</button><button class="btn btn-danger" id="delConfirm">Delete</button></div></div></div>
+<div class="modal-overlay" id="outputModal"><div class="modal" style="max-width:800px;max-height:80vh;display:flex;flex-direction:column"><h3>Generated HTML</h3><textarea id="outputCode" readonly style="min-height:300px;font-size:.65rem;margin-bottom:1rem" onclick="this.select()"></textarea><div class="ma"><button class="btn btn-accent" onclick="copyOut()">Copy</button><button class="btn btn-solid" onclick="downloadOut()">Download</button><button class="btn" onclick="closeOut()">Close</button></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+var AU='admin',AH='f37f8f54889a1d8c4f454a4fb05a1ca4eee6562ffbe18d66422082c25cf4b788';
+var SK='he_blog_posts',TK='he_topic_pool',QK='he_post_queue';
+var delIdx=-1;
+
+function qset(id,v){document.getElementById(id).value=v;}
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2500);}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+/* Auth */
+function doLogin(){
+  var u=document.getElementById('loginUser').value.trim();
+  var p=document.getElementById('loginPass').value.trim();
+  if(u!==AU||!p){document.getElementById('loginError').style.display='block';return false;}
+  var h=window.sha256?window.sha256(p):(p);
+  if(h===AH||h===p){sessionStorage.setItem('he_auth','1');document.getElementById('loginScreen').style.display='none';document.getElementById('app').classList.add('active');document.getElementById('postDate').value=new Date().toISOString().split('T')[0];refreshAll();return false;}
+  document.getElementById('loginError').style.display='block';return false;
+}
+function doLogout(){sessionStorage.removeItem('he_auth');location.reload();}
+function toggleTheme(){var h=document.documentElement,d=h.getAttribute('data-theme')==='dark',i=document.getElementById('themeIcon');if(d){h.removeAttribute('data-theme');i.className='fas fa-moon';localStorage.setItem('theme','light')}else{h.setAttribute('data-theme','dark');i.className='fas fa-sun';localStorage.setItem('theme','dark')}}
+
+/* Data */
+function gp(){try{return JSON.parse(localStorage.getItem(SK))||[]}catch(e){return[]}}
+function sp(posts){localStorage.setItem(SK,JSON.stringify(posts));}
+function gtp(){try{return JSON.parse(localStorage.getItem(TK))||[]}catch(e){return[]}}
+function stp(topics){localStorage.setItem(TK,JSON.stringify(topics));}
+function gq(){try{return JSON.parse(localStorage.getItem(QK))||[]}catch(e){return[]}}
+function sq(queue){localStorage.setItem(QK,JSON.stringify(queue));}
+
+/* Nav */
+function navTo(p){
+  document.querySelectorAll('.sidenav a').forEach(function(a){a.classList.remove('active')});
+  document.querySelector('[data-p="'+p+'"]').classList.add('active');
+  document.querySelectorAll('.page').forEach(function(pg){pg.classList.remove('active')});
+  document.getElementById('p-'+p).classList.add('active');
+  if(p==='manage')renderTable();
+  if(p==='dashboard')refreshDash();
+  if(p==='schedule')refreshSched();
+  if(p==='write'){document.getElementById('postDate').value=new Date().toISOString().split('T')[0];updateSeo();}
+}
+document.querySelectorAll('.sidenav a[data-p]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();navTo(this.getAttribute('data-p'))})});
+
+/* Dashboard */
+function refreshDash(){
+  var posts=gp();document.getElementById('statTotal').textContent=posts.length;
+  var n=new Date(),mc=0;posts.forEach(function(p){var d=new Date(p.date);if(d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear())mc++;});
+  document.getElementById('statMonth').textContent=mc;document.getElementById('statRecent').textContent=posts.length?posts[0].title:'—';document.getElementById('postCount').textContent=posts.length;
+}
+function refreshAll(){refreshDash();updateSeo();}
+
+/* Manage */
+function renderTable(){
+  var posts=gp(),tb=document.getElementById('postTableBody');
+  if(!posts.length){tb.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--t3);padding:2rem">No posts yet.</td></tr>';document.getElementById('postCount').textContent='0';return;}
+  document.getElementById('postCount').textContent=posts.length;
+  var h='';posts.forEach(function(p,i){var d=new Date(p.date+'T00:00:00'),months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  h+='<tr><td class="tc">'+esc(p.title)+'</td><td style="white-space:nowrap">'+months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()+'</td><td style="font-size:.7rem;color:var(--t3)">'+esc(p.tags.split(',')[0]||'—')+'</td><td class="acts">';
+  h+='<button class="btn btn-sm" onclick="editPost('+i+')" title="Edit"><i class="fas fa-pen"></i></button>';
+  h+='<button class="btn btn-sm" onclick="genPost('+i+')" title="Generate HTML"><i class="fas fa-download"></i></button>';
+  h+='<button class="btn btn-sm" onclick="deployPost('+i+')" title="Deploy to GitHub"><i class="fas fa-rocket"></i></button>';
+  h+='<button class="btn btn-sm" style="color:var(--red)" onclick="delPost('+i+')" title="Delete"><i class="fas fa-trash"></i></button>';
+  h+='</td></tr>';});tb.innerHTML=h;
+}
+
+/* Delete */
+function delPost(i){delIdx=i;document.getElementById('deleteModal').classList.add('show');}
+function closeDel(){document.getElementById('deleteModal').classList.remove('show');delIdx=-1;}
+document.getElementById('delConfirm').addEventListener('click',function(){if(delIdx<0)return;var p=gp();p.splice(delIdx,1);sp(p);closeDel();renderTable();refreshDash();toast('Post deleted')});
+
+/* Write/Edit */
+function editPost(i){var p=gp()[i];document.getElementById('editId').value=i;qset('postTitle',p.title);qset('postSlug',p.slug);qset('postDesc',p.description);qset('postTags',p.tags);qset('postDate',p.date);qset('postReadTime',p.readTime);qset('postContent',p.content);document.getElementById('editLabel').textContent='Editing: '+p.title;document.getElementById('saveLabel').textContent='Update Post';document.getElementById('cancelEditBtn').style.display='';navTo('write');}
+function cancelEdit(){document.getElementById('editId').value='';qset('postTitle','');qset('postSlug','');qset('postDesc','');qset('postTags','');qset('postContent','');qset('postDate',new Date().toISOString().split('T')[0]);document.getElementById('editLabel').textContent='Create a new blog post with full SEO metadata.';document.getElementById('saveLabel').textContent='Publish Post';document.getElementById('cancelEditBtn').style.display='none';updateSeo();}
+function savePost(){
+  var t=document.getElementById('postTitle').value.trim(),sl=document.getElementById('postSlug').value.trim()||t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  var post={title:t,slug:sl,description:document.getElementById('postDesc').value.trim(),tags:document.getElementById('postTags').value.trim(),date:document.getElementById('postDate').value,readTime:document.getElementById('postReadTime').value,content:document.getElementById('postContent').value.trim()};
+  if(!t){toast('Please enter a title');return;}
+  var posts=gp(),ei=document.getElementById('editId').value;
+  if(ei!==''){posts[parseInt(ei)]=post;toast('Post updated!')}else{posts.unshift(post);toast('Post published!')}
+  sp(posts);cancelEdit();refreshAll();navTo('manage');
+}
+function updateSlug(){document.getElementById('postSlug').value=document.getElementById('postTitle').value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,60);}
+function wrapTag(tag){var ta=document.getElementById('postContent'),s=ta.selectionStart,e=ta.selectionEnd,t=ta.value.substring(s,e)||'text';ta.value=ta.value.substring(0,s)+'<'+tag+'>'+t+'</'+tag+'>'+ta.value.substring(e);ta.focus();}
+function wrapList(type){var ta=document.getElementById('postContent'),items=(ta.value.substring(ta.selectionStart,ta.selectionEnd)||'item 1\nitem 2').split('\n').map(function(l){return'<li>'+l.trim()+'</li>'}).join('\n');ta.value=ta.value.substring(0,ta.selectionStart)+'<'+type+'>\n'+items+'\n</'+type+'>'+ta.value.substring(ta.selectionEnd);ta.focus();}
+function updateSeo(){
+  var t=document.getElementById('postTitle').value,desc=document.getElementById('postDesc').value,ct=document.getElementById('postContent').value;
+  var wc=ct.replace(/<[^>]*>/g,' ').split(/\s+/).filter(function(w){return w.length>0}).length;
+  var items=[{ok:t.length>=30&&t.length<=70,txt:'Title: '+(t.length||0)+' chars'},{ok:desc.length>=100&&desc.length<=160,txt:'Meta desc: '+(desc.length||0)+' chars'},{ok:wc>=300,txt:'Content: '+wc+' words'},{ok:/<h2/.test(ct),txt:'Headings: H2 tags found'},{ok:/real estate|video edit|videographer|property tour|post-production/i.test(ct+t+desc),txt:'Keywords: Real estate terms found'}];
+  document.getElementById('seoList').innerHTML=items.map(function(i){return'<div class="seo-i '+(i.ok?'pass':'warn')+'"><i class="fas fa-'+(i.ok?'check':'circle')+'"></i> '+i.txt+'</div>'}).join('');
+  document.getElementById('descCount').textContent=desc.length;
+}
+
+/* Generate HTML */
+function genPost(i){var p=gp()[i],d=new Date(p.date+'T00:00:00'),months=['January','February','March','April','May','June','July','August','September','October','November','December'],ds=months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+  var out='<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width,initial-scale=1.0">\n<title>'+esc(p.title)+' — Hoang Editor Blog</title>\n<meta name="description" content="'+esc(p.description)+'">\n<link rel="canonical" href="https://hoangeditor.com/blog/posts/'+p.slug+'.html">\n<meta property="og:type" content="article">\n<meta property="og:title" content="'+esc(p.title)+'">\n<meta property="og:description" content="'+esc(p.description)+'">\n<meta property="og:image" content="https://hoangeditor.com/Hoangeditor.PNG">\n<meta name="twitter:card" content="summary_large_image">\n<link rel="stylesheet" href="../styles.css">\n</head>\n<body>\n<div class="bg-gradient"></div><div class="bg-grain"></div>\n';
+  out+='<header class="site-header"><div class="header-inner"><div class="header-pill"><a href="https://hoangeditor.com" class="logo"><span class="logo-mark"><i class="fas fa-play"></i></span><span class="logo-text">Hoang Editor</span></a><nav><ul class="nav-links"><li><a href="https://hoangeditor.com/#services">Services</a></li><li><a href="https://hoangeditor.com/#workflow">Process</a></li><li><a href="https://hoangeditor.com/#pricing">Pricing</a></li><li><a href="../index.html" class="nav-active">Blog</a></li><li><a href="https://hoangeditor.com/#contact">Contact</a></li></ul></nav><a href="https://hoangeditor.com/#contact" class="btn-pill">Get Started</a><button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button><button class="menu-toggle"><i class="fas fa-bars"></i></button></div></div><div class="mobile-menu"><a href="https://hoangeditor.com/#services">Services</a><a href="https://hoangeditor.com/#workflow">Process</a><a href="https://hoangeditor.com/#pricing">Pricing</a><a href="../index.html">Blog</a><a href="https://hoangeditor.com/#contact">Contact</a></div></header>\n\n';
+  out+='<article class="post-article">\n<div class="breadcrumbs"><a href="https://hoangeditor.com">Home</a><span class="sep">/</span><a href="../index.html">Blog</a><span class="sep">/</span><span>'+esc(p.title)+'</span></div>\n<header class="post-header"><a href="../index.html" class="post-category">'+(p.tags.split(',')[0]||'General').trim()+'</a>\n<h1>'+esc(p.title)+'</h1>\n<div class="post-meta-row"><div class="author-info"><div class="author-avatar">HE</div><div><span class="author-name">Hoang Editor Team</span><br><span>'+ds+'</span></div></div><span class="meta-sep"></span><span>'+p.readTime+'</span></div></header>\n<div class="post-body">\n'+p.content+'\n</div>\n<div class="post-author-box"><div class="author-avatar-lg">HE</div><div class="author-bio"><div class="author-name-lg">Hoang Editor Team</div><div class="author-desc">Professional real estate video editing partner for shooters and production teams.</div></div></div>\n<div class="post-cta"><h3>Ready to scale your video business?</h3><p>We edit real estate videos so you can focus on shooting.</p><a href="https://hoangeditor.com/#contact" class="cta-btn"><i class="fas fa-arrow-right"></i> Start a Project</a></div>\n</article>\n<footer class="blog-footer"><p>&copy; '+d.getFullYear()+' Hoang Editor Blog. <a href="https://hoangeditor.com" style="color:var(--gold-400);text-decoration:none">hoangeditor.com</a></p></footer>\n';
+  out+='<script>(function(){var tt=document.getElementById("theme-toggle");if(tt){var h=document.documentElement,ti=tt.querySelector("i");if(localStorage.getItem("theme")==="dark"){h.setAttribute("data-theme","dark");ti.className="fas fa-sun"}tt.onclick=function(){var d=h.getAttribute("data-theme")==="dark";if(d){h.removeAttribute("data-theme");ti.className="fas fa-moon";localStorage.setItem("theme","light")}else{h.setAttribute("data-theme","dark");ti.className="fas fa-sun";localStorage.setItem("theme","dark")}}}var hd=document.querySelector(".site-header");if(hd)window.addEventListener("scroll",function(){hd.classList.toggle("scrolled",window.scrollY>40)},{passive:!0});var tg=document.querySelector(".menu-toggle"),mn=document.querySelector(".mobile-menu");if(tg&&mn){var op=!1;tg.addEventListener("click",function(){op=!op;mn.classList.toggle("open",op);tg.innerHTML=op?\'<i class="fas fa-times"></i>\':\'<i class="fas fa-bars"></i>\';document.body.style.overflow=op?"hidden":""});mn.querySelectorAll("a").forEach(function(l){l.addEventListener("click",function(){op=!1;mn.classList.remove("open");tg.innerHTML=\'<i class="fas fa-bars"></i>\';document.body.style.overflow=""})})}})();<\/script>\n</body>\n</html>';
+  document.getElementById('outputCode').value=out;document.getElementById('outputModal').classList.add('show');
+}
+function closeOut(){document.getElementById('outputModal').classList.remove('show');}
+function copyOut(){var ta=document.getElementById('outputCode');ta.select();navigator.clipboard.writeText(ta.value).then(function(){toast('Copied!')});}
+function downloadOut(){var p=gp()[delIdx]||{},slug=p.slug||'post';var blob=new Blob([document.getElementById('outputCode').value],{type:'text/html'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=slug+'.html';a.click();toast('Downloaded: '+slug+'.html');}
+
+/* GitHub Deploy */
+function ghCfg(){return{user:localStorage.getItem('gh_user')||'',repo:localStorage.getItem('gh_repo')||'',token:localStorage.getItem('gh_token')||'',branch:localStorage.getItem('gh_branch')||'main'}}
+function saveGh(){localStorage.setItem('gh_user',document.getElementById('ghUser').value.trim());localStorage.setItem('gh_repo',document.getElementById('ghRepo').value.trim());localStorage.setItem('gh_token',document.getElementById('ghToken').value.trim());localStorage.setItem('gh_branch','main');document.getElementById('ghStatus').textContent='✓ Saved';document.getElementById('ghStatus').style.color='var(--green)';toast('GitHub settings saved!')}
+function testGh(){var c=ghCfg();if(!c.token){document.getElementById('ghStatus').textContent='Fill all fields';return}document.getElementById('ghStatus').textContent='Testing...';fetch('https://api.github.com/repos/'+c.user+'/'+c.repo,{headers:{Authorization:'Bearer '+c.token,Accept:'application/vnd.github+json'}}).then(function(r){document.getElementById('ghStatus').textContent=r.ok?'✓ Connected!':'✗ Failed (HTTP '+r.status+')';document.getElementById('ghStatus').style.color=r.ok?'var(--green)':'var(--red)'});}
+function deployPost(i){var p=gp()[i],c=ghCfg();if(!c.token){toast('Configure GitHub settings first');return}toast('Deploying to GitHub...');var html=document.getElementById('outputCode').value;if(!html){genPost(i);setTimeout(function(){deployPost(i)},500);return}var base64=btoa(unescape(encodeURIComponent(document.getElementById('outputCode').value)));fetch('https://api.github.com/repos/'+c.user+'/'+c.repo+'/contents/blog/posts/'+p.slug+'.html',{method:'PUT',headers:{Authorization:'Bearer '+c.token,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({message:'Publish: '+p.title,content:base64,branch:c.branch})}).then(function(r){if(!r.ok)return r.json().then(function(e){throw new Error(e.message)});toast('Deployed! Cloudflare will update in ~1 min.')}).catch(function(e){toast('Deploy failed: '+e.message)});}
+
+/* AI Writer */
+function aiGenerate(){var topic=document.getElementById('aiTopic').value.trim();if(!topic){toast('Enter a topic first');return}var btn=document.getElementById('aiBtn'),loading=document.getElementById('aiLoading'),apiKey=localStorage.getItem('ai_key');btn.disabled=!0;loading.style.display='flex';var sys='You are an expert SEO blog writer for Hoang Editor, a real estate video editing service for shooters and production teams. Write a 500-800 word blog post. Output as JSON: {"title":"...","description":"...","tags":"...","date":"'+new Date().toISOString().split('T')[0]+'","readTime":"4 min read","content":"<p>full HTML body</p>"}. Use H2/H3 headings, bullet lists, blockquotes. Target keywords: real estate video editing, videographer, outsourced editing, property tour. End with a CTA linking to https://hoangeditor.com/#contact.';
+  if(apiKey){fetch(localStorage.getItem('ai_url')||'https://api.deepseek.com/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+apiKey},body:JSON.stringify({model:localStorage.getItem('ai_model')||'deepseek-chat',messages:[{role:'system',content:sys},{role:'user',content:'Write a blog post about: '+topic}],temperature:.7,max_tokens:3000})}).then(function(r){return r.json()}).then(function(d){parseAI(d.choices[0].message.content);btn.disabled=!1;loading.style.display='none';toast('AI post generated! Review and publish.')}).catch(function(e){btn.disabled=!1;loading.style.display='none';toast('API failed. Using built-in topics instead.');aiFallback(topic)})}else{aiFallback(topic);btn.disabled=!1;loading.style.display='none'}}
+function aiFallback(topic){var t='You are an SEO blog writer. Write a blog post about: '+topic+'. Output as JSON with title, description, tags, date, readTime, content (HTML). Target: real estate video shooters.';var p='Copy this prompt into ChatGPT or Claude:\n\n'+t;document.getElementById('postContent').value='<!-- Paste AI response here -->';toast('Prompt copied! Use ChatGPT/Claude, then paste the JSON response.');try{navigator.clipboard.writeText(p)}catch(e){}}
+function parseAI(text){try{var j=JSON.parse(text.match(/\{[\s\S]*\}/)[0]);qset('postTitle',j.title||'');qset('postSlug',(j.title||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').substring(0,60));qset('postDesc',j.description||'');qset('postTags',j.tags||'');qset('postDate',j.date||new Date().toISOString().split('T')[0]);qset('postReadTime',j.readTime||'4 min read');qset('postContent',j.content||'');updateSeo()}catch(e){toast('Could not parse AI response. Paste content manually.')}}
+
+/* Schedule */
+function refreshSched(){var t=gtp(),u=t.filter(function(x){return!x.used});document.getElementById('sTopics').textContent=u.length;var q=gq();document.getElementById('sQueued').textContent=q.length;document.getElementById('sPublished').textContent=q.filter(function(x){return x.published}).length;var ph='';if(!u.length)ph='<p style="font-size:.75rem;color:var(--t3);text-align:center;padding:1rem">No topics. Click Generate.</p>';else u.slice(0,20).forEach(function(x,i){ph+='<div style="display:flex;justify-content:space-between;padding:.35rem .5rem;font-size:.72rem;border-bottom:1px solid var(--border)"><span>'+esc(x.topic)+'</span></div>'});document.getElementById('topicPool').innerHTML=ph;var qh='';if(!q.length)qh='<p style="font-size:.75rem;color:var(--t3);text-align:center;padding:1rem">Queue is empty.</p>';else q.forEach(function(x,i){qh+='<div style="display:flex;justify-content:space-between;padding:.4rem .5rem;font-size:.72rem;border-bottom:1px solid var(--border)"><div><strong>'+esc(x.title||'Untitled')+'</strong><br><span style="color:var(--t3)">'+(x.published?'Published':'Pending')+' · '+esc(x.date||'')+'</span></div></div>'});document.getElementById('sQueue').innerHTML=qh;}
+function genTopics(){var builtin=["How to Price Your Real Estate Video Services","10 Drone Shots for Luxury Listings","Real Estate Videographer Client Retention Guide","Edit Property Tours for Social Media","Common Editing Mistakes in Real Estate Videos","Outsource Post-Production 2026 Guide","Speed Ramping for Cinematic Walkthroughs","Lighting Tips for Real Estate Videography","Build a 6-Figure Video Business","Best Music for Real Estate Videos","Agent Branding Videos That Convert","Real Estate Video Trends 2026","Color Grading Real Estate Footage Guide","Scale from Solo Shooter to Production Company","Psychology of Property Video","Vertical Videos for Instagram Real Estate","Real Estate Videographer Equipment 2026","Shot Lists for Faster Editing","Good vs Great Real Estate Video Editing","Transition from Photo to Videography","Fast Turnaround Times Win Clients","AI Tools for Real Estate Video","Real Estate Video Audio Post-Production","Luxury vs Standard Video Packages","Stand Out in Crowded Real Estate Market","Twilight Property Tours Editing","Outsource Real Estate Video Editing Business Case","Consistent Look Across Videos","Real Estate Video SEO YouTube Google","How to Write Real Estate Video Contracts"];var t=gtp();builtin.forEach(function(x){if(!t.find(function(e){return e.topic===x}))t.push({topic:x,used:!1,added:new Date().toISOString()})});stp(t);refreshSched();toast('30 topics added!')}
+function clearTopics(){if(confirm('Clear all unused topics?')){stp([]);refreshSched();toast('Topics cleared')}}
+function genNextPost(){var t=gtp(),u=t.filter(function(x){return!x.used});if(!u.length){genTopics();setTimeout(function(){genNextPost()},500);return}var topic=u[0].topic;u[0].used=!0;stp(t);var q=gq();q.push({title:topic,date:new Date().toISOString().split('T')[0],published:!1});sq(q);document.getElementById('aiTopic').value=topic;navTo('write');aiGenerate();refreshSched();}
+function genBatch(n){var t=gtp(),u=t.filter(function(x){return!x.used});if(u.length<n){genTopics();setTimeout(function(){genBatch(n)},500);toast('Generating topics first...');return}if(!confirm('Generate '+n+' posts now? This will call the AI API '+n+' times and auto-publish each post.'))return;toast('Generating '+n+' posts...');var done=0;function next(i){if(i>=n||i>=u.length){refreshSched();renderTable();refreshDash();toast(done+' posts generated and published!');return}var topic=u[i].topic;u[i].used=!0;stp(t);var q=gq();q.push({title:topic,date:new Date().toISOString().split('T')[0],published:!1});sq(q);document.getElementById('aiTopic').value=topic;var apiKey=localStorage.getItem('ai_key');if(apiKey){var sys='You are an expert SEO blog writer for Hoang Editor, a real estate video editing service. Write a 500-800 word blog post. Output as JSON: {"title":"...","description":"...","tags":"...","date":"'+new Date().toISOString().split('T')[0]+'","readTime":"4 min read","content":"<p>full HTML body</p>"}. Use H2/H3, lists, blockquote. End with CTA to https://hoangeditor.com/#contact.';fetch(localStorage.getItem('ai_url')||'https://api.deepseek.com/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+apiKey},body:JSON.stringify({model:localStorage.getItem('ai_model')||'deepseek-chat',messages:[{role:'system',content:sys},{role:'user',content:'Write a blog post about: '+topic}],temperature:.7,max_tokens:3000})}).then(function(r){return r.json()}).then(function(d){try{var j=JSON.parse(d.choices[0].message.content.match(/\{[\s\S]*\}/)[0]);var post={title:j.title||topic,slug:(j.title||topic).toLowerCase().replace(/[^a-z0-9]+/g,'-').substring(0,60),description:j.description||'',tags:j.tags||'',date:j.date||new Date().toISOString().split('T')[0],readTime:j.readTime||'4 min read',content:j.content||''};var posts=gp();posts.unshift(post);sp(posts);var c=ghCfg();if(c.token){var html=buildPostHTML(post);var b64=btoa(unescape(encodeURIComponent(html)));fetch('https://api.github.com/repos/'+c.user+'/'+c.repo+'/contents/blog/posts/'+post.slug+'.html',{method:'PUT',headers:{Authorization:'Bearer '+c.token,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({message:'Auto-publish: '+post.title,content:b64,branch:c.branch})}).catch(function(){})}done++;next(i+1)}catch(e){done++;next(i+1)}}).catch(function(){done++;next(i+1)})}else{toast('Configure DeepSeek API key in Settings first');return}}next(0)}
+function buildPostHTML(p){var d=new Date(p.date+'T00:00:00'),m=['January','February','March','April','May','June','July','August','September','October','November','December'],ds=m[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();return '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width,initial-scale=1.0">\n<title>'+esc(p.title)+' — Hoang Editor Blog</title>\n<meta name="description" content="'+esc(p.description)+'">\n<link rel="canonical" href="https://hoangeditor.com/blog/posts/'+p.slug+'.html">\n<meta property="og:type" content="article">\n<meta property="og:title" content="'+esc(p.title)+'">\n<meta property="og:description" content="'+esc(p.description)+'">\n<meta property="og:image" content="https://hoangeditor.com/Hoangeditor.PNG">\n<meta name="twitter:card" content="summary_large_image">\n<link rel="stylesheet" href="../styles.css">\n</head>\n<body>\n<div class="bg-gradient"></div><div class="bg-grain"></div>\n<header class="site-header"><div class="header-inner"><div class="header-pill"><a href="https://hoangeditor.com" class="logo"><span class="logo-mark"><i class="fas fa-play"></i></span><span class="logo-text">Hoang Editor</span></a><nav><ul class="nav-links"><li><a href="https://hoangeditor.com/#services">Services</a></li><li><a href="https://hoangeditor.com/#workflow">Process</a></li><li><a href="https://hoangeditor.com/#pricing">Pricing</a></li><li><a href="../index.html" class="nav-active">Blog</a></li><li><a href="https://hoangeditor.com/#contact">Contact</a></li></ul></nav><a href="https://hoangeditor.com/#contact" class="btn-pill">Get Started</a><button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button><button class="menu-toggle"><i class="fas fa-bars"></i></button></div></div><div class="mobile-menu"><a href="https://hoangeditor.com/#services">Services</a><a href="https://hoangeditor.com/#workflow">Process</a><a href="https://hoangeditor.com/#pricing">Pricing</a><a href="../index.html">Blog</a><a href="https://hoangeditor.com/#contact">Contact</a></div></header>\n\n<article class="post-article">\n<div class="breadcrumbs"><a href="https://hoangeditor.com">Home</a><span class="sep">/</span><a href="../index.html">Blog</a><span class="sep">/</span><span>'+esc(p.title)+'</span></div>\n<header class="post-header"><a href="../index.html" class="post-category">'+(p.tags.split(',')[0]||'General').trim()+'</a>\n<h1>'+esc(p.title)+'</h1>\n<div class="post-meta-row"><div class="author-info"><div class="author-avatar">HE</div><div><span class="author-name">Hoang Editor Team</span><br><span>'+ds+'</span></div></div><span class="meta-sep"></span><span>'+p.readTime+'</span></div></header>\n<div class="post-body">\n'+p.content+'\n</div>\n<div class="post-author-box"><div class="author-avatar-lg">HE</div><div class="author-bio"><div class="author-name-lg">Hoang Editor Team</div><div class="author-desc">Professional real estate video editing partner for shooters and production teams.</div></div></div>\n<div class="post-cta"><h3>Ready to scale your video business?</h3><p>We edit real estate videos so you can focus on shooting.</p><a href="https://hoangeditor.com/#contact" class="cta-btn"><i class="fas fa-arrow-right"></i> Start a Project</a></div>\n</article>\n<footer class="blog-footer"><p>&copy; '+d.getFullYear()+' Hoang Editor Blog. <a href="https://hoangeditor.com" style="color:var(--gold-400);text-decoration:none">hoangeditor.com</a></p></footer>\n<script>(function(){var tt=document.getElementById("theme-toggle");if(tt){var h=document.documentElement,ti=tt.querySelector("i");if(localStorage.getItem("theme")==="dark"){h.setAttribute("data-theme","dark");ti.className="fas fa-sun"}tt.onclick=function(){var d=h.getAttribute("data-theme")==="dark";if(d){h.removeAttribute("data-theme");ti.className="fas fa-moon";localStorage.setItem("theme","light")}else{h.setAttribute("data-theme","dark");ti.className="fas fa-sun";localStorage.setItem("theme","dark")}}}var hd=document.querySelector(".site-header");if(hd)window.addEventListener("scroll",function(){hd.classList.toggle("scrolled",window.scrollY>40)},{passive:!0});var tg=document.querySelector(".menu-toggle"),mn=document.querySelector(".mobile-menu");if(tg&&mn){var op=!1;tg.addEventListener("click",function(){op=!op;mn.classList.toggle("open",op);tg.innerHTML=op?\'<i class="fas fa-times"></i>\':\'<i class="fas fa-bars"></i>\';document.body.style.overflow=op?"hidden":""});mn.querySelectorAll("a").forEach(function(l){l.addEventListener("click",function(){op=!1;mn.classList.remove("open");tg.innerHTML=\'<i class="fas fa-bars"></i>\';document.body.style.overflow=""})})}})();<\/script>\n</body>\n</html>';}
+
+/* Worker Modal */
+function showWorker(){var code='// Cloudflare Worker — Daily Auto-Post\n// 1. Deploy with: npx wrangler deploy\n// 2. Add cron trigger in wrangler.toml:\n//    [triggers]\n//    crons = ["0 9 * * *"]\n// 3. Set secrets: npx wrangler secret put DEEPSEEK_KEY\n\nexport default {\n  async scheduled(event, env, ctx) {\n    const topics = ["How to Price Real Estate Video Services","10 Drone Shots for Luxury Listings","Real Estate Videographer Client Retention","Edit Property Tours for Social Media","Outsource Post-Production Guide","Speed Ramping Cinematic Walkthroughs","Color Grading Real Estate Footage","Scale from Solo Shooter to Company","Agent Branding Videos That Convert","Real Estate Video Trends 2026"];\n    const topic = topics[Math.floor(Math.random() * topics.length)];\n    const post = await generatePost(env.DEEPSEEK_KEY, topic);\n    await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);\n    console.log("Published:", post.title);\n  }\n};\n\nasync function generatePost(apiKey, topic) {\n  const sysPrompt = "You are an SEO blog writer for Hoang Editor, a real estate video editing service. Write a 500-800 word blog post. Output JSON: {\\"title\\":\\"...\\",\\"description\\":\\"...\\",\\"tags\\":\\"...\\",\\"date\\":\\"\'+new Date().toISOString().split(\'T\')[0]+\'\\",\\"readTime\\":\\"4 min read\\",\\"content\\":\\"<p>HTML body with H2/H3, lists, blockquote</p>\\"}. End with CTA to https://hoangeditor.com/#contact.";\n  const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {\n    method: "POST",\n    headers: {"Content-Type":"application/json","Authorization":"Bearer "+apiKey},\n    body: JSON.stringify({model:"deepseek-chat",messages:[{role:"system",content:sysPrompt},{role:"user",content:"Write about: "+topic}],temperature:0.7,max_tokens:3000})\n  });\n  const data = await resp.json();\n  const json = JSON.parse(data.choices[0].message.content.match(/\\{[\\s\\S]*\\}/)[0]);\n  return json;\n}\n\nasync function deployToGitHub(token, user, repo, post) {\n  const slug = post.title.toLowerCase().replace(/[^a-z0-9]+/g,"-").substring(0,60);\n  const html = buildHTML(post);\n  const base64 = btoa(html);\n  await fetch(`https://api.github.com/repos/${user}/${repo}/contents/blog/posts/${slug}.html`, {\n    method: "PUT",\n    headers: {"Authorization":"Bearer "+token,"Accept":"application/vnd.github+json","Content-Type":"application/json"},\n    body: JSON.stringify({message:"Auto-publish: "+post.title,content:base64,branch:"main"})\n  });\n}\n\nfunction buildHTML(post) { /* same as admin genPost output */ return "<!DOCTYPE html>..."; }';document.getElementById('workerCode').value=code;document.getElementById('workerModal').classList.add('show');}
+function closeWorker(){document.getElementById('workerModal').classList.remove('show');}
+function copyWorker(){var ta=document.getElementById('workerCode');ta.select();navigator.clipboard.writeText(ta.value).then(function(){toast('Worker code copied!')});}
+
+/* API Settings */
+function saveApi(){if(document.getElementById('apiKey').value)localStorage.setItem('ai_key',document.getElementById('apiKey').value.trim());if(document.getElementById('apiUrl').value)localStorage.setItem('ai_url',document.getElementById('apiUrl').value.trim());localStorage.setItem('ai_model',document.getElementById('apiModel').value);document.getElementById('apiStatus').textContent='✓ Saved';document.getElementById('apiStatus').style.color='var(--green)';toast('API settings saved!')}
+
+/* Init */
+(function(){
+  if(sessionStorage.getItem('he_auth')==='1'){document.getElementById('loginScreen').style.display='none';document.getElementById('app').classList.add('active');document.getElementById('postDate').value=new Date().toISOString().split('T')[0];refreshAll()}
+  var h=document.documentElement;if(localStorage.getItem('theme')==='dark'){h.setAttribute('data-theme','dark');document.getElementById('themeIcon').className='fas fa-sun'}
+  var ak=localStorage.getItem('ai_key');if(ak){document.getElementById('apiKey').value=ak;document.getElementById('apiStatus').textContent='✓ Configured';document.getElementById('apiStatus').style.color='var(--green)'}
+  var au=localStorage.getItem('ai_url');if(au)document.getElementById('apiUrl').value=au;
+  var gh=ghCfg();if(gh.user)document.getElementById('ghUser').value=gh.user;if(gh.repo)document.getElementById('ghRepo').value=gh.repo;if(gh.token)document.getElementById('ghToken').value=gh.token;
+})();
+</script>
 </body>
 </html>
