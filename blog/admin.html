@@ -546,7 +546,7 @@
         posts.forEach(function(p, i) {
             var d = new Date(p.date + 'T00:00:00');
             var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            var dateStr = months[d.getMonth()] + ' ' + d.getNgày() + ', ' + d.getFullYear();
+            var dateStr = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
             var seoStatus = p.staticFile
                 ? '<span style="color:var(--green);font-size:.65rem;font-weight:600" title="Đã có file HTML — Google index được"><i class="fas fa-check-circle"></i> Có Thể Index</span>'
                 : '<span style="color:#f59e0b;font-size:.65rem;font-weight:600" title="Chỉ trong localStorage — tải HTML để Google index được"><i class="fas fa-exclamation-triangle"></i> Cần File</span>';
@@ -686,7 +686,7 @@
         var p = getPosts()[index];
         var d = new Date(p.date + 'T00:00:00');
         var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        var dateStr = months[d.getMonth()] + ' ' + d.getNgày() + ', ' + d.getFullYear();
+        var dateStr = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
         var jsonDate = p.date;
         var out = '<!DOCTYPE html>\n<html lang="en">\n<head>\n';
         out += '    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width,initial-scale=1.0">\n';
@@ -991,7 +991,7 @@
     function buildStaticHTML(post) {
         var d = new Date(post.date + 'T00:00:00');
         var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        var dateStr = months[d.getMonth()] + ' ' + d.getNgày() + ', ' + d.getFullYear();
+        var dateStr = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
         var jsonDate = post.date;
         var primaryTag = (post.tags.split(',')[0] || 'Chung').trim();
         var h = '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width,initial-scale=1.0">\n';
@@ -1342,7 +1342,7 @@
         var content = document.getElementById('postContent').value || '<p style="color:#999">Xem trước nội dung...</p>';
         var d = new Date((document.getElementById('postDate').value||'2026-01-01')+'T00:00:00');
         var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        document.getElementById('previewFrame').innerHTML = '<div style="font-size:.7rem;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">'+months[d.getMonth()]+' '+d.getNgày()+', '+d.getFullYear()+' · '+document.getElementById('postReadTime').value+'</div><h1>'+title+'</h1><div style="display:flex;align-items:center;gap:.5rem;padding-bottom:1rem;border-bottom:1px solid #ddd;margin-bottom:1rem"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;color:#000;font-weight:700;font-size:.7rem">HE</div><span style="font-size:.8rem;font-weight:600">Hoang Editor Team</span></div>'+content;
+        document.getElementById('previewFrame').innerHTML = '<div style="font-size:.7rem;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem">'+months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()+' · '+document.getElementById('postReadTime').value+'</div><h1>'+title+'</h1><div style="display:flex;align-items:center;gap:.5rem;padding-bottom:1rem;border-bottom:1px solid #ddd;margin-bottom:1rem"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;color:#000;font-weight:700;font-size:.7rem">HE</div><span style="font-size:.8rem;font-weight:600">Hoang Editor Team</span></div>'+content;
     }
 
     function updateSeo() {
