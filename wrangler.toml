@@ -1,0 +1,6 @@
+name = "hoang-editor-auto-post"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+[triggers]
+crons = ["0 9 * * *"]

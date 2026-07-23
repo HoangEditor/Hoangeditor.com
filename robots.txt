@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /blog/admin.html
+
+Sitemap: https://hoangeditor.com/sitemap.xml

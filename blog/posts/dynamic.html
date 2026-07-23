@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Blog Post — Hoang Editor | Real Estate Video Editing Insights</title>
+<meta name="description" content="Real estate video editing insights for shooters and production teams. Professional tips, guides, and strategies.">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/png" href="https://hoangeditor.com/Hoangeditor.PNG">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="bg-gradient" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+
+<header class="site-header">
+<div class="header-inner"><div class="header-pill">
+<a href="https://hoangeditor.com" class="logo"><span class="logo-mark"><i class="fas fa-play"></i></span><span class="logo-text">Hoang Editor</span></a>
+<nav><ul class="nav-links">
+<li><a href="https://hoangeditor.com/#services">Services</a></li>
+<li><a href="https://hoangeditor.com/#workflow">Process</a></li>
+<li><a href="https://hoangeditor.com/#pricing">Pricing</a></li>
+<li><a href="../index.html" class="nav-active">Blog</a></li>
+<li><a href="https://hoangeditor.com/#contact">Contact</a></li>
+</ul></nav>
+<a href="https://hoangeditor.com/#contact" class="btn-pill">Get Started <i class="fas fa-arrow-right" style="font-size:.7rem"></i></a>
+<button class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></button>
+<button class="menu-toggle"><i class="fas fa-bars"></i></button>
+</div></div>
+<div class="mobile-menu">
+<a href="https://hoangeditor.com/#services">Services</a>
+<a href="https://hoangeditor.com/#workflow">Process</a>
+<a href="https://hoangeditor.com/#pricing">Pricing</a>
+<a href="../index.html">Blog</a>
+<a href="https://hoangeditor.com/#contact">Contact</a>
+</div>
+</header>
+
+<article class="post-article" id="postArticle">
+<div class="breadcrumbs"><a href="https://hoangeditor.com">Home</a><span class="sep">/</span><a href="../index.html">Blog</a><span class="sep">/</span><span id="breadcrumbTitle">Post</span></div>
+<header class="post-header">
+<a href="../index.html" class="post-category" id="postCat">General</a>
+<h1 id="postTitle"></h1>
+<div class="post-meta-row">
+<div class="author-info"><div class="author-avatar">HE</div><div><span class="author-name">Hoang Editor Team</span><br><span id="postMetaInfo"></span></div></div>
+<span class="meta-sep"></span><span id="postReadTime"></span>
+<div class="post-share"><span>Share</span>
+<a href="#" id="shareTwitter" target="_blank" title="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
+<a href="#" id="shareLinkedIn" target="_blank" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+<a href="#" id="shareFacebook" target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+<a href="#" id="shareCopy" title="Copy link" onclick="copyPostLink();return false"><i class="fas fa-link"></i></a>
+</div>
+</div>
+</header>
+
+<div class="post-toc" id="postToc"><h4>Table of Contents</h4><ol id="tocList"></ol></div>
+<div class="post-body" id="postBody"></div>
+
+<div class="post-author-box">
+<div class="author-avatar-lg">HE</div>
+<div class="author-bio"><div class="author-name-lg">Hoang Editor Team</div><div class="author-desc">Professional real estate video editing partner for shooters and production teams. We help videographers scale their business by handling post-production — so they can focus on what they do best: shooting.</div></div>
+</div>
+
+<div class="post-cta"><h3>Ready to scale your video business?</h3><p>We edit real estate videos so you can focus on shooting and growing your client base.</p><a href="https://hoangeditor.com/#contact" class="cta-btn"><i class="fas fa-arrow-right"></i> Start a Project</a></div>
+
+<div class="related-posts" id="relatedPosts" style="display:none"><h3>Related Posts</h3><div class="related-grid" id="relatedGrid"></div></div>
+</article>
+
+<div id="postNotFound" style="display:none;max-width:780px;margin:7rem auto 3rem;text-align:center;padding:3rem 1.5rem;position:relative;z-index:10">
+<h1 style="font-size:2rem;font-weight:800;margin-bottom:1rem">Post Not Found</h1>
+<p style="color:var(--text-muted);margin-bottom:1.5rem">This post does not exist or may have been removed.</p>
+<a href="../index.html" style="display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.5rem;border-radius:9999px;background:var(--btn-solid-bg);color:var(--btn-solid-text);font-size:.875rem;font-weight:600;text-decoration:none"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+</div>
+
+<footer class="blog-footer"><p>&copy; 2026 Hoang Editor Blog. <a href="https://hoangeditor.com" style="color:var(--gold-400);text-decoration:none">hoangeditor.com</a></p></footer>
+
+<script>
+(function(){
+var tt=document.getElementById('theme-toggle');if(tt){var h=document.documentElement,ti=tt.querySelector('i');if(localStorage.getItem('theme')==='dark'){h.setAttribute('data-theme','dark');ti.className='fas fa-sun';}tt.onclick=function(){var d=h.getAttribute('data-theme')==='dark';if(d){h.removeAttribute('data-theme');ti.className='fas fa-moon';localStorage.setItem('theme','light');}else{h.setAttribute('data-theme','dark');ti.className='fas fa-sun';localStorage.setItem('theme','dark');}};}
+var hd=document.querySelector('.site-header');if(hd)window.addEventListener('scroll',function(){hd.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
+var tg=document.querySelector('.menu-toggle'),mn=document.querySelector('.mobile-menu');if(tg&&mn){var op=false;tg.addEventListener('click',function(){op=!op;mn.classList.toggle('open',op);tg.innerHTML=op?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';document.body.style.overflow=op?'hidden':'';});mn.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){op=false;mn.classList.remove('open');tg.innerHTML='<i class="fas fa-bars"></i>';document.body.style.overflow='';});})}
+
+var slug=window.location.hash.replace('#','')||window.location.search.replace('?slug=','');
+if(!slug){showNotFound();return;}
+var posts=[];try{posts=JSON.parse(localStorage.getItem('he_blog_posts')||'[]');}catch(e){}
+var post=null;for(var i=0;i<posts.length;i++){if(posts[i].slug===slug){post=posts[i];break;}}
+if(!post){showNotFound();return;}
+
+document.title=post.title+' — Hoang Editor Blog';
+var md=document.querySelector('meta[name="description"]');if(!md){md=document.createElement('meta');md.name='description';document.head.appendChild(md);}md.content=post.description||'';
+var cn=document.querySelector('link[rel="canonical"]');if(!cn){cn=document.createElement('link');cn.rel='canonical';document.head.appendChild(cn);}cn.href='https://hoangeditor.com/blog/posts/dynamic.html#'+post.slug;
+function um(prop,content){var el=document.querySelector('meta[property="'+prop+'"]');if(!el){el=document.createElement('meta');el.setAttribute('property',prop);document.head.appendChild(el);}el.setAttribute('content',content);}
+um('og:title',post.title);um('og:description',post.description||'');um('og:url','https://hoangeditor.com/blog/posts/dynamic.html#'+post.slug);
+
+var d=new Date(post.date+'T00:00:00');
+var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+document.getElementById('postTitle').textContent=post.title;
+document.getElementById('breadcrumbTitle').textContent=post.title;
+document.getElementById('postCat').textContent=post.tags.split(',')[0].trim()||'General';
+document.getElementById('postMetaInfo').textContent=months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+document.getElementById('postReadTime').textContent=post.readTime||'4 min read';
+document.getElementById('postBody').innerHTML=post.content||'';
+
+// Build TOC from H2s
+var h2s=document.getElementById('postBody').querySelectorAll('h2');
+var tocHtml='';h2s.forEach(function(h,i){var id='section-'+(i+1);h.id=id;tocHtml+='<li><a href="#'+id+'">'+h.textContent+'</a></li>';});
+document.getElementById('tocList').innerHTML=tocHtml||'<li style="color:var(--text-muted)">No sections found</li>';
+if(!tocHtml)document.getElementById('postToc').style.display='none';
+
+// Share links
+var url=encodeURIComponent('https://hoangeditor.com/blog/posts/dynamic.html#'+post.slug);
+var title=encodeURIComponent(post.title);
+document.getElementById('shareTwitter').href='https://twitter.com/intent/tweet?text='+title+'&url='+url;
+document.getElementById('shareLinkedIn').href='https://www.linkedin.com/sharing/share-offsite/?url='+url;
+document.getElementById('shareFacebook').href='https://www.facebook.com/sharer/sharer.php?u='+url;
+window.copyPostLink=function(){navigator.clipboard.writeText('https://hoangeditor.com/blog/posts/dynamic.html#'+post.slug).then(function(){var t=document.createElement('div');t.textContent='Link copied!';t.style.cssText='position:fixed;bottom:2rem;right:2rem;background:var(--text);color:var(--bg);padding:.75rem 1.25rem;border-radius:8px;font-size:.8rem;font-weight:600;z-index:999';document.body.appendChild(t);setTimeout(function(){t.remove()},2000);});};
+
+// Related posts
+var allPosts=posts;try{allPosts=JSON.parse(localStorage.getItem('he_blog_posts')||'[]');}catch(e){}
+var related=allPosts.filter(function(p){return p.slug!==slug;}).slice(0,3);
+var relatedHtml='';related.forEach(function(rp){var rd=new Date(rp.date+'T00:00:00');relatedHtml+='<a href="dynamic.html#'+rp.slug+'" class="related-card"><div class="rel-date">'+months[rd.getMonth()]+' '+rd.getDate()+', '+rd.getFullYear()+'</div><div class="rel-title">'+rp.title+'</div></a>';});
+if(relatedHtml){document.getElementById('relatedGrid').innerHTML=relatedHtml;document.getElementById('relatedPosts').style.display='';}
+
+var ld=document.createElement('script');ld.type='application/ld+json';
+ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'BlogPosting','headline':post.title,'url':'https://hoangeditor.com/blog/posts/dynamic.html#'+post.slug,'datePublished':post.date,'dateModified':post.date,'author':{'@type':'Person','name':'Hoang Editor Team'},'publisher':{'@type':'Organization','name':'Hoang Editor'}});
+document.head.appendChild(ld);
+
+function showNotFound(){document.getElementById('postArticle').style.display='none';document.getElementById('postNotFound').style.display='block';}
+})();
+</script>
+</body>
+</html>
