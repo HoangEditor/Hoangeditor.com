@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="posts-data.js"></script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"Hoang Editor Blog","url":"https://hoangeditor.com/blog/","description":"Insights for real estate video shooters and production teams.","publisher":{"@type":"Organization","name":"Hoang Editor","url":"https://hoangeditor.com"}}</script>
 </head>
 <body>
@@ -56,43 +57,16 @@
 
 <div class="blog-container"><div class="blog-layout">
 <main>
-<div class="posts-grid" id="postList">
-<a href="posts/scale-video-business.html" class="post-card featured" data-featured="true">
-<div class="card-image"><span class="icon"><i class="fas fa-chart-line"></i></span></div>
-<div class="card-body"><span class="card-label">Latest Article</span>
-<h2>How to Scale Your Real Estate Video Business Without Burning Out</h2>
-<p>You are booking more shoots than ever but editing is eating your nights. Here is the framework top videographers use to scale without sacrificing quality or sanity.</p>
-<div class="card-meta"><span>Jul 15, 2026</span><span>·</span><span>4 min read</span><span>·</span><span class="cat">Scaling</span></div>
-</div></a>
-<a href="posts/outsourcing-video-editing-guide.html" class="post-card">
-<div class="card-thumb"><i class="fas fa-file-lines"></i></div>
-<div class="card-content"><div class="card-meta"><span>Jul 8, 2026</span><span>·</span><span>4 min read</span><span>·</span><span class="cat">Guide</span></div>
-<h3>The Ultimate Guide to Outsourcing Real Estate Video Editing</h3>
-<p class="card-excerpt">Everything you need to know before handing off your footage to an editing partner — workflows, quality standards, and what to expect.</p>
-</div></a>
-<a href="posts/color-grading-trends-luxury.html" class="post-card">
-<div class="card-thumb"><i class="fas fa-palette"></i></div>
-<div class="card-content"><div class="card-meta"><span>Jun 28, 2026</span><span>·</span><span>3 min read</span><span>·</span><span class="cat">Editing</span></div>
-<h3>5 Color Grading Trends That Sell Luxury Listings Faster</h3>
-<p class="card-excerpt">The right grade can make a property feel like a million dollars. These five trends are what top luxury videographers are using right now.</p>
-</div></a>
-</div>
+<div class="posts-grid" id="postList"></div>
 <nav class="pagination" id="pagination"></nav>
 </main>
 
 <aside class="blog-sidebar">
 <div class="sidebar-widget"><h4>Search</h4><div class="search-box"><input type="text" id="blogSearch" placeholder="Search posts..." oninput="filterPosts()"><button onclick="filterPosts()"><i class="fas fa-search"></i></button></div></div>
-<div class="sidebar-widget"><h4>Categories</h4><ul class="cat-list">
-<li><a href="#" onclick="filterByCat('all');return false">All Posts <span class="count" id="catAll">3</span></a></li>
-<li><a href="#" onclick="filterByCat('Scaling');return false">Scaling <span class="count" id="catScaling">1</span></a></li>
-<li><a href="#" onclick="filterByCat('Guide');return false">Guides <span class="count" id="catGuide">1</span></a></li>
-<li><a href="#" onclick="filterByCat('Editing');return false">Editing <span class="count" id="catEditing">1</span></a></li>
+<div class="sidebar-widget"><h4>Categories</h4><ul class="cat-list" id="catList">
+<li><a href="#" onclick="filterByCat('all');return false">All Posts <span class="count" id="catAll">8</span></a></li>
 </ul></div>
-<div class="sidebar-widget"><h4>Recent Posts</h4><ul class="recent-list" id="recentPosts">
-<li><a href="posts/scale-video-business.html">How to Scale Your Real Estate Video Business Without Burning Out</a><span class="recent-date">Jul 15, 2026</span></li>
-<li><a href="posts/outsourcing-video-editing-guide.html">The Ultimate Guide to Outsourcing Real Estate Video Editing</a><span class="recent-date">Jul 8, 2026</span></li>
-<li><a href="posts/color-grading-trends-luxury.html">5 Color Grading Trends That Sell Luxury Listings Faster</a><span class="recent-date">Jun 28, 2026</span></li>
-</ul></div>
+<div class="sidebar-widget"><h4>Recent Posts</h4><ul class="recent-list" id="recentPosts"></ul></div>
 <div class="sidebar-widget newsletter-widget"><h4 style="color:var(--gold-400)">Get Editing Tips</h4><p>Practical tips for real estate video shooters — delivered to your inbox. No spam.</p><input type="email" placeholder="your@email.com"><button onclick="this.previousElementSibling.value&&showToast('Thanks! (demo)')">Subscribe</button></div>
 </aside>
 </div></div>
@@ -101,15 +75,165 @@
 
 <script>
 (function(){
+// ===== THEME TOGGLE =====
 var tt=document.getElementById('theme-toggle');if(tt){var h=document.documentElement,ti=tt.querySelector('i');if(localStorage.getItem('theme')==='dark'){h.setAttribute('data-theme','dark');ti.className='fas fa-sun';}tt.onclick=function(){var d=h.getAttribute('data-theme')==='dark';if(d){h.removeAttribute('data-theme');ti.className='fas fa-moon';localStorage.setItem('theme','light');}else{h.setAttribute('data-theme','dark');ti.className='fas fa-sun';localStorage.setItem('theme','dark');}};}
+
+// ===== HEADER SCROLL =====
 var hd=document.querySelector('.site-header');if(hd)window.addEventListener('scroll',function(){hd.classList.toggle('scrolled',window.scrollY>40)},{passive:true});
+
+// ===== MOBILE MENU =====
 var tg=document.querySelector('.menu-toggle'),mn=document.querySelector('.mobile-menu');if(tg&&mn){var op=false;tg.addEventListener('click',function(){op=!op;mn.classList.toggle('open',op);tg.innerHTML=op?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';document.body.style.overflow=op?'hidden':'';});mn.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){op=false;mn.classList.remove('open');tg.innerHTML='<i class="fas fa-bars"></i>';document.body.style.overflow='';});})}
+
+// ===== UTILS =====
 function escHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-try{var adminPosts=JSON.parse(localStorage.getItem('he_blog_posts')||'[]');var list=document.getElementById('postList');adminPosts.forEach(function(p){var d=new Date(p.date+'T00:00:00');var months=['January','February','March','April','May','June','July','August','September','October','November','December'];var dateStr=months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();var card=document.createElement('a');card.className='post-card';card.href='posts/dynamic.html#'+(p.slug||'');card.innerHTML='<div class="card-thumb"><i class="fas fa-file-lines"></i></div><div class="card-content"><div class="card-meta"><span>'+dateStr+'</span><span>·</span><span>'+(p.readTime||'4 min read')+'</span><span>·</span><span class="cat">'+(escHtml(p.tags.split(',')[0].trim())||'General')+'</span></div><h3>'+escHtml(p.title)+'</h3><p class="card-excerpt">'+escHtml(p.description||'')+'</p></div>';list.appendChild(card);});}catch(e){}
-window.filterPosts=function(){var q=(document.getElementById('blogSearch').value||'').toLowerCase();document.querySelectorAll('#postList .post-card').forEach(function(c){c.style.display=(c.textContent||'').toLowerCase().indexOf(q)>=0?'':'none';});};
-window.filterByCat=function(cat){document.querySelectorAll('.cat-list a').forEach(function(a){a.style.fontWeight=''});event.target.style.fontWeight='700';document.querySelectorAll('#postList .post-card').forEach(function(c){if(cat==='all'){c.style.display='';return;}var ce=c.querySelector('.cat');c.style.display=ce&&ce.textContent.trim()===cat?'':'none';});};
-window.showToast=function(m){var t=document.createElement('div');t.textContent=m;t.style.cssText='position:fixed;bottom:2rem;right:2rem;background:var(--text);color:var(--bg);padding:.75rem 1.25rem;border-radius:8px;font-size:.8rem;font-weight:600;z-index:999;opacity:0;transition:opacity .3s';document.body.appendChild(t);setTimeout(function(){t.style.opacity='1'},10);setTimeout(function(){t.style.opacity='0';setTimeout(function(){t.remove()},300)},2000);};
-var PER_PAGE=10,pagination=document.getElementById('pagination');if(pagination){var cards=[].slice.call(document.querySelectorAll('#postList .post-card'));var totalPages=Math.ceil(cards.length/PER_PAGE),currentPage=1;function showPage(p){currentPage=Math.max(1,Math.min(p,totalPages));cards.forEach(function(c,i){c.style.display=Math.floor(i/PER_PAGE)+1===currentPage?'':'none';var isFeatured=c.hasAttribute('data-featured');if(isFeatured&&currentPage===1)c.style.display='';});renderPagination();window.scrollTo({top:document.getElementById('postList').offsetTop-120,behavior:'smooth'});}function renderPagination(){var h='<button class="page-btn'+(currentPage===1?' disabled':'')+'" onclick="showPage('+(currentPage-1)+')"><i class="fas fa-chevron-left"></i> Prev</button>';for(var i=1;i<=totalPages;i++)h+='<button class="page-num'+(i===currentPage?' active':'')+'" onclick="showPage('+i+')">'+i+'</button>';h+='<button class="page-btn'+(currentPage===totalPages?' disabled':'')+'" onclick="showPage('+(currentPage+1)+')">Next <i class="fas fa-chevron-right"></i></button>';pagination.innerHTML=h;}if(totalPages>1)showPage(1);else{cards.forEach(function(c){c.style.display=''});renderPagination();}window.showPage=showPage;}
+function formatDate(dateStr){var d=new Date(dateStr+'T00:00:00');var months=['January','February','March','April','May','June','July','August','September','October','November','December'];return months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();}
+
+// ===== BUILD POSTS FROM posts-data.js =====
+var ALL_POSTS = (typeof BLOG_POSTS !== 'undefined') ? BLOG_POSTS : [];
+var list = document.getElementById('postList');
+var allCards = [];
+
+ALL_POSTS.forEach(function(p, idx) {
+  var dateStr = formatDate(p.date);
+  var isFirst = (idx === 0);
+  var card = document.createElement('a');
+  card.className = 'post-card' + (isFirst ? ' featured' : '');
+  card.href = 'posts/' + p.slug + '.html';
+  if (isFirst) card.setAttribute('data-featured', 'true');
+
+  if (isFirst) {
+    card.innerHTML =
+      '<div class="card-image"><span class="icon"><i class="fas ' + (p.icon || 'fa-file-lines') + '"></i></span></div>' +
+      '<div class="card-body"><span class="card-label">Latest Article</span>' +
+      '<h2>' + escHtml(p.title) + '</h2>' +
+      '<p>' + escHtml(p.description) + '</p>' +
+      '<div class="card-meta"><span>' + dateStr + '</span><span>·</span><span>' + escHtml(p.readTime) + '</span><span>·</span><span class="cat">' + escHtml(p.category) + '</span></div>' +
+      '</div>';
+  } else {
+    card.innerHTML =
+      '<div class="card-thumb"><i class="fas ' + (p.icon || 'fa-file-lines') + '"></i></div>' +
+      '<div class="card-content"><div class="card-meta"><span>' + dateStr + '</span><span>·</span><span>' + escHtml(p.readTime) + '</span><span>·</span><span class="cat">' + escHtml(p.category) + '</span></div>' +
+      '<h3>' + escHtml(p.title) + '</h3>' +
+      '<p class="card-excerpt">' + escHtml(p.description) + '</p>' +
+      '</div>';
+  }
+  list.appendChild(card);
+  allCards.push(card);
+});
+
+// Also load admin-created posts from localStorage
+try {
+  var adminPosts = JSON.parse(localStorage.getItem('he_blog_posts') || '[]');
+  adminPosts.forEach(function(p) {
+    var d = new Date(p.date + 'T00:00:00');
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var dateStr = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    var card = document.createElement('a');
+    card.className = 'post-card';
+    card.href = 'posts/dynamic.html#' + (p.slug || '');
+    card.innerHTML =
+      '<div class="card-thumb"><i class="fas fa-file-lines"></i></div>' +
+      '<div class="card-content"><div class="card-meta"><span>' + dateStr + '</span><span>·</span><span>' + (p.readTime || '4 min read') + '</span><span>·</span><span class="cat">' + (escHtml(p.tags ? p.tags.split(',')[0].trim() : '' ) || 'General') + '</span></div>' +
+      '<h3>' + escHtml(p.title) + '</h3>' +
+      '<p class="card-excerpt">' + escHtml(p.description || '') + '</p>' +
+      '</div>';
+    list.appendChild(card);
+    allCards.push(card);
+  });
+} catch(e) {}
+
+// ===== BUILD CATEGORIES =====
+var catCount = {};
+ALL_POSTS.forEach(function(p) { catCount[p.category] = (catCount[p.category] || 0) + 1; });
+// Also count admin posts
+try {
+  var adminPosts2 = JSON.parse(localStorage.getItem('he_blog_posts') || '[]');
+  adminPosts2.forEach(function(p) {
+    var cat = (p.tags ? p.tags.split(',')[0].trim() : '') || 'General';
+    catCount[cat] = (catCount[cat] || 0) + 1;
+  });
+} catch(e) {}
+var totalAll = ALL_POSTS.length + (JSON.parse(localStorage.getItem('he_blog_posts') || '[]')).length;
+document.getElementById('catAll').textContent = totalAll;
+
+var catList = document.getElementById('catList');
+var catsAdded = {};
+Object.keys(catCount).sort().forEach(function(cat) {
+  if (catsAdded[cat]) return; catsAdded[cat] = true;
+  var li = document.createElement('li');
+  var id = 'cat' + cat.replace(/[^a-zA-Z0-9]/g, '');
+  li.innerHTML = '<a href="#" onclick="filterByCat(\'' + escHtml(cat).replace(/'/g, "\\'") + '\');return false">' + escHtml(cat) + ' <span class="count" id="' + escHtml(id) + '">' + catCount[cat] + '</span></a>';
+  catList.appendChild(li);
+});
+
+// ===== BUILD RECENT POSTS =====
+var recentList = document.getElementById('recentPosts');
+var recentPosts = ALL_POSTS.slice(0, 5);
+recentPosts.forEach(function(p) {
+  var li = document.createElement('li');
+  li.innerHTML = '<a href="posts/' + p.slug + '.html">' + escHtml(p.title) + '</a><span class="recent-date">' + formatDate(p.date) + '</span>';
+  recentList.appendChild(li);
+});
+
+// ===== SEARCH & FILTER =====
+window.filterPosts = function() {
+  var q = (document.getElementById('blogSearch').value || '').toLowerCase();
+  allCards.forEach(function(c) {
+    c.style.display = (c.textContent || '').toLowerCase().indexOf(q) >= 0 ? '' : 'none';
+  });
+};
+
+window.filterByCat = function(cat) {
+  document.querySelectorAll('.cat-list a').forEach(function(a) { a.style.fontWeight = ''; });
+  if (window.event && window.event.target) window.event.target.style.fontWeight = '700';
+  allCards.forEach(function(c) {
+    if (cat === 'all') { c.style.display = ''; return; }
+    var ce = c.querySelector('.cat');
+    c.style.display = ce && ce.textContent.trim() === cat ? '' : 'none';
+  });
+};
+
+window.showToast = function(m) {
+  var t = document.createElement('div');
+  t.textContent = m;
+  t.style.cssText = 'position:fixed;bottom:2rem;right:2rem;background:var(--text);color:var(--bg);padding:.75rem 1.25rem;border-radius:8px;font-size:.8rem;font-weight:600;z-index:999;opacity:0;transition:opacity .3s';
+  document.body.appendChild(t);
+  setTimeout(function() { t.style.opacity = '1'; }, 10);
+  setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2000);
+};
+
+// ===== PAGINATION =====
+var PER_PAGE = 10;
+var pagination = document.getElementById('pagination');
+if (pagination && allCards.length > 0) {
+  var totalPages = Math.ceil(allCards.length / PER_PAGE);
+  var currentPage = 1;
+
+  function showPage(p) {
+    currentPage = Math.max(1, Math.min(p, totalPages));
+    allCards.forEach(function(c, i) {
+      c.style.display = Math.floor(i / PER_PAGE) + 1 === currentPage ? '' : 'none';
+      if (c.hasAttribute('data-featured') && currentPage === 1) c.style.display = '';
+    });
+    renderPagination();
+    window.scrollTo({ top: document.getElementById('postList').offsetTop - 120, behavior: 'smooth' });
+  }
+
+  function renderPagination() {
+    var h = '<button class="page-btn' + (currentPage === 1 ? ' disabled' : '') + '" onclick="showPage(' + (currentPage - 1) + ')"><i class="fas fa-chevron-left"></i> Prev</button>';
+    for (var i = 1; i <= totalPages; i++)
+      h += '<button class="page-num' + (i === currentPage ? ' active' : '') + '" onclick="showPage(' + i + ')">' + i + '</button>';
+    h += '<button class="page-btn' + (currentPage === totalPages ? ' disabled' : '') + '" onclick="showPage(' + (currentPage + 1) + ')">Next <i class="fas fa-chevron-right"></i></button>';
+    pagination.innerHTML = h;
+  }
+
+  if (totalPages > 1) showPage(1);
+  else {
+    allCards.forEach(function(c) { c.style.display = ''; });
+    renderPagination();
+  }
+  window.showPage = showPage;
+}
 })();
 </script>
 </body>
