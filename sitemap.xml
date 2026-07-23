@@ -1,41 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
-  <!--
-    HoangEditor.com Sitemap
-    Generated: 2026-07-23
-    All lastmod dates reflect actual content updates.
-    Posts are ordered by priority then date.
-  -->
-
-  <!-- ===== MAIN PAGES ===== -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>https://hoangeditor.com/</loc>
-    <lastmod>2026-07-22</lastmod>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://hoangeditor.com/Hoangeditor.PNG</image:loc>
-      <image:title>Hoang Editor — Real Estate Video Editing</image:title>
-      <image:caption>Professional real estate video editing services for videographers and production teams.</image:caption>
-    </image:image>
   </url>
 
   <url>
     <loc>https://hoangeditor.com/blog/</loc>
     <lastmod>2026-07-23</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- ===== BLOG POSTS ===== -->
+  <url>
+    <loc>https://hoangeditor.com/blog/posts/scale-video-business.html</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <url>
-    <loc>https://hoangeditor.com/blog/posts/the-real-estate-videographer-s-guide-to-client-retention-tur.html</loc>
+    <loc>https://hoangeditor.com/blog/posts/outsourcing-video-editing-guide.html</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hoangeditor.com/blog/posts/color-grading-trends-luxury.html</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hoangeditor.com/blog/posts/mastering-speed-ramping-for-cinematic-real-estate-walkthroug.html</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -49,14 +51,14 @@
   </url>
 
   <url>
-    <loc>https://hoangeditor.com/blog/posts/how-to-price-your-real-estate-video-services-a-complete-guid.html</loc>
+    <loc>https://hoangeditor.com/blog/posts/common-editing-mistakes-in-real-estate-videos-and-how-to-fix.html</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://hoangeditor.com/blog/posts/common-editing-mistakes-in-real-estate-videos-and-how-to-fix.html</loc>
+    <loc>https://hoangeditor.com/blog/posts/the-real-estate-videographer-s-guide-to-client-retention-tur.html</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -70,24 +72,10 @@
   </url>
 
   <url>
-    <loc>https://hoangeditor.com/blog/posts/scale-video-business.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <loc>https://hoangeditor.com/blog/posts/how-to-price-your-real-estate-video-services-a-complete-guid.html</loc>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://hoangeditor.com/blog/posts/outsourcing-video-editing-guide.html</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://hoangeditor.com/blog/posts/color-grading-trends-luxury.html</loc>
-    <lastmod>2026-06-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 
 </urlset>
