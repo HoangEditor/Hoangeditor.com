@@ -2,6 +2,15 @@
 // Daily cron: generates a blog post via DeepSeek, deploys to GitHub
 // Deploy: npx wrangler deploy
 
+function toBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let binStr = '';
+  for (let i = 0; i < bytes.length; i++) {
+    binStr += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binStr);
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -24,10 +33,21 @@ export default {
       }
     }
 
+    // Manual trigger for testing: POST /__trigger
+    if (url.pathname === "/__trigger" && request.method === "POST") {
+      ctx.waitUntil(runAutoPost(env));
+      return new Response("OK — generating post...", { status: 202 });
+    }
+
     return new Response("Not Found", { status: 404 });
   },
 
   async scheduled(event, env, ctx) {
+    ctx.waitUntil(runAutoPost(env));
+  }
+};
+
+async function runAutoPost(env) {
     console.log('Auto-post cron triggered at', new Date().toISOString());
 
     // 1. Pick a random topic
@@ -88,7 +108,6 @@ export default {
     await updateSitemap(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
     console.log('Sitemap updated');
   }
-};
 
 async function generatePost(apiKey, topic) {
   const today = new Date().toISOString().split('T')[0];
@@ -146,7 +165,7 @@ async function generateImage(ai, bucket, topic, post) {
   const response = await ai.run("@cf/black-forest-labs/flux-1-schnell", inputs);
 
   // Convert the generated image to PNG buffer
-  const imageBytes = await new Response(response.image).arrayBuffer();
+  const imageBytes = await new Response(response).arrayBuffer();
   const uint8 = new Uint8Array(imageBytes);
 
   // Generate slug for filename
@@ -186,15 +205,16 @@ async function deployToGitHub(token, user, repo, post, imageUrl) {
       },
       body: JSON.stringify({
         message: "Auto-publish: " + post.title,
-        content: btoa(html),
+        content: toBase64(html),
         branch: "main"
       })
     }
   );
 
   if (!resp.ok) {
-    const err = await resp.json();
-    throw new Error("GitHub deploy failed: " + (err.message || resp.status));
+    let errMsg = resp.status;
+    try { const err = await resp.json(); errMsg = err.message || resp.status; } catch (e) { errMsg = await resp.text(); }
+    throw new Error("GitHub deploy failed: " + errMsg);
   }
 }
 
@@ -336,7 +356,7 @@ async function updateSitemap(token, user, repo, post) {
       },
       body: JSON.stringify({
         message: "Update sitemap: " + post.title,
-        content: btoa(sitemap),
+        content: toBase64(sitemap),
         sha: sha || undefined,
         branch: "main"
       })
