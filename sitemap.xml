@@ -1,43 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- HoangEditor.com Sitemap — Generated 2026-07-23 -->
 
   <url>
     <loc>https://hoangeditor.com/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://hoangeditor.com/Hoangeditor.PNG</image:loc>
+      <image:title>Hoang Editor — Real Estate Video Editing</image:title>
+      <image:caption>Professional real estate video editing services for videographers and production teams.</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://hoangeditor.com/blog/</loc>
     <lastmod>2026-07-23</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://hoangeditor.com/blog/posts/scale-video-business.html</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://hoangeditor.com/blog/posts/outsourcing-video-editing-guide.html</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://hoangeditor.com/blog/posts/color-grading-trends-luxury.html</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://hoangeditor.com/blog/posts/how-to-build-a-6-figure-video-business-a-real-estate-editor-.html</loc>
+    <loc>https://hoangeditor.com/blog/posts/mastering-speed-ramping-for-cinematic-real-estate-walkthroug.html</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -51,21 +39,7 @@
   </url>
 
   <url>
-    <loc>https://hoangeditor.com/blog/posts/mastering-speed-ramping-for-cinematic-real-estate-walkthroug.html</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://hoangeditor.com/blog/posts/the-2026-guide-to-outsource-post-production-why-real-estate-.html</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://hoangeditor.com/blog/posts/common-editing-mistakes-in-real-estate-videos-and-how-to-fix.html</loc>
+    <loc>https://hoangeditor.com/blog/posts/how-to-build-a-6-figure-video-business-a-real-estate-editor-.html</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -79,7 +53,7 @@
   </url>
 
   <url>
-    <loc>https://hoangeditor.com/blog/posts/10-drone-shots-that-sell-luxury-real-estate-listings-faster.html</loc>
+    <loc>https://hoangeditor.com/blog/posts/the-2026-guide-to-outsource-post-production-why-real-estate-.html</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -90,6 +64,41 @@
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hoangeditor.com/blog/posts/common-editing-mistakes-in-real-estate-videos-and-how-to-fix.html</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hoangeditor.com/blog/posts/10-drone-shots-that-sell-luxury-real-estate-listings-faster.html</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hoangeditor.com/blog/posts/scale-video-business.html</loc>
+    <lastmod>2026-07-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hoangeditor.com/blog/posts/outsourcing-video-editing-guide.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hoangeditor.com/blog/posts/color-grading-trends-luxury.html</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
 </urlset>

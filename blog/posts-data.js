@@ -4,6 +4,33 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "mastering-speed-ramping-for-cinematic-real-estate-walkthroug",
+    title: "Mastering Speed Ramping for Cinematic Real Estate Walkthroughs",
+    description: "Learn how to use speed ramping to transform your real estate walkthroughs into cinematic masterpieces. Tips, techniques, and tools included.",
+    date: "2026-07-23",
+    readTime: "4 min read",
+    category: "Editing",
+    icon: "fa-film"
+  },
+  {
+    slug: "lighting-tips-for-real-estate-videography-transform-listings",
+    title: "Lighting Tips for Real Estate Videography: Transform Listings with Pro Techniques",
+    description: "Master lighting for real estate videography with expert tips. Learn to use natural light, artificial setups, and HDR to make properties shine.",
+    date: "2026-07-23",
+    readTime: "4 min read",
+    category: "Filming",
+    icon: "fa-lightbulb"
+  },
+  {
+    slug: "how-to-build-a-6-figure-video-business-a-real-estate-editor-",
+    title: "How to Build a 6-Figure Video Business: A Real Estate Editor's Blueprint",
+    description: "Learn the step-by-step strategy to scale your real estate video editing business to six figures. From niching down to client retention, this blueprint covers it all.",
+    date: "2026-07-23",
+    readTime: "4 min read",
+    category: "Business",
+    icon: "fa-building-columns"
+  },
+  {
     slug: "the-real-estate-videographer-s-guide-to-client-retention-tur",
     title: "The Real Estate Videographer's Guide to Client Retention: Turn One-Shots Into Lifelong Partnerships",
     description: "Learn proven strategies to keep real estate agents coming back to you for video content. From communication hacks to value-add services, this guide helps videographers build lasting client relationships.",
