@@ -8,3 +8,6 @@ crons = ["0 9 * * *"]
 [[r2_buckets]]
 bucket_name = "hoang-editor-images"
 binding = "BLOG_IMAGES"
+
+[ai]
+binding = "AI"

@@ -71,11 +71,20 @@ export default {
     const post = await generatePost(env.DEEPSEEK_KEY, topic);
     console.log('Generated post:', post.title);
 
-    // 3. Deploy to GitHub
-    await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
+    // 3. Generate featured image via Workers AI
+    let imageUrl = null;
+    try {
+      imageUrl = await generateImage(env.AI, env.BLOG_IMAGES, topic, post);
+      console.log('Generated image:', imageUrl);
+    } catch (e) {
+      console.log('Image generation failed, continuing without image:', e.message);
+    }
+
+    // 4. Deploy to GitHub
+    await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post, imageUrl);
     console.log('Deployed to GitHub:', post.title);
 
-    // 4. Update sitemap
+    // 5. Update sitemap
     await updateSitemap(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
     console.log('Sitemap updated');
   }
@@ -125,14 +134,46 @@ Output ONLY valid JSON, no other text:
   return JSON.parse(match[0]);
 }
 
-async function deployToGitHub(token, user, repo, post) {
+async function generateImage(ai, bucket, topic, post) {
+  // Build a descriptive prompt for the featured image
+  const prompt = `Professional real estate video editing blog featured image. ${topic}. Cinematic, modern, clean design with warm lighting, luxury real estate aesthetic. High quality, minimalist composition with subtle gold and dark tones. No text in the image.`;
+
+  const inputs = {
+    prompt: prompt,
+    num_steps: 4  // Fast generation (flux-schnell works well with 4 steps)
+  };
+
+  const response = await ai.run("@cf/black-forest-labs/flux-1-schnell", inputs);
+
+  // Convert the generated image to PNG buffer
+  const imageBytes = await new Response(response.image).arrayBuffer();
+  const uint8 = new Uint8Array(imageBytes);
+
+  // Generate slug for filename
+  const slug = post.title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .substring(0, 40);
+  const filename = `blog/${slug}.png`;
+
+  // Upload to R2
+  await bucket.put(filename, uint8, {
+    httpMetadata: { contentType: "image/png" }
+  });
+
+  // Return the public URL
+  return `https://hoang-editor-auto-post.hoangf29.workers.dev/images/${filename}`;
+}
+
+async function deployToGitHub(token, user, repo, post, imageUrl) {
   const slug = post.title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "")
     .substring(0, 60);
 
-  const html = buildHTML(post, slug);
+  const html = buildHTML(post, slug, imageUrl);
 
   const resp = await fetch(
     `https://api.github.com/repos/${user}/${repo}/contents/blog/posts/${slug}.html`,
@@ -157,7 +198,7 @@ async function deployToGitHub(token, user, repo, post) {
   }
 }
 
-function buildHTML(post, slug) {
+function buildHTML(post, slug, imageUrl) {
   const d = new Date(post.date + "T00:00:00");
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const dateStr = months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
@@ -176,7 +217,7 @@ function buildHTML(post, slug) {
 <meta property="og:title" content="${post.title}">
 <meta property="og:description" content="${post.description || ''}">
 <meta property="og:url" content="https://hoangeditor.com/blog/posts/${slug}.html">
-<meta property="og:image" content="https://hoangeditor.com/Hoangeditor.PNG">
+<meta property="og:image" content="${imageUrl || 'https://hoangeditor.com/Hoangeditor.PNG'}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="https://hoangeditor.com/Hoangeditor.PNG">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -229,6 +270,7 @@ function buildHTML(post, slug) {
 </div>
 </header>
 
+${imageUrl ? `<figure class="post-featured-image"><img src="${imageUrl}" alt="${post.title}" loading="lazy" style="width:100%;max-width:800px;border-radius:12px;margin-bottom:2rem"></figure>` : ''}
 <div class="post-body">
 ${post.content || ''}
 </div>
