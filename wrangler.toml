@@ -4,3 +4,7 @@ compatibility_date = "2025-01-01"
 
 [triggers]
 crons = ["0 9 * * *"]
+
+[[r2_buckets]]
+bucket_name = "hoang-editor-images"
+binding = "BLOG_IMAGES"

@@ -3,6 +3,30 @@
 // Deploy: npx wrangler deploy
 
 export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    // Serve images from R2 bucket
+    if (url.pathname.startsWith("/images/")) {
+      const key = url.pathname.replace("/images/", "");
+      try {
+        const obj = await env.BLOG_IMAGES.get(key);
+        if (!obj) return new Response("Not Found", { status: 404 });
+        return new Response(obj.body, {
+          headers: {
+            "Content-Type": obj.httpMetadata?.contentType || "image/png",
+            "Cache-Control": "public, max-age=31536000, immutable",
+            "Access-Control-Allow-Origin": "*"
+          }
+        });
+      } catch (e) {
+        return new Response("Not Found", { status: 404 });
+      }
+    }
+
+    return new Response("Not Found", { status: 404 });
+  },
+
   async scheduled(event, env, ctx) {
     console.log('Auto-post cron triggered at', new Date().toISOString());
 
