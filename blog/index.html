@@ -90,6 +90,7 @@ function formatDate(dateStr){var d=new Date(dateStr+'T00:00:00');var months=['Ja
 
 // ===== BUILD POSTS FROM posts-data.js =====
 var ALL_POSTS = (typeof BLOG_POSTS !== 'undefined') ? BLOG_POSTS : [];
+ALL_POSTS.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
 var list = document.getElementById('postList');
 var allCards = [];
 
