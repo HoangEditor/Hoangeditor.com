@@ -33,6 +33,40 @@ export default {
       }
     }
 
+    // Generate only image: POST /generate-image { topic: "..." }
+    if (url.pathname === "/generate-image" && request.method === "POST") {
+      try {
+        const body = await request.json();
+        const topic = body.topic || "real estate video editing";
+        const slug = topic.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 40);
+        const filename = `blog/${slug}.png`;
+
+        // Check if already exists
+        const existing = await env.BLOG_IMAGES.get(filename);
+        if (existing) {
+          return new Response(JSON.stringify({
+            url: `https://hoang-editor-auto-post.hoangf29.workers.dev/images/${filename}`
+          }), { headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } });
+        }
+
+        const prompt = `Professional real estate video editing blog featured image. ${topic}. Cinematic, modern, clean design with warm lighting, luxury real estate aesthetic. High quality, minimalist composition with subtle gold and dark tones. No text.`;
+        const response = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", { prompt, num_steps: 4 });
+        const imageBytes = await new Response(response).arrayBuffer();
+        await env.BLOG_IMAGES.put(filename, new Uint8Array(imageBytes), {
+          httpMetadata: { contentType: "image/png" }
+        });
+
+        return new Response(JSON.stringify({
+          url: `https://hoang-editor-auto-post.hoangf29.workers.dev/images/${filename}`
+        }), { headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } });
+      } catch (e) {
+        return new Response(JSON.stringify({ error: e.message }), {
+          status: 500,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+        });
+      }
+    }
+
     // Manual trigger for testing: POST /__trigger
     if (url.pathname === "/__trigger" && request.method === "POST") {
       ctx.waitUntil(runAutoPost(env));
