@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-he
 
 /* Blog Layout: Main + Sidebar */
 .blog-layout{display:grid;grid-template-columns:1fr 300px;gap:3rem;padding-bottom:4rem}
-@media(max-width:900px){.blog-layout{grid-template-columns:1fr}.blog-sidebar{order:-1}}
+@media(max-width:900px){.blog-layout{grid-template-columns:1fr}}
 
 /* ═══ POST CARDS ═══ */
 .posts-grid{display:flex;flex-direction:column;gap:1.75rem}
