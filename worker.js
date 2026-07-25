@@ -169,7 +169,7 @@ Output ONLY valid JSON, no other text:
       "Authorization": "Bearer " + apiKey
     },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-pro",
       messages: [
         { role: "system", content: sysPrompt },
         { role: "user", content: "Write a blog post about: " + topic }
