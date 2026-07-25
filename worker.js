@@ -82,6 +82,7 @@ export default {
 };
 
 async function runAutoPost(env) {
+  try {
     console.log('Auto-post cron triggered at', new Date().toISOString());
 
     // 1. Pick a random topic
@@ -141,7 +142,11 @@ async function runAutoPost(env) {
     // 5. Update sitemap
     await updateSitemap(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
     console.log('Sitemap updated');
+
+  } catch (e) {
+    console.log('Auto-post FAILED:', e.message, e.stack);
   }
+}
 
 async function generatePost(apiKey, topic) {
   const today = new Date().toISOString().split('T')[0];
