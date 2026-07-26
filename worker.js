@@ -52,9 +52,12 @@ export default {
         const prompt = `Professional real estate video editing blog featured image. ${topic}. Cinematic, modern, clean design with warm lighting, luxury real estate aesthetic. High quality, minimalist composition with subtle gold and dark tones. No text.`;
         const aiResp = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", { prompt, num_steps: 4 });
         const stream = (aiResp && aiResp.image) ? aiResp.image : aiResp;
-        const imageBytes = await new Response(stream).arrayBuffer();
-        await env.BLOG_IMAGES.put(filename, new Uint8Array(imageBytes), {
-          httpMetadata: { contentType: "image/png" }
+        const text = await new Response(stream).text();
+        const binaryStr = atob(text.replace(/^data:image\/\w+;base64,/, ''));
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+        await env.BLOG_IMAGES.put(filename, bytes, {
+          httpMetadata: { contentType: "image/jpeg" }
         });
 
         return new Response(JSON.stringify({
@@ -216,8 +219,14 @@ async function generateImage(ai, bucket, topic, post) {
     throw new Error("Unexpected AI response format: " + JSON.stringify(Object.keys(response || {})));
   }
 
-  const imageBytes = await new Response(imageStream).arrayBuffer();
-  const uint8 = new Uint8Array(imageBytes);
+  // Read the stream as text (AI returns base64-encoded JPEG)
+  const text = await new Response(imageStream).text();
+  // Decode base64 to binary
+  const binaryStr = atob(text.replace(/^data:image\/\w+;base64,/, ''));
+  const bytes = new Uint8Array(binaryStr.length);
+  for (let i = 0; i < binaryStr.length; i++) {
+    bytes[i] = binaryStr.charCodeAt(i);
+  }
 
   // Generate slug for filename
   const slug = post.title
@@ -228,7 +237,7 @@ async function generateImage(ai, bucket, topic, post) {
   const filename = `blog/${slug}.jpg`;
 
   // Upload to R2
-  await bucket.put(filename, uint8, {
+  await bucket.put(filename, bytes, {
     httpMetadata: { contentType: "image/jpeg" }
   });
 
