@@ -73,8 +73,12 @@ export default {
 
     // Manual trigger for testing: POST /__trigger
     if (url.pathname === "/__trigger" && request.method === "POST") {
-      ctx.waitUntil(runAutoPost(env));
-      return new Response("OK — generating post...", { status: 202 });
+      try {
+        await runAutoPost(env);
+        return new Response("OK — post published!", { status: 200 });
+      } catch (e) {
+        return new Response("Error: " + e.message, { status: 500 });
+      }
     }
 
     return new Response("Not Found", { status: 404 });
@@ -130,25 +134,17 @@ async function runAutoPost(env) {
     const post = await generatePost(env.DEEPSEEK_KEY, topic);
     console.log('Generated post:', post.title);
 
-    // 3. Generate featured image via Workers AI
-    let imageUrl = null;
-    try {
-      imageUrl = await generateImage(env.AI, env.BLOG_IMAGES, topic, post);
-      console.log('Generated image:', imageUrl);
-    } catch (e) {
-      console.log('Image generation failed, continuing without image:', e.message);
-    }
-
-    // 4. Deploy to GitHub
-    await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post, imageUrl);
+    // 3. Deploy to GitHub (no image in cron to avoid 30s timeout)
+    await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post, null);
     console.log('Deployed to GitHub:', post.title);
 
-    // 5. Update sitemap
+    // 4. Update sitemap
     await updateSitemap(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
     console.log('Sitemap updated');
 
   } catch (e) {
     console.log('Auto-post FAILED:', e.message, e.stack);
+    throw e; // Re-throw so caller knows it failed
   }
 }
 
@@ -190,9 +186,12 @@ Output ONLY valid JSON, no other text:
   const data = await resp.json();
   const text = data.choices[0].message.content;
 
-  // Extract JSON from response
-  const match = text.match(/\{[\s\S]*\}/);
-  if (!match) throw new Error("Could not parse JSON from AI response");
+  // Extract JSON from response — handle markdown code blocks
+  let jsonText = text;
+  const codeMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (codeMatch) jsonText = codeMatch[1];
+  const match = jsonText.match(/\{[\s\S]*\}/);
+  if (!match) throw new Error("Could not parse JSON from AI response. Raw: " + text.substring(0, 200));
   return JSON.parse(match[0]);
 }
 
