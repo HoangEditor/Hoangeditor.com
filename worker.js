@@ -39,7 +39,7 @@ export default {
         const body = await request.json();
         const topic = body.topic || "real estate video editing";
         const slug = topic.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 40);
-        const filename = `blog/${slug}.png`;
+        const filename = `blog/${slug}.jpg`;
 
         // Check if already exists
         const existing = await env.BLOG_IMAGES.get(filename);
@@ -50,8 +50,9 @@ export default {
         }
 
         const prompt = `Professional real estate video editing blog featured image. ${topic}. Cinematic, modern, clean design with warm lighting, luxury real estate aesthetic. High quality, minimalist composition with subtle gold and dark tones. No text.`;
-        const response = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", { prompt, num_steps: 4 });
-        const imageBytes = await new Response(response).arrayBuffer();
+        const aiResp = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", { prompt, num_steps: 4 });
+        const stream = (aiResp && aiResp.image) ? aiResp.image : aiResp;
+        const imageBytes = await new Response(stream).arrayBuffer();
         await env.BLOG_IMAGES.put(filename, new Uint8Array(imageBytes), {
           httpMetadata: { contentType: "image/png" }
         });
@@ -203,8 +204,19 @@ async function generateImage(ai, bucket, topic, post) {
 
   const response = await ai.run("@cf/black-forest-labs/flux-1-schnell", inputs);
 
-  // Convert the generated image to PNG buffer
-  const imageBytes = await new Response(response).arrayBuffer();
+  // Flux returns { image: ReadableStream<Uint8Array> } or ReadableStream directly
+  let imageStream;
+  if (response && typeof response === 'object' && response.image) {
+    // Object wrapper: { image: ReadableStream }
+    imageStream = response.image;
+  } else if (response && typeof response.pipeTo === 'function') {
+    // ReadableStream directly
+    imageStream = response;
+  } else {
+    throw new Error("Unexpected AI response format: " + JSON.stringify(Object.keys(response || {})));
+  }
+
+  const imageBytes = await new Response(imageStream).arrayBuffer();
   const uint8 = new Uint8Array(imageBytes);
 
   // Generate slug for filename
@@ -213,11 +225,11 @@ async function generateImage(ai, bucket, topic, post) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "")
     .substring(0, 40);
-  const filename = `blog/${slug}.png`;
+  const filename = `blog/${slug}.jpg`;
 
   // Upload to R2
   await bucket.put(filename, uint8, {
-    httpMetadata: { contentType: "image/png" }
+    httpMetadata: { contentType: "image/jpeg" }
   });
 
   // Return the public URL
