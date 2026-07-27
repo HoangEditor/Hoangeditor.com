@@ -134,8 +134,17 @@ async function runAutoPost(env) {
     const post = await generatePost(env.DEEPSEEK_KEY, topic);
     console.log('Generated post:', post.title);
 
-    // 3. Deploy to GitHub (no image in cron to avoid 30s timeout)
-    await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post, null);
+    // 3. Generate featured image via Workers AI (cron has enough time)
+    let imageUrl = null;
+    try {
+      imageUrl = await generateImage(env.AI, env.BLOG_IMAGES, topic, post);
+      console.log('Generated image:', imageUrl);
+    } catch (e) {
+      console.log('Image generation failed, continuing without image:', e.message);
+    }
+
+    // 4. Deploy to GitHub
+    await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post, imageUrl);
     console.log('Deployed to GitHub:', post.title);
 
     // 4. Update posts-data.js
@@ -173,7 +182,7 @@ Output ONLY valid JSON, no other text:
       "Authorization": "Bearer " + apiKey
     },
     body: JSON.stringify({
-      model: "deepseek-v4-pro",
+      model: "deepseek-v4-flash",
       messages: [
         { role: "system", content: sysPrompt },
         { role: "user", content: "Write a blog post about: " + topic }
@@ -188,7 +197,11 @@ Output ONLY valid JSON, no other text:
   }
 
   const data = await resp.json();
-  const text = data.choices[0].message.content;
+  const choice = data.choices?.[0] || {};
+  const msg = choice.message || {};
+  // Try multiple possible content locations for different model versions
+  const text = msg.content || msg.reasoning_content || choice.text || '';
+  console.log('Content length:', text.length, 'Message keys:', JSON.stringify(Object.keys(msg)));
 
   // Extract JSON from response — handle markdown code blocks
   let jsonText = text;
@@ -264,7 +277,8 @@ async function deployToGitHub(token, user, repo, post, imageUrl) {
       headers: {
         "Authorization": "Bearer " + token,
         "Accept": "application/vnd.github+json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "HoangEditor"
       },
       body: JSON.stringify({
         message: "Auto-publish: " + post.title,
@@ -275,8 +289,9 @@ async function deployToGitHub(token, user, repo, post, imageUrl) {
   );
 
   if (!resp.ok) {
+    const text = await resp.text();
     let errMsg = resp.status;
-    try { const err = await resp.json(); errMsg = err.message || resp.status; } catch (e) { errMsg = await resp.text(); }
+    try { errMsg = JSON.parse(text).message || resp.status; } catch (e) { errMsg = text.substring(0, 200); }
     throw new Error("GitHub deploy failed: " + errMsg);
   }
 }
@@ -390,7 +405,7 @@ async function updatePostsData(token, user, repo, post) {
   // Fetch current posts-data.js
   const getResp = await fetch(
     `https://api.github.com/repos/${user}/${repo}/contents/blog/posts-data.js`,
-    { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" } }
+    { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" } }
   );
   if (!getResp.ok) { console.log('Could not fetch posts-data.js'); return; }
 
@@ -408,7 +423,8 @@ async function updatePostsData(token, user, repo, post) {
     headers: {
       "Authorization": "Bearer " + token,
       "Accept": "application/vnd.github+json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "User-Agent": "HoangEditor"
     },
     body: JSON.stringify({
       message: "Update posts-data: " + post.title,
@@ -429,7 +445,7 @@ async function updateSitemap(token, user, repo, post) {
   // Fetch current sitemap
   const getResp = await fetch(
     `https://api.github.com/repos/${user}/${repo}/contents/sitemap.xml`,
-    { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" } }
+    { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" } }
   );
 
   let sitemap;
@@ -451,7 +467,7 @@ async function updateSitemap(token, user, repo, post) {
     // Push updated sitemap
     const sha = getResp.ok ? (await (await fetch(
       `https://api.github.com/repos/${user}/${repo}/contents/sitemap.xml`,
-      { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" } }
+      { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" } }
     )).json()).sha : null;
 
     await fetch(`https://api.github.com/repos/${user}/${repo}/contents/sitemap.xml`, {
@@ -459,7 +475,8 @@ async function updateSitemap(token, user, repo, post) {
       headers: {
         "Authorization": "Bearer " + token,
         "Accept": "application/vnd.github+json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "HoangEditor"
       },
       body: JSON.stringify({
         message: "Update sitemap: " + post.title,
