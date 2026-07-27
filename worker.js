@@ -49,7 +49,7 @@ export default {
           }), { headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } });
         }
 
-        const prompt = `Professional real estate video editing blog featured image. ${topic}. Cinematic, modern, clean design with warm lighting, luxury real estate aesthetic. High quality, minimalist composition with subtle gold and dark tones. No text, no words, no letters, no watermarks anywhere.`;
+        const prompt = `Cinematic wide photograph for a blog. ${topic}. Warm golden hour lighting, luxury real estate interior or exterior, shallow depth of field, professional architectural photography style, 8K quality, photorealistic. No text, no typography, no words, no captions, no logos, no watermarks, clean image only.`;
         const aiResp = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", { prompt, num_steps: 4, width: 1024, height: 576 });
         const stream = (aiResp && aiResp.image) ? aiResp.image : aiResp;
         const text = await new Response(stream).text();
@@ -214,7 +214,7 @@ Output ONLY valid JSON, no other text:
 
 async function generateImage(ai, bucket, topic, post) {
   // Build a descriptive prompt for the featured image
-  const prompt = `Professional real estate video editing blog featured image. ${topic}. Cinematic, modern, clean design with warm lighting, luxury real estate aesthetic. High quality, minimalist composition with subtle gold and dark tones. No text, no words, no letters, no watermarks anywhere in the image.`;
+  const prompt = `Cinematic wide photograph for a blog. ${topic}. Warm golden hour lighting, luxury real estate interior or exterior, shallow depth of field, professional architectural photography style, 8K quality, photorealistic. No text, no typography, no words, no captions, no logos, no watermarks, clean image only.`;
 
   const inputs = {
     prompt: prompt,
