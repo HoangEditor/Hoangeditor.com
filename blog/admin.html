@@ -158,7 +158,7 @@ label{display:block;font-size:.75rem;font-weight:600;color:var(--t3);text-transf
 <div class="ph"><h2>Manage Posts</h2><p>Edit, delete, or generate HTML for your posts.</p></div>
 <div style="display:flex;gap:.5rem;margin-bottom:.75rem"><button class="btn btn-sm" onclick="updateSitemap().then(function(){toast('Sitemap updated!')})"><i class="fas fa-sitemap"></i> Update Sitemap</button></div>
 <div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
-<table class="pt"><thead><tr><th>Title</th><th>Date</th><th>Tags</th><th style="width:130px">Actions</th></tr></thead>
+<table class="pt"><thead><tr><th>Title</th><th>Date</th><th>Tags</th><th>Status</th><th style="width:130px">Actions</th></tr></thead>
 <tbody id="postTableBody"><tr><td colspan="4" style="text-align:center;color:var(--t3);padding:2rem">No posts yet.</td></tr></tbody></table></div>
 </div>
 
@@ -253,11 +253,11 @@ function refreshAll(){refreshDash();updateSeo();}
 /* Manage */
 function renderTable(){
   var posts=gp(),tb=document.getElementById('postTableBody');
-  if(!posts.length){tb.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--t3);padding:2rem">No posts yet.</td></tr>';document.getElementById('postCount').textContent='0';return;}
+  if(!posts.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--t3);padding:2rem">No posts yet.</td></tr>';document.getElementById('postCount').textContent='0';return;}
   document.getElementById('postCount').textContent=posts.length;
   var h='';posts.forEach(function(p,i){var d=new Date(p.date+'T00:00:00'),months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var statusBadge=p.deployed?' <span style="font-size:.55rem;background:var(--green);color:#fff;padding:.1rem .35rem;border-radius:9999px;font-weight:700">LIVE</span>':' <span style="font-size:.55rem;background:var(--t3);color:var(--bg);padding:.1rem .35rem;border-radius:9999px">DRAFT</span>';
-h+='<tr><td class="tc">'+esc(p.title)+statusBadge+'</td><td style="white-space:nowrap">'+months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()+'</td><td style="font-size:.7rem;color:var(--t3)">'+esc(p.tags.split(',')[0]||'—')+'</td><td class="acts">';
+  var statusBadge=p.deployed?'<span style="font-size:.65rem;background:var(--green);color:#fff;padding:.15rem .5rem;border-radius:9999px;font-weight:700;white-space:nowrap">LIVE</span>':'<span style="font-size:.65rem;background:var(--t3);color:var(--bg);padding:.15rem .5rem;border-radius:9999px;white-space:nowrap">DRAFT</span>';
+h+='<tr><td class="tc">'+esc(p.title)+'</td><td style="white-space:nowrap">'+months[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear()+'</td><td style="font-size:.7rem;color:var(--t3)">'+esc(p.tags.split(',')[0]||'—')+'</td><td>'+statusBadge+'</td><td class="acts">';
   h+='<button class="btn btn-sm" onclick="editPost('+i+')" title="Edit"><i class="fas fa-pen"></i></button>';
   h+='<button class="btn btn-sm" onclick="genPost('+i+')" title="Generate HTML"><i class="fas fa-download"></i></button>';
   h+='<button class="btn btn-sm" style="'+(p.deployed?'color:var(--green)':'')+'" onclick="deployPost('+i+')" title="'+(p.deployed?'Re-deploy':'Deploy')+' to GitHub"><i class="fas fa-rocket"></i></button>';
