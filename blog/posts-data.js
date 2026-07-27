@@ -1,8 +1,17 @@
 /**
- * Hoang Editor Blog — Post Manifest
- * Sorted newest → oldest. Add new posts here and they appear automatically.
+ * Hoang Editor Blog â Post Manifest
+ * Sorted newest â oldest. Add new posts here and they appear automatically.
  */
 var BLOG_POSTS = [
+  {
+    slug: "the-psychology-of-property-video-why-some-listings-sell-fast",
+    title: "The Psychology of Property Video: Why Some Listings Sell Faster (And How You Can Make It Happen)",
+    description: "Discover the psychology behind property video that makes listings sell faster. Learn how real estate video editing and storytelling impact buyer decisions.",
+    date: "2026-07-27",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
   {
     slug: "mastering-color-grading-for-real-estate-footage-a-videograph",
     title: "Mastering Color Grading for Real Estate Footage: A Videographer's Guide",
@@ -96,7 +105,7 @@ var BLOG_POSTS = [
   {
     slug: "outsourcing-video-editing-guide",
     title: "The Ultimate Guide to Outsourcing Real Estate Video Editing",
-    description: "Everything you need to know before handing off your footage to an editing partner — workflows, quality standards, and what to expect.",
+    description: "Everything you need to know before handing off your footage to an editing partner â workflows, quality standards, and what to expect.",
     date: "2026-07-08",
     readTime: "4 min read",
     category: "Guide",
