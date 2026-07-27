@@ -1,8 +1,17 @@
 /**
- * Hoang Editor Blog â Post Manifest
- * Sorted newest â oldest. Add new posts here and they appear automatically.
+ * Hoang Editor Blog Ã¢ÂÂ Post Manifest
+ * Sorted newest Ã¢ÂÂ oldest. Add new posts here and they appear automatically.
  */
 var BLOG_POSTS = [
+  {
+    slug: "the-real-estate-videographer-s-guide-to-client-retention-5-p",
+    title: "The Real Estate Videographer’s Guide to Client Retention: 5 Proven Strategies",
+    description: "Learn how real estate videographers can retain clients by leveraging real estate video editing, outsourced video editing, and a reliable video editing partner. Boost your production team's success.",
+    date: "2026-07-27",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
   {
     slug: "the-psychology-of-property-video-why-some-listings-sell-fast",
     title: "The Psychology of Property Video: Why Some Listings Sell Faster (And How You Can Make It Happen)",
@@ -105,7 +114,7 @@ var BLOG_POSTS = [
   {
     slug: "outsourcing-video-editing-guide",
     title: "The Ultimate Guide to Outsourcing Real Estate Video Editing",
-    description: "Everything you need to know before handing off your footage to an editing partner â workflows, quality standards, and what to expect.",
+    description: "Everything you need to know before handing off your footage to an editing partner Ã¢ÂÂ workflows, quality standards, and what to expect.",
     date: "2026-07-08",
     readTime: "4 min read",
     category: "Guide",
