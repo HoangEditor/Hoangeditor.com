@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "mastering-color-grading-for-real-estate-footage-a-videograph",
+    title: "Mastering Color Grading for Real Estate Footage: A Videographer's Guide",
+    description: "Learn essential color grading techniques for real estate video editing. This guide helps videographers and property tour editors achieve stunning, consistent results with outsourced editing.",
+    date: "2026-07-27",
+    readTime: "4 min read",
+    category: "Editing",
+    icon: "fa-palette"
+  },
+  {
     slug: "mastering-speed-ramping-for-cinematic-real-estate-walkthroug",
     title: "Mastering Speed Ramping for Cinematic Real Estate Walkthroughs",
     description: "Learn how to use speed ramping to transform your real estate walkthroughs into cinematic masterpieces. Tips, techniques, and tools included.",

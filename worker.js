@@ -138,7 +138,11 @@ async function runAutoPost(env) {
     await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post, null);
     console.log('Deployed to GitHub:', post.title);
 
-    // 4. Update sitemap
+    // 4. Update posts-data.js
+    await updatePostsData(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
+    console.log('Posts data updated');
+
+    // 5. Update sitemap
     await updateSitemap(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
     console.log('Sitemap updated');
 
@@ -369,6 +373,50 @@ ${post.content || ''}
 </script>
 </body>
 </html>`;
+}
+
+async function updatePostsData(token, user, repo, post) {
+  const slug = post.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 60);
+  const entry = `  {
+    slug: "${slug}",
+    title: "${post.title.replace(/"/g, '\\"')}",
+    description: "${(post.description || '').replace(/"/g, '\\"')}",
+    date: "${post.date}",
+    readTime: "${post.readTime || '4 min read'}",
+    category: "${(post.tags || '').split(',')[0].trim() || 'General'}",
+    icon: "fa-file-lines"
+  },\n`;
+
+  // Fetch current posts-data.js
+  const getResp = await fetch(
+    `https://api.github.com/repos/${user}/${repo}/contents/blog/posts-data.js`,
+    { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" } }
+  );
+  if (!getResp.ok) { console.log('Could not fetch posts-data.js'); return; }
+
+  const data = await getResp.json();
+  const current = atob(data.content);
+
+  // Check if slug already exists
+  if (current.includes(`slug: "${slug}"`)) { console.log('Post already in posts-data.js'); return; }
+
+  // Insert new entry after "var BLOG_POSTS = ["
+  const updated = current.replace('var BLOG_POSTS = [\n', 'var BLOG_POSTS = [\n' + entry);
+
+  await fetch(`https://api.github.com/repos/${user}/${repo}/contents/blog/posts-data.js`, {
+    method: "PUT",
+    headers: {
+      "Authorization": "Bearer " + token,
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: "Update posts-data: " + post.title,
+      content: toBase64(updated),
+      sha: data.sha,
+      branch: "main"
+    })
+  });
 }
 
 async function updateSitemap(token, user, repo, post) {
