@@ -49,8 +49,8 @@ export default {
           }), { headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } });
         }
 
-        const prompt = `Professional real estate video editing blog featured image. ${topic}. Cinematic, modern, clean design with warm lighting, luxury real estate aesthetic. High quality, minimalist composition with subtle gold and dark tones. No text.`;
-        const aiResp = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", { prompt, num_steps: 4 });
+        const prompt = `Professional real estate video editing blog featured image. ${topic}. Cinematic, modern, clean design with warm lighting, luxury real estate aesthetic. High quality, minimalist composition with subtle gold and dark tones. No text, no words, no letters, no watermarks anywhere.`;
+        const aiResp = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", { prompt, num_steps: 4, width: 1024, height: 576 });
         const stream = (aiResp && aiResp.image) ? aiResp.image : aiResp;
         const text = await new Response(stream).text();
         const binaryStr = atob(text.replace(/^data:image\/\w+;base64,/, ''));
@@ -214,11 +214,13 @@ Output ONLY valid JSON, no other text:
 
 async function generateImage(ai, bucket, topic, post) {
   // Build a descriptive prompt for the featured image
-  const prompt = `Professional real estate video editing blog featured image. ${topic}. Cinematic, modern, clean design with warm lighting, luxury real estate aesthetic. High quality, minimalist composition with subtle gold and dark tones. No text in the image.`;
+  const prompt = `Professional real estate video editing blog featured image. ${topic}. Cinematic, modern, clean design with warm lighting, luxury real estate aesthetic. High quality, minimalist composition with subtle gold and dark tones. No text, no words, no letters, no watermarks anywhere in the image.`;
 
   const inputs = {
     prompt: prompt,
-    num_steps: 4  // Fast generation (flux-schnell works well with 4 steps)
+    num_steps: 4,
+    width: 1024,
+    height: 576  // 16:9 aspect ratio
   };
 
   const response = await ai.run("@cf/black-forest-labs/flux-1-schnell", inputs);
