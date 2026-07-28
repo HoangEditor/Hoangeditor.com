@@ -1,8 +1,17 @@
 /**
- * Hoang Editor Blog ÃÂ¢ÃÂÃÂ Post Manifest
- * Sorted newest ÃÂ¢ÃÂÃÂ oldest. Add new posts here and they appear automatically.
+ * Hoang Editor Blog ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Post Manifest
+ * Sorted newest ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ oldest. Add new posts here and they appear automatically.
  */
 var BLOG_POSTS = [
+  {
+    slug: "mastering-vertical-real-estate-videos-for-instagram-and-tikt",
+    title: "Mastering Vertical Real Estate Videos for Instagram and TikTok: Editing Tips That Drive Engagement",
+    description: "Learn how to edit vertical real estate videos for Instagram and TikTok. Expert tips from a video editing partner to boost views, leads, and property tours.",
+    date: "2026-07-28",
+    readTime: "4 min read",
+    category: "Real estate video editing",
+    icon: "fa-file-lines"
+  },
   {
     slug: "lighting-tips-for-real-estate-videography-natural-vs-artific",
     title: "Lighting Tips for Real Estate Videography: Natural vs Artificial",
@@ -14,7 +23,7 @@ var BLOG_POSTS = [
   },
   {
     slug: "the-real-estate-videographer-s-guide-to-client-retention-5-p",
-    title: "The Real Estate Videographerâs Guide to Client Retention: 5 Proven Strategies",
+    title: "The Real Estate VideographerÃ¢ÂÂs Guide to Client Retention: 5 Proven Strategies",
     description: "Learn how real estate videographers can retain clients by leveraging real estate video editing, outsourced video editing, and a reliable video editing partner. Boost your production team's success.",
     date: "2026-07-27",
     readTime: "4 min read",
@@ -123,7 +132,7 @@ var BLOG_POSTS = [
   {
     slug: "outsourcing-video-editing-guide",
     title: "The Ultimate Guide to Outsourcing Real Estate Video Editing",
-    description: "Everything you need to know before handing off your footage to an editing partner ÃÂ¢ÃÂÃÂ workflows, quality standards, and what to expect.",
+    description: "Everything you need to know before handing off your footage to an editing partner ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ workflows, quality standards, and what to expect.",
     date: "2026-07-08",
     readTime: "4 min read",
     category: "Guide",
