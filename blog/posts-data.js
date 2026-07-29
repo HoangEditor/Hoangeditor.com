@@ -1,8 +1,17 @@
 /**
- * Hoang Editor Blog ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Post Manifest
- * Sorted newest ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ oldest. Add new posts here and they appear automatically.
+ * Hoang Editor Blog ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Post Manifest
+ * Sorted newest ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ oldest. Add new posts here and they appear automatically.
  */
 var BLOG_POSTS = [
+  {
+    slug: "from-solo-shooter-to-production-company-scaling-your-real-es",
+    title: "From Solo Shooter to Production Company: Scaling Your Real Estate Video Business",
+    description: "Learn how to scale from solo real estate videographer to a full production team. Tips on outsourcing video editing, building systems, and leveraging a video editing partner.",
+    date: "2026-07-29",
+    readTime: "5 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
   {
     slug: "why-top-videographers-are-outsourcing-post-production-in-202",
     title: "Why Top Videographers Are Outsourcing Post-Production in 2026 (And Why You Should Too)",
@@ -41,7 +50,7 @@ var BLOG_POSTS = [
   },
   {
     slug: "the-real-estate-videographer-s-guide-to-client-retention-5-p",
-    title: "The Real Estate VideographerÃÂÃÂ¢ÃÂÃÂÃÂÃÂs Guide to Client Retention: 5 Proven Strategies",
+    title: "The Real Estate VideographerÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂs Guide to Client Retention: 5 Proven Strategies",
     description: "Learn how real estate videographers can retain clients by leveraging real estate video editing, outsourced video editing, and a reliable video editing partner. Boost your production team's success.",
     date: "2026-07-27",
     readTime: "4 min read",
@@ -150,7 +159,7 @@ var BLOG_POSTS = [
   {
     slug: "outsourcing-video-editing-guide",
     title: "The Ultimate Guide to Outsourcing Real Estate Video Editing",
-    description: "Everything you need to know before handing off your footage to an editing partner ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ workflows, quality standards, and what to expect.",
+    description: "Everything you need to know before handing off your footage to an editing partner ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ workflows, quality standards, and what to expect.",
     date: "2026-07-08",
     readTime: "4 min read",
     category: "Guide",
