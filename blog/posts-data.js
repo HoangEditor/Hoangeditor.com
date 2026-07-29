@@ -1,8 +1,17 @@
 /**
- * Hoang Editor Blog ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Post Manifest
- * Sorted newest ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ oldest. Add new posts here and they appear automatically.
+ * Hoang Editor Blog ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Post Manifest
+ * Sorted newest ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ oldest. Add new posts here and they appear automatically.
  */
 var BLOG_POSTS = [
+  {
+    slug: "why-top-videographers-are-outsourcing-post-production-in-202",
+    title: "Why Top Videographers Are Outsourcing Post-Production in 2026 (And Why You Should Too)",
+    description: "Discover why leading real estate videographers are outsourcing post-production in 2026 to scale their business, improve turnaround, and deliver polished property tours.",
+    date: "2026-07-29",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
   {
     slug: "how-to-price-luxury-vs-standard-real-estate-video-packages",
     title: "How to Price Luxury vs Standard Real Estate Video Packages",
@@ -32,7 +41,7 @@ var BLOG_POSTS = [
   },
   {
     slug: "the-real-estate-videographer-s-guide-to-client-retention-5-p",
-    title: "The Real Estate VideographerÃÂ¢ÃÂÃÂs Guide to Client Retention: 5 Proven Strategies",
+    title: "The Real Estate VideographerÃÂÃÂ¢ÃÂÃÂÃÂÃÂs Guide to Client Retention: 5 Proven Strategies",
     description: "Learn how real estate videographers can retain clients by leveraging real estate video editing, outsourced video editing, and a reliable video editing partner. Boost your production team's success.",
     date: "2026-07-27",
     readTime: "4 min read",
@@ -141,7 +150,7 @@ var BLOG_POSTS = [
   {
     slug: "outsourcing-video-editing-guide",
     title: "The Ultimate Guide to Outsourcing Real Estate Video Editing",
-    description: "Everything you need to know before handing off your footage to an editing partner ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ workflows, quality standards, and what to expect.",
+    description: "Everything you need to know before handing off your footage to an editing partner ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ workflows, quality standards, and what to expect.",
     date: "2026-07-08",
     readTime: "4 min read",
     category: "Guide",
