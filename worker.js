@@ -11,6 +11,15 @@ function toBase64(str) {
   return btoa(binStr);
 }
 
+function fromBase64(base64) {
+  const binStr = atob(base64);
+  const bytes = new Uint8Array(binStr.length);
+  for (let i = 0; i < binStr.length; i++) {
+    bytes[i] = binStr.charCodeAt(i);
+  }
+  return new TextDecoder().decode(bytes);
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -412,7 +421,7 @@ async function updatePostsData(token, user, repo, post) {
   if (!getResp.ok) { console.log('Could not fetch posts-data.js'); return; }
 
   const data = await getResp.json();
-  const current = atob(data.content);
+  const current = fromBase64(data.content);
 
   // Check if slug already exists
   if (current.includes(`slug: "${slug}"`)) { console.log('Post already in posts-data.js'); return; }
@@ -453,7 +462,7 @@ async function updateSitemap(token, user, repo, post) {
   let sitemap;
   if (getResp.ok) {
     const data = await getResp.json();
-    sitemap = atob(data.content);
+    sitemap = fromBase64(data.content);
   } else {
     // Create new sitemap if none exists
     sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset\n  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n\n  <url>\n    <loc>https://hoangeditor.com/</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n    <image:image>\n      <image:loc>https://hoangeditor.com/Hoangeditor.PNG</image:loc>\n      <image:title>Hoang Editor — Real Estate Video Editing</image:title>\n      <image:caption>Professional real estate video editing services for videographers and production teams.</image:caption>\n    </image:image>\n  </url>\n\n  <url>\n    <loc>https://hoangeditor.com/blog/</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.9</priority>\n  </url>\n\n</urlset>\n`;

@@ -50,8 +50,8 @@ var BLOG_POSTS = [
   },
   {
     slug: "the-real-estate-videographer-s-guide-to-client-retention-5-p",
-    title: "The Real Estate VideographerÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂs Guide to Client Retention: 5 Proven Strategies",
-    description: "Learn how real estate videographers can retain clients by leveraging real estate video editing, outsourced video editing, and a reliable video editing partner. Boost your production team's success.",
+    title: "The Real Estate Videographer’s Guide to Client Retention: 5 Proven Strategies",
+    description: "Learn how real estate videographers can retain clients by leveraging real estate video editing, outsourced video editing, and a reliable video editing partner. Boost your production team’s success.",
     date: "2026-07-27",
     readTime: "4 min read",
     category: "Real Estate Video Editing",
