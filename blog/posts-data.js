@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "best-music-choices-for-different-types-of-real-estate-videos",
+    title: "Best Music Choices for Different Types of Real Estate Videos",
+    description: "Learn how to select the perfect soundtrack for luxury homes, family properties, commercial spaces, and more. Tips for real estate videographers and outsourced editing teams.",
+    date: "2026-07-30",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "beginner-s-guide-to-color-grading-real-estate-footage",
     title: "Beginner’s Guide to Color Grading Real Estate Footage",
     description: "Master color grading for real estate videos with this beginner's guide. Learn to enhance property tours and save time with professional outsourced video editing.",
