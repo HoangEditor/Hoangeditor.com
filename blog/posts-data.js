@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "beginner-s-guide-to-color-grading-real-estate-footage",
+    title: "Beginner’s Guide to Color Grading Real Estate Footage",
+    description: "Master color grading for real estate videos with this beginner's guide. Learn to enhance property tours and save time with professional outsourced video editing.",
+    date: "2026-07-30",
+    readTime: "4 min read",
+    category: "Color Grading",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "from-solo-shooter-to-production-company-scaling-your-real-es",
     title: "From Solo Shooter to Production Company: Scaling Your Real Estate Video Business",
     description: "Learn how to scale from solo real estate videographer to a full production team. Tips on outsourcing video editing, building systems, and leveraging a video editing partner.",
