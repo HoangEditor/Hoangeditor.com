@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "speed-ramping-for-cinematic-property-walkthroughs-a-guide-fo",
+    title: "Speed Ramping for Cinematic Property Walkthroughs: A Guide for Real Estate Videographers",
+    description: "Learn how to use speed ramping to create cinematic property walkthroughs. Discover shooting tips & editing tricks for real estate video editing success.",
+    date: "2026-07-31",
+    readTime: "4 min read",
+    category: "Speed Ramping",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-price-your-real-estate-video-services-for-maximum-pro",
     title: "How to Price Your Real Estate Video Services for Maximum Profit",
     description: "Learn how to price real estate video services for higher profit. Explore pricing models, add-ons, and outsourced video editing to boost your margins.",
