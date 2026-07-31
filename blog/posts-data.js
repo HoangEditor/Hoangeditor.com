@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-price-your-real-estate-video-services-for-maximum-pro",
+    title: "How to Price Your Real Estate Video Services for Maximum Profit",
+    description: "Learn how to price real estate video services for higher profit. Explore pricing models, add-ons, and outsourced video editing to boost your margins.",
+    date: "2026-07-31",
+    readTime: "4 min read",
+    category: "Real Estate Video Pricing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "best-music-choices-for-different-types-of-real-estate-videos",
     title: "Best Music Choices for Different Types of Real Estate Videos",
     description: "Learn how to select the perfect soundtrack for luxury homes, family properties, commercial spaces, and more. Tips for real estate videographers and outsourced editing teams.",
