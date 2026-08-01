@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-video-seo-rank-your-videos-on-youtube-and-google",
+    title: "Real Estate Video SEO: Rank Your Videos on YouTube and Google",
+    description: "Learn how to optimize property tour videos for YouTube and Google. Discover SEO strategies for real estate videographers and the value of outsourcing video editing.",
+    date: "2026-08-01",
+    readTime: "4 min read",
+    category: "Real Estate Video SEO",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "why-outsourcing-your-video-editing-is-the-key-to-scaling-fas",
     title: "Why Outsourcing Your Video Editing Is the Key to Scaling Fast",
     description: "Discover how outsourcing your real estate video editing can help you scale your video business, deliver faster property tours, and free up time for shooting.",
