@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "why-outsourcing-your-video-editing-is-the-key-to-scaling-fas",
+    title: "Why Outsourcing Your Video Editing Is the Key to Scaling Fast",
+    description: "Discover how outsourcing your real estate video editing can help you scale your video business, deliver faster property tours, and free up time for shooting.",
+    date: "2026-08-01",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "speed-ramping-for-cinematic-property-walkthroughs-a-guide-fo",
     title: "Speed Ramping for Cinematic Property Walkthroughs: A Guide for Real Estate Videographers",
     description: "Learn how to use speed ramping to create cinematic property walkthroughs. Discover shooting tips & editing tricks for real estate video editing success.",
