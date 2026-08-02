@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "from-stills-to-motion-how-to-transition-from-real-estate-pho",
+    title: "From Stills to Motion: How to Transition from Real Estate Photography to Videography",
+    description: "Ready to add video to your real estate services? Learn how to transition from photography to videography with gear, workflow, and editing tips.",
+    date: "2026-08-02",
+    readTime: "4 min read",
+    category: "Real Estate Photography",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-video-seo-rank-your-videos-on-youtube-and-google",
     title: "Real Estate Video SEO: Rank Your Videos on YouTube and Google",
     description: "Learn how to optimize property tour videos for YouTube and Google. Discover SEO strategies for real estate videographers and the value of outsourcing video editing.",
