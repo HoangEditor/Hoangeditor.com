@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "complete-guide-to-real-estate-video-audio-post-production",
+    title: "Complete Guide to Real Estate Video Audio Post-Production",
+    description: "Master real estate video audio post-production: cleanup, leveling, mixing, and sound design tips. Learn when to outsource and elevate your property tours.",
+    date: "2026-08-03",
+    readTime: "4 min read",
+    category: "real estate video editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-business-case-for-outsourcing-real-estate-video-editing",
     title: "The Business Case for Outsourcing Real Estate Video Editing",
     description: "Discover why outsourcing real estate video editing is the smartest move for your production team. Save time, scale faster, and boost profits with expert video post-production.",
