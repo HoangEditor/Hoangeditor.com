@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-business-case-for-outsourcing-real-estate-video-editing",
+    title: "The Business Case for Outsourcing Real Estate Video Editing",
+    description: "Discover why outsourcing real estate video editing is the smartest move for your production team. Save time, scale faster, and boost profits with expert video post-production.",
+    date: "2026-08-03",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "from-stills-to-motion-how-to-transition-from-real-estate-pho",
     title: "From Stills to Motion: How to Transition from Real Estate Photography to Videography",
     description: "Ready to add video to your real estate services? Learn how to transition from photography to videography with gear, workflow, and editing tips.",
