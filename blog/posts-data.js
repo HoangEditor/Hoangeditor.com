@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "",
+    title: "...",
+    description: "...",
+    date: "2026-08-04",
+    readTime: "4 min read",
+    category: "...",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "complete-guide-to-real-estate-video-audio-post-production",
     title: "Complete Guide to Real Estate Video Audio Post-Production",
     description: "Master real estate video audio post-production: cleanup, leveling, mixing, and sound design tips. Learn when to outsource and elevate your property tours.",
