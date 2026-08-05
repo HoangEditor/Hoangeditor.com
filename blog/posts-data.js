@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "build-a-6-figure-real-estate-video-business-without-an-in-ho",
+    title: "Build a 6-Figure Real Estate Video Business Without an In-House Editor",
+    description: "Learn how to scale your real estate video business to six figures by outsourcing editing. Focus on shooting and winning clients while a video editing partner handles post-production.",
+    date: "2026-08-05",
+    readTime: "4 min read",
+    category: "Real Estate Video Business",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "",
     title: "...",
     description: "...",
