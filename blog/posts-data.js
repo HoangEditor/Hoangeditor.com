@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-edit-property-tours-that-get-more-views-on-social-med",
+    title: "How to Edit Property Tours That Get More Views on Social Media",
+    description: "Want property tours that actually get views? These real estate video editing tips will help you create scroll-stopping social media content.",
+    date: "2026-08-06",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "build-a-6-figure-real-estate-video-business-without-an-in-ho",
     title: "Build a 6-Figure Real Estate Video Business Without an In-House Editor",
     description: "Learn how to scale your real estate video business to six figures by outsourcing editing. Focus on shooting and winning clients while a video editing partner handles post-production.",
