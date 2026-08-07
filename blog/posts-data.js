@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "5-common-editing-mistakes-that-make-listings-look-cheap",
+    title: "5 Common Editing Mistakes That Make Listings Look Cheap",
+    description: "Avoid these 5 real estate video editing mistakes that cheapen property tours. Learn how professional video post-production elevates listings.",
+    date: "2026-08-07",
+    readTime: "4 min read",
+    category: "real estate video editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-video-trends-that-will-dominate-2027",
     title: "Real Estate Video Trends That Will Dominate 2027",
     description: "Discover the real estate video trends shaping 2027—from AI editing to interactive tours—and how to stay ahead with the right video editing partner.",
