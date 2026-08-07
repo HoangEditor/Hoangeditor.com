@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-video-trends-that-will-dominate-2027",
+    title: "Real Estate Video Trends That Will Dominate 2027",
+    description: "Discover the real estate video trends shaping 2027—from AI editing to interactive tours—and how to stay ahead with the right video editing partner.",
+    date: "2026-08-07",
+    readTime: "4 min read",
+    category: "Real Estate Video Trends",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-edit-property-tours-that-get-more-views-on-social-med",
     title: "How to Edit Property Tours That Get More Views on Social Media",
     description: "Want property tours that actually get views? These real estate video editing tips will help you create scroll-stopping social media content.",
