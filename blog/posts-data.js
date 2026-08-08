@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "5-ways-to-make-real-estate-videos-stand-out-in-crowded-marke",
+    title: "5 Ways to Make Real Estate Videos Stand Out in Crowded Market",
+    description: "Discover 5 proven ways to make your property tours unforgettable and attract more clients. Learn how real estate video editing can transform your work.",
+    date: "2026-08-08",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "5-common-editing-mistakes-that-make-listings-look-cheap",
     title: "5 Common Editing Mistakes That Make Listings Look Cheap",
     description: "Avoid these 5 real estate video editing mistakes that cheapen property tours. Learn how professional video post-production elevates listings.",
