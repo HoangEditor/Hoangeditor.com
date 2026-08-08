@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-fast-turnaround-times-win-more-real-estate-clients",
+    title: "How Fast Turnaround Times Win More Real Estate Clients",
+    description: "Learn how offering fast real estate video editing turnaround times can help videographers win more clients, build trust, and grow their production business.",
+    date: "2026-08-08",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "5-ways-to-make-real-estate-videos-stand-out-in-crowded-marke",
     title: "5 Ways to Make Real Estate Videos Stand Out in Crowded Market",
     description: "Discover 5 proven ways to make your property tours unforgettable and attract more clients. Learn how real estate video editing can transform your work.",
