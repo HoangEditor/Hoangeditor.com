@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-videographer-guide-to-client-retention",
+    title: "Real Estate Videographer Guide to Client Retention",
+    description: "Learn how real estate videographers can retain clients with quality, speed, and outsourced video editing. Build a loyal client base today.",
+    date: "2026-08-09",
+    readTime: "4 min read",
+    category: "Client Retention",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-fast-turnaround-times-win-more-real-estate-clients",
     title: "How Fast Turnaround Times Win More Real Estate Clients",
     description: "Learn how offering fast real estate video editing turnaround times can help videographers win more clients, build trust, and grow their production business.",
