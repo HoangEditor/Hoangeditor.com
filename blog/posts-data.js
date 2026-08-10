@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-write-shot-lists-that-make-editing-twice-as-fast",
+    title: "How to Write Shot Lists That Make Editing Twice as Fast",
+    description: "Learn how to create shot lists that streamline real estate video editing. Boost efficiency for your property tour projects and impress your clients.",
+    date: "2026-08-10",
+    readTime: "4 min read",
+    category: "Shot List",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-videographer-guide-to-client-retention",
     title: "Real Estate Videographer Guide to Client Retention",
     description: "Learn how real estate videographers can retain clients with quality, speed, and outsourced video editing. Build a loyal client base today.",
