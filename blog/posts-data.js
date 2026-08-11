@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "speed-ramping-for-cinematic-property-walkthroughs-a-complete",
+    title: "Speed Ramping for Cinematic Property Walkthroughs: A Complete Guide",
+    description: "Learn how speed ramping can transform your property tour videos. Discover techniques, shooting tips, and why outsourced editing benefits your production team.",
+    date: "2026-08-11",
+    readTime: "4 min read",
+    category: "Speed Ramping",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-write-shot-lists-that-make-editing-twice-as-fast",
     title: "How to Write Shot Lists That Make Editing Twice as Fast",
     description: "Learn how to create shot lists that streamline real estate video editing. Boost efficiency for your property tour projects and impress your clients.",
