@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-build-a-6-figure-real-estate-video-business-without-a",
+    title: "How to Build a 6-Figure Real Estate Video Business Without an In-House Editor",
+    description: "Skip the overhead of hiring an in-house editor. Learn how outsourced video post-production can help you scale to six figures faster.",
+    date: "2026-08-12",
+    readTime: "4 min read",
+    category: "Real Estate Video Business",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "speed-ramping-for-cinematic-property-walkthroughs-a-complete",
     title: "Speed Ramping for Cinematic Property Walkthroughs: A Complete Guide",
     description: "Learn how speed ramping can transform your property tour videos. Discover techniques, shooting tips, and why outsourced editing benefits your production team.",
