@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-transition-from-real-estate-photography-to-videograph",
+    title: "How to Transition from Real Estate Photography to Videography",
+    description: "Learn how to transition from real estate photography to videography. Upgrade your gear, master motion, and leverage real estate video editing to grow your business.",
+    date: "2026-08-13",
+    readTime: "4 min read",
+    category: "Real Estate Videography",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-build-a-6-figure-real-estate-video-business-without-a",
     title: "How to Build a 6-Figure Real Estate Video Business Without an In-House Editor",
     description: "Skip the overhead of hiring an in-house editor. Learn how outsourced video post-production can help you scale to six figures faster.",
