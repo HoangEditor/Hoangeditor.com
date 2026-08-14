@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "ai-tools-to-enhance-real-estate-video-production-workflow",
+    title: "AI Tools to Enhance Real Estate Video Production Workflow",
+    description: "Discover top AI tools for real estate video editing, from automated property tours to smart post-production. Learn how to boost your workflow today.",
+    date: "2026-08-14",
+    readTime: "4 min read",
+    category: "AI video tools",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-transition-from-real-estate-photography-to-videograph",
     title: "How to Transition from Real Estate Photography to Videography",
     description: "Learn how to transition from real estate photography to videography. Upgrade your gear, master motion, and leverage real estate video editing to grow your business.",
