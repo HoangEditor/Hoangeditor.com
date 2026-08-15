@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "speed-ramping-for-cinematic-property-walkthroughs-a-pro-guid",
+    title: "Speed Ramping for Cinematic Property Walkthroughs: A Pro Guide",
+    description: "Learn how speed ramping can transform property tour videos into cinematic experiences. Discover techniques, pitfalls, and when to outsource real estate video editing.",
+    date: "2026-08-15",
+    readTime: "4 min read",
+    category: "Speed Ramping",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "ai-tools-to-enhance-real-estate-video-production-workflow",
     title: "AI Tools to Enhance Real Estate Video Production Workflow",
     description: "Discover top AI tools for real estate video editing, from automated property tours to smart post-production. Learn how to boost your workflow today.",
