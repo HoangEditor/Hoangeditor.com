@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-create-a-consistent-look-across-all-your-real-estate-",
+    title: "How to Create a Consistent Look Across All Your Real Estate Videos",
+    description: "...",
+    date: "2026-08-15",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "speed-ramping-for-cinematic-property-walkthroughs-a-pro-guid",
     title: "Speed Ramping for Cinematic Property Walkthroughs: A Pro Guide",
     description: "Learn how speed ramping can transform property tour videos into cinematic experiences. Discover techniques, pitfalls, and when to outsource real estate video editing.",
