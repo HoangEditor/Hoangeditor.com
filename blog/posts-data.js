@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "beginner-guide-to-color-grading-real-estate-footage",
+    title: "Beginner Guide to Color Grading Real Estate Footage",
+    description: "Learn the basics of color grading for real estate footage. Make property tours look natural and inviting with these simple steps.",
+    date: "2026-08-16",
+    readTime: "4 min read",
+    category: "Color Grading",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-create-a-consistent-look-across-all-your-real-estate-",
     title: "How to Create a Consistent Look Across All Your Real Estate Videos",
     description: "...",
