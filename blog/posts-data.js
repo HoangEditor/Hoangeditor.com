@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "from-solo-shooter-to-full-production-company-a-growth-roadma",
+    title: "From Solo Shooter to Full Production Company: A Growth Roadmap for Real Estate Videographers",
+    description: "Learn how solo real estate videographers can scale into a full production company by outsourcing video post-production and building a reliable team.",
+    date: "2026-08-17",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "beginner-guide-to-color-grading-real-estate-footage",
     title: "Beginner Guide to Color Grading Real Estate Footage",
     description: "Learn the basics of color grading for real estate footage. Make property tours look natural and inviting with these simple steps.",
