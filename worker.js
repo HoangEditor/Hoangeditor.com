@@ -80,13 +80,22 @@ export default {
       }
     }
 
-    // Manual trigger for testing: POST /__trigger
-    if (url.pathname === "/__trigger" && request.method === "POST") {
-      try {
-        await runAutoPost(env);
-        return new Response("OK — post published!", { status: 200 });
-      } catch (e) {
-        return new Response("Error: " + e.message, { status: 500 });
+    // Manual triggers for testing
+    if (request.method === "POST") {
+      const handlers = {
+        "/__trigger": () => runAutoPost(env),
+        "/__topics": () => runSmartTopics(env),
+        "/__pillar": () => runPillar(env),
+        "/__refresh": () => runRefresh(env),
+        "/__weekly": () => runWeekly(env)
+      };
+      if (handlers[url.pathname]) {
+        try {
+          await handlers[url.pathname]();
+          return new Response("OK — done!", { status: 200 });
+        } catch (e) {
+          return new Response("Error: " + e.message, { status: 500 });
+        }
       }
     }
 
@@ -94,6 +103,13 @@ export default {
   },
 
   async scheduled(event, env, ctx) {
+    const cron = event.cron || '';
+    // Weekly maintenance (Monday 8am): pillar + refresh + smart topics
+    if (cron === '0 8 * * 1') {
+      ctx.waitUntil(runWeekly(env));
+      return;
+    }
+    // Default: daily auto-post
     ctx.waitUntil(runAutoPost(env));
   }
 };
@@ -136,15 +152,31 @@ async function runAutoPost(env) {
       "Why Outsourcing Your Video Editing Is the Key to Scaling Fast"
     ];
 
-    const topic = topics[Math.floor(Math.random() * topics.length)];
-    console.log('Selected topic:', topic);
+    // Fetch existing posts once (for dedup + internal linking)
+    const existingPosts = await fetchExistingPosts(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO);
+    const existingTitles = existingPosts.map(p => p.title);
 
-    // Dedup: skip if a similar post already exists
-    const existingTitles = await fetchExistingTitles(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO);
-    if (isDuplicate(topic, existingTitles)) {
-      console.log('Duplicate topic detected, skipping:', topic);
+    // Merge dynamic topic pool (from weekly smart topics) with built-in topics
+    const pool = await fetchTopicPool(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO);
+    const allTopics = [...new Set([...pool, ...topics])];
+
+    // Pick a topic that is NOT a duplicate (try up to all available topics)
+    let topic = null;
+    const shuffled = allTopics.sort(() => 0.5 - Math.random());
+    for (const candidate of shuffled) {
+      if (!isDuplicate(candidate, existingTitles)) {
+        topic = candidate;
+        break;
+      }
+    }
+    if (!topic) {
+      console.log('All topics exhausted — no non-duplicate topic available. Run smart topics to add more.');
       return;
     }
+    console.log('Selected topic:', topic);
+
+    // Internal linking: find related posts
+    const relatedPosts = findRelatedPosts(topic, existingPosts, 3);
 
     // 2. Generate post via DeepSeek
     const post = await generatePost(env.DEEPSEEK_KEY, topic);
@@ -160,16 +192,20 @@ async function runAutoPost(env) {
     }
 
     // 4. Deploy to GitHub
-    await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post, imageUrl);
+    await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post, imageUrl, relatedPosts);
     console.log('Deployed to GitHub:', post.title);
 
-    // 4. Update posts-data.js
+    // 5. Update posts-data.js
     await updatePostsData(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
     console.log('Posts data updated');
 
-    // 5. Update sitemap
+    // 6. Update sitemap
     await updateSitemap(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
     console.log('Sitemap updated');
+
+    // 7. Notify + auto-share (best effort, errors are swallowed)
+    const url = `https://hoangeditor.com/blog/posts/${slugify(post.title)}.html`;
+    await notifyAndShare(env, post, url, imageUrl);
 
   } catch (e) {
     console.log('Auto-post FAILED:', e.message, e.stack);
@@ -186,10 +222,15 @@ Write a 500-800 word blog post. Use proper HTML: <h2> for sections, <h3> for sub
 
 Include these keywords naturally: real estate video editing, video post-production, property tour, real estate videographer, outsourced video editing, video editing partner, production team.
 
-End with: <div class="post-cta"><h3>Ready to scale your video business?</h3><p>We edit real estate videos so you can focus on shooting.</p><a href="https://hoangeditor.com/#contact" class="cta-btn">Start a Project →</a></div>
+End the "content" field with: <div class="post-cta"><h3>Ready to scale your video business?</h3><p>We edit real estate videos so you can focus on shooting.</p><a href="https://hoangeditor.com/#contact" class="cta-btn">Start a Project →</a></div>
+
+Also produce:
+1. "faq": 3-4 question/answer pairs (common buyer questions) as [{q, a}] — each answer 1-2 sentences with a keyword.
+2. "socialSnippets": 3 short catchy captions (under 200 chars each) for Pinterest/Twitter/LinkedIn promotion.
+3. "videoScript": a 45-60 second vertical video script (hook, 3 key points, CTA) as a single string with line breaks.
 
 Output ONLY valid JSON, no other text:
-{"title":"...","description":"120-155 char meta description...","tags":"Tag1, Tag2, Tag3","date":"${today}","readTime":"4 min read","content":"<full HTML body with H2/H3 tags>"}`;
+{"title":"...","description":"120-155 char meta description...","tags":"Tag1, Tag2, Tag3","date":"${today}","readTime":"4 min read","content":"<full HTML body with H2/H3 tags ending in CTA>","faq":[{"q":"...","a":"..."}],"socialSnippets":["...","...","..."],"videoScript":"..."}`;
 
   const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {
     method: "POST",
@@ -204,7 +245,7 @@ Output ONLY valid JSON, no other text:
         { role: "user", content: "Write a blog post about: " + topic }
       ],
       temperature: 0.7,
-      max_tokens: 3000
+      max_tokens: 4000
     })
   });
 
@@ -217,7 +258,7 @@ Output ONLY valid JSON, no other text:
   const msg = choice.message || {};
   // Try multiple possible content locations for different model versions
   const text = msg.content || msg.reasoning_content || choice.text || '';
-  console.log('Content length:', text.length, 'Message keys:', JSON.stringify(Object.keys(msg)));
+  console.log('Content length:', text.length);
 
   // Extract JSON from response — handle markdown code blocks
   let jsonText = text;
@@ -279,14 +320,14 @@ async function generateImage(ai, bucket, topic, post) {
   return `https://hoang-editor-auto-post.hoangf29.workers.dev/images/${filename}`;
 }
 
-async function deployToGitHub(token, user, repo, post, imageUrl) {
+async function deployToGitHub(token, user, repo, post, imageUrl, relatedPosts) {
   const slug = post.title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "")
     .substring(0, 60);
 
-  const html = buildHTML(post, slug, imageUrl);
+  const html = buildHTML(post, slug, imageUrl, relatedPosts);
 
   const resp = await fetch(
     `https://api.github.com/repos/${user}/${repo}/contents/blog/posts/${slug}.html`,
@@ -314,11 +355,35 @@ async function deployToGitHub(token, user, repo, post, imageUrl) {
   }
 }
 
-function buildHTML(post, slug, imageUrl) {
+function buildHTML(post, slug, imageUrl, relatedPosts) {
   const d = new Date(post.date + "T00:00:00");
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const dateStr = months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
   const primaryTag = (post.tags || "").split(",")[0].trim() || "General";
+
+  // Build FAQ section + schema
+  let faqHtml = '';
+  let faqSchema = '';
+  if (Array.isArray(post.faq) && post.faq.length > 0) {
+    faqHtml = '<section class="post-faq"><h2>Frequently Asked Questions</h2>' +
+      post.faq.map(f => `<div class="faq-item"><h3>${(f.q||'').replace(/[<>]/g,'')}</h3><p>${(f.a||'').replace(/[<>]/g,'')}</p></div>`).join('') +
+      '</section>';
+    faqSchema = `<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[${post.faq.map(f => `{"@type":"Question","name":"${(f.q||'').replace(/"/g,'\\"')}","acceptedAnswer":{"@type":"Answer","text":"${(f.a||'').replace(/"/g,'\\"')}"}}`).join(',')}]}</script>`;
+  }
+
+  // Build related posts section
+  let relatedHtml = '';
+  if (Array.isArray(relatedPosts) && relatedPosts.length > 0) {
+    relatedHtml = '<section class="related-posts"><h2>Related Articles</h2><div class="related-grid">' +
+      relatedPosts.map(r => `<a href="${r.slug}.html" class="related-card"><div class="rel-title">${(r.title||'').replace(/[<>]/g,'')}</div></a>`).join('') +
+      '</div></section>';
+  }
+
+  // Build video script section
+  let videoHtml = '';
+  if (post.videoScript) {
+    videoHtml = '<section class="post-video-script"><h2>🎬 Video Script (60s)</h2><p class="vs-hint">Use this vertical video script for TikTok, Reels or Shorts.</p><pre>' + (post.videoScript || '').replace(/[<>]/g,'') + '</pre></section>';
+  }
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -342,6 +407,7 @@ function buildHTML(post, slug, imageUrl) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="../styles.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"${post.title}","url":"https://hoangeditor.com/blog/posts/${slug}.html","datePublished":"${post.date}","dateModified":"${post.date}","author":{"@type":"Person","name":"Hoang Editor Team"},"publisher":{"@type":"Organization","name":"Hoang Editor"}}</script>
+${faqSchema}
 </head>
 <body>
 <div class="bg-gradient" aria-hidden="true"></div>
@@ -391,6 +457,10 @@ ${imageUrl ? `<figure class="post-featured-image"><img src="${imageUrl}" alt="${
 ${post.content || ''}
 </div>
 
+${faqHtml}
+${relatedHtml}
+${videoHtml}
+
 <div class="post-author-box">
 <div class="author-avatar-lg">HE</div>
 <div class="author-bio"><div class="author-name-lg">Hoang Editor Team</div><div class="author-desc">Professional real estate video editing partner for shooters and production teams. We help videographers scale by handling post-production.</div></div>
@@ -435,6 +505,11 @@ function isDuplicate(topic, existingTitles) {
 }
 
 async function fetchExistingTitles(token, user, repo) {
+  const posts = await fetchExistingPosts(token, user, repo);
+  return posts.map(p => p.title);
+}
+
+async function fetchExistingPosts(token, user, repo) {
   try {
     const resp = await fetch(
       `https://api.github.com/repos/${user}/${repo}/contents/blog/posts-data.js`,
@@ -443,14 +518,49 @@ async function fetchExistingTitles(token, user, repo) {
     if (!resp.ok) return [];
     const data = await resp.json();
     const content = fromBase64(data.content);
-    const titles = [];
-    const re = /title:\s*"([^"]+)"/g;
+    const posts = [];
+    // Parse entries: match { slug: "...", title: "..." } blocks
+    const re = /slug:\s*"([^"]+)"[\s\S]*?title:\s*"([^"]+)"/g;
     let m;
-    while ((m = re.exec(content)) !== null) titles.push(m[1]);
-    return titles;
+    while ((m = re.exec(content)) !== null) {
+      if (m[1] && m[2]) posts.push({ slug: m[1], title: m[2] });
+    }
+    return posts;
   } catch (e) {
     return [];
   }
+}
+
+async function fetchTopicPool(token, user, repo) {
+  try {
+    const resp = await fetch(
+      `https://api.github.com/repos/${user}/${repo}/contents/blog/topics-pool.json`,
+      { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" } }
+    );
+    if (!resp.ok) return [];
+    const data = await resp.json();
+    const content = JSON.parse(fromBase64(data.content));
+    return Array.isArray(content.topics) ? content.topics : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+// Find related posts by keyword overlap for internal linking
+function findRelatedPosts(currentTopic, allPosts, limit) {
+  limit = limit || 3;
+  const topicWords = keywordsOf(currentTopic);
+  if (topicWords.length === 0 || allPosts.length === 0) return [];
+  return allPosts
+    .map(p => {
+      const pWords = keywordsOf(p.title);
+      let overlap = 0;
+      for (const w of topicWords) if (pWords.includes(w)) overlap++;
+      return { ...p, score: overlap };
+    })
+    .filter(p => p.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
 }
 
 async function updatePostsData(token, user, repo, post) {
@@ -496,6 +606,185 @@ async function updatePostsData(token, user, repo, post) {
       branch: "main"
     })
   });
+}
+
+function slugify(text) {
+  return (text || '').toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 60);
+}
+
+// ===== NOTIFICATION & SOCIAL SHARING =====
+
+async function notifyAndShare(env, post, url, imageUrl) {
+  const results = [];
+  // Discord / Slack webhooks
+  if (env.DISCORD_WEBHOOK) {
+    results.push(notifyDiscord(env.DISCORD_WEBHOOK, post, url));
+  }
+  if (env.SLACK_WEBHOOK) {
+    results.push(notifySlack(env.SLACK_WEBHOOK, post, url));
+  }
+  // Pinterest
+  if (env.PINTEREST_TOKEN && env.PINTEREST_BOARD_ID) {
+    results.push(postToPinterest(env.PINTEREST_TOKEN, env.PINTEREST_BOARD_ID, post, url, imageUrl));
+  }
+  // LinkedIn
+  if (env.LINKEDIN_TOKEN && env.LINKEDIN_URN) {
+    results.push(postToLinkedIn(env.LINKEDIN_TOKEN, env.LINKEDIN_URN, post, url));
+  }
+  await Promise.allSettled(results.map(p => p.catch(e => console.log('Share failed:', e.message))));
+}
+
+async function notifyDiscord(webhookUrl, post, url) {
+  const msg = {
+    embeds: [{
+      title: post.title,
+      description: (post.description || '').substring(0, 200),
+      url: url,
+      color: 0xf59e0b,
+      fields: [
+        { name: "Tags", value: (post.tags || 'General').split(',').slice(0,3).join(', '), inline: true },
+        { name: "Read time", value: post.readTime || '4 min read', inline: true }
+      ]
+    }]
+  };
+  await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(msg)
+  });
+  console.log('Discord notified');
+}
+
+async function notifySlack(webhookUrl, post, url) {
+  const text = `*New blog post published:* <${url}|${post.title}>\n> ${(post.description || '').substring(0, 150)}`;
+  await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text })
+  });
+  console.log('Slack notified');
+}
+
+async function postToPinterest(token, boardId, post, url, imageUrl) {
+  const body = {
+    board_id: boardId,
+    title: post.title,
+    description: (post.socialSnippets && post.socialSnippets[0]) || post.description || '',
+    link: url,
+    media_source: { source_type: "image_url", url: imageUrl || "https://hoangeditor.com/Hoangeditor.PNG" }
+  };
+  const resp = await fetch("https://api.pinterest.com/v5/pins", {
+    method: "POST",
+    headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  if (!resp.ok) throw new Error("Pinterest error: " + resp.status);
+  console.log('Pinterest pinned');
+}
+
+async function postToLinkedIn(token, authorUrn, post, url) {
+  const text = (post.socialSnippets && post.socialSnippets[1]) || post.title;
+  const body = {
+    author: authorUrn,
+    lifecycleState: "PUBLISHED",
+    specificContent: {
+      "com.linkedin.ugc.ShareContent": {
+        shareCommentary: { text: text + " " + url },
+        shareMediaCategory: "ARTICLE",
+        media: [{ status: "READY", originalUrl: url }]
+      }
+    },
+    visibility: { "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC" }
+  };
+  const resp = await fetch("https://api.linkedin.com/v2/ugcPosts", {
+    method: "POST",
+    headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json", "X-Restli-Protocol-Version": "2.0.0" },
+    body: JSON.stringify(body)
+  });
+  if (!resp.ok) throw new Error("LinkedIn error: " + resp.status);
+  console.log('LinkedIn posted');
+}
+
+// ===== WEEKLY TASKS =====
+
+async function runWeekly(env) {
+  try {
+    await runSmartTopics(env);
+  } catch (e) { console.log('Smart topics failed:', e.message); }
+  try {
+    await runRefresh(env);
+  } catch (e) { console.log('Refresh failed:', e.message); }
+  try {
+    await runPillar(env);
+  } catch (e) { console.log('Pillar failed:', e.message); }
+}
+
+async function runSmartTopics(env) {
+  const topics = await suggestTopics(env.DEEPSEEK_KEY);
+  if (!topics || topics.length === 0) { console.log('No topics suggested'); return; }
+  // Save topics to a JSON file in GitHub
+  const content = JSON.stringify({ generated: new Date().toISOString(), topics }, null, 2);
+  const path = 'blog/topics-pool.json';
+  const getResp = await fetch(`https://api.github.com/repos/${env.GITHUB_USER}/${env.GITHUB_REPO}/contents/${path}`, {
+    headers: { Authorization: "Bearer " + env.GITHUB_TOKEN, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" }
+  });
+  const sha = getResp.ok ? (await getResp.json()).sha : undefined;
+  const resp = await fetch(`https://api.github.com/repos/${env.GITHUB_USER}/${env.GITHUB_REPO}/contents/${path}`, {
+    method: "PUT",
+    headers: { Authorization: "Bearer " + env.GITHUB_TOKEN, Accept: "application/vnd.github+json", "Content-Type": "application/json", "User-Agent": "HoangEditor" },
+    body: JSON.stringify({ message: "Update topics pool", content: toBase64(content), sha, branch: "main" })
+  });
+  console.log('Topics pool updated:', resp.status);
+}
+
+async function suggestTopics(apiKey) {
+  const sys = 'You are a real estate video editing content strategist. Suggest 10 fresh, non-duplicate blog topics for Hoang Editor (real estate video editing service for videographers and production teams). Topics must be specific and SEO-friendly. Output ONLY a JSON array of strings, no other text.';
+  const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey },
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "system", content: sys }, { role: "user", content: "Suggest 10 new blog topics." }], temperature: 0.8, max_tokens: 1000 })
+  });
+  const data = await resp.json();
+  const text = data.choices?.[0]?.message?.content || '';
+  const match = text.match(/\[[\s\S]*\]/);
+  if (!match) return [];
+  try { return JSON.parse(match[0]); } catch (e) { return []; }
+}
+
+async function runRefresh(env) {
+  // Refresh the oldest post: regenerate content with an updated angle
+  const posts = await fetchExistingPosts(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO);
+  if (posts.length === 0) return;
+  const oldest = posts[posts.length - 1]; // posts-data.js is sorted newest first
+  console.log('Refreshing oldest post:', oldest.title);
+  const refreshed = await generatePost(env.DEEPSEEK_KEY, "Updated guide: " + oldest.title);
+  const slug = oldest.slug;
+  const html = buildHTML(refreshed, slug, null, findRelatedPosts(oldest.title, posts, 3));
+  const getResp = await fetch(`https://api.github.com/repos/${env.GITHUB_USER}/${env.GITHUB_REPO}/contents/blog/posts/${slug}.html`, {
+    headers: { Authorization: "Bearer " + env.GITHUB_TOKEN, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" }
+  });
+  if (!getResp.ok) { console.log('Could not fetch old post to refresh'); return; }
+  const data = await getResp.json();
+  await fetch(`https://api.github.com/repos/${env.GITHUB_USER}/${env.GITHUB_REPO}/contents/blog/posts/${slug}.html`, {
+    method: "PUT",
+    headers: { Authorization: "Bearer " + env.GITHUB_TOKEN, Accept: "application/vnd.github+json", "Content-Type": "application/json", "User-Agent": "HoangEditor" },
+    body: JSON.stringify({ message: "Refresh post: " + refreshed.title, content: toBase64(html), sha: data.sha, branch: "main" })
+  });
+  console.log('Refreshed:', refreshed.title);
+}
+
+async function runPillar(env) {
+  const posts = await fetchExistingPosts(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO);
+  if (posts.length === 0) return;
+  const topic = "The Complete Guide to Real Estate Video Editing (Ultimate Resource)";
+  const post = await generatePost(env.DEEPSEEK_KEY, topic);
+  // Add internal links to top posts inside the pillar content
+  const links = posts.slice(0, 8).map(p => `<li><a href="${p.slug}.html">${p.title}</a></li>`).join('');
+  post.content = (post.content || '') + `<h2>Explore More</h2><ul>${links}</ul>`;
+  await deployToGitHub(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post, null, posts.slice(0, 3));
+  await updatePostsData(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
+  await updateSitemap(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO, post);
+  console.log('Pillar post published:', post.title);
 }
 
 async function updateSitemap(token, user, repo, post) {

@@ -183,13 +183,22 @@ label{display:block;font-size:.75rem;font-weight:600;color:var(--t3);text-transf
 <div class="fg"><label>Model</label><select id="apiModel"><option value="deepseek-v4-flash">DeepSeek-V4 Flash (fast)</option><option value="deepseek-v4-pro">DeepSeek-V4 Pro</option><option value="deepseek-reasoner">DeepSeek-R1 (reasoning)</option></select></div>
 <button class="btn btn-accent" onclick="saveApi()">Save API Settings</button> <span id="apiStatus" style="font-size:.75rem"></span>
 </div>
-<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;max-width:600px">
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;max-width:600px;margin-bottom:1rem">
 <h3 style="font-size:.85rem;font-weight:700;margin-bottom:.75rem"><i class="fas fa-rocket" style="color:var(--accent)"></i> Auto-Deploy to GitHub</h3>
 <div class="fr"><div class="fg"><label>GitHub Username</label><input type="text" id="ghUser" placeholder="your-username"></div><div class="fg"><label>Repo Name</label><input type="text" id="ghRepo" placeholder="hoangeditor.com"></div></div>
 <div class="fg"><label>GitHub Token</label><input type="password" id="ghToken" placeholder="ghp_..."><div class="hint">Create at <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--accent)">github.com/settings/tokens</a> — needs <strong>repo</strong> scope</div></div>
 <button class="btn btn-accent" onclick="saveGh()">Save GitHub</button>
 <button class="btn" style="margin-left:.5rem" onclick="testGh()">Test Connection</button>
 <span id="ghStatus" style="font-size:.75rem;margin-left:.75rem"></span>
+</div>
+<div style="background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;max-width:600px">
+<h3 style="font-size:.85rem;font-weight:700;margin-bottom:.75rem"><i class="fas fa-share-nodes" style="color:var(--accent)"></i> Notification & Social Auto-Share</h3>
+<p style="font-size:.7rem;color:var(--t3);margin-bottom:1rem">These are set as Cloudflare secrets for the Worker (run <code>npx wrangler secret put NAME</code>). Enter here as a reference — they also auto-save to this browser.</p>
+<div class="fr"><div class="fg"><label>Discord Webhook URL</label><input type="text" id="sDiscord" placeholder="https://discord.com/api/webhooks/..."></div><div class="fg"><label>Slack Webhook URL</label><input type="text" id="sSlack" placeholder="https://hooks.slack.com/services/..."></div></div>
+<div class="fr"><div class="fg"><label>Pinterest Token</label><input type="password" id="sPinterest" placeholder="pina_..."></div><div class="fg"><label>Pinterest Board ID</label><input type="text" id="sPinterestBoard" placeholder="1234567890"></div></div>
+<div class="fr"><div class="fg"><label>LinkedIn Token</label><input type="password" id="sLinkedin" placeholder="AQ..."></div><div class="fg"><label>LinkedIn URN (person/org)</label><input type="text" id="sLinkedinUrn" placeholder="urn:li:person:ABC123"></div></div>
+<button class="btn btn-accent" onclick="saveSocial()">Save Social Settings</button> <span id="socialStatus" style="font-size:.75rem"></span>
+<div class="hint" style="margin-top:.75rem">Worker secret names: <code>DISCORD_WEBHOOK</code>, <code>SLACK_WEBHOOK</code>, <code>PINTEREST_TOKEN</code>, <code>PINTEREST_BOARD_ID</code>, <code>LINKEDIN_TOKEN</code>, <code>LINKEDIN_URN</code></div>
 </div>
 </div>
 
@@ -351,6 +360,7 @@ function copyWorker(){var ta=document.getElementById('workerCode');ta.select();n
 
 /* API Settings */
 function saveApi(){if(document.getElementById('apiKey').value)localStorage.setItem('ai_key',document.getElementById('apiKey').value.trim());if(document.getElementById('apiUrl').value)localStorage.setItem('ai_url',document.getElementById('apiUrl').value.trim());localStorage.setItem('ai_model',document.getElementById('apiModel').value);document.getElementById('apiStatus').textContent='✓ Saved';document.getElementById('apiStatus').style.color='var(--green)';toast('API settings saved!')}
+function saveSocial(){localStorage.setItem('s_discord',document.getElementById('sDiscord').value.trim());localStorage.setItem('s_slack',document.getElementById('sSlack').value.trim());localStorage.setItem('s_pinterest',document.getElementById('sPinterest').value.trim());localStorage.setItem('s_pinterest_board',document.getElementById('sPinterestBoard').value.trim());localStorage.setItem('s_linkedin',document.getElementById('sLinkedin').value.trim());localStorage.setItem('s_linkedin_urn',document.getElementById('sLinkedinUrn').value.trim());document.getElementById('socialStatus').textContent='✓ Saved (browser)';document.getElementById('socialStatus').style.color='var(--green)';toast('Social settings saved! Remember to set Cloudflare secrets too.')}
 
 /* Init */
 (function(){
@@ -359,6 +369,7 @@ function saveApi(){if(document.getElementById('apiKey').value)localStorage.setIt
   var ak=localStorage.getItem('ai_key');if(ak){document.getElementById('apiKey').value=ak;document.getElementById('apiStatus').textContent='✓ Configured';document.getElementById('apiStatus').style.color='var(--green)'}
   var au=localStorage.getItem('ai_url');if(au)document.getElementById('apiUrl').value=au;
   var gh=ghCfg();if(gh.user)document.getElementById('ghUser').value=gh.user;if(gh.repo)document.getElementById('ghRepo').value=gh.repo;if(gh.token)document.getElementById('ghToken').value=gh.token;
+  if(localStorage.getItem('s_discord'))document.getElementById('sDiscord').value=localStorage.getItem('s_discord');if(localStorage.getItem('s_slack'))document.getElementById('sSlack').value=localStorage.getItem('s_slack');if(localStorage.getItem('s_pinterest'))document.getElementById('sPinterest').value=localStorage.getItem('s_pinterest');if(localStorage.getItem('s_pinterest_board'))document.getElementById('sPinterestBoard').value=localStorage.getItem('s_pinterest_board');if(localStorage.getItem('s_linkedin'))document.getElementById('sLinkedin').value=localStorage.getItem('s_linkedin');if(localStorage.getItem('s_linkedin_urn'))document.getElementById('sLinkedinUrn').value=localStorage.getItem('s_linkedin_urn');
 })();
 </script>
 </body>
