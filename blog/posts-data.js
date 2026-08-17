@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "voiceover-and-music-selection-for-real-estate-video-edits-be",
+    title: "Voiceover and Music Selection for Real Estate Video Edits: Best Practices",
+    description: "Learn how to choose the right voiceover and music for real estate video edits. Elevate property tours with these video post-production best practices.",
+    date: "2026-08-17",
+    readTime: "4 min read",
+    category: "Voiceover",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-create-cinematic-real-estate-walkthroughs-editing-tec",
     title: "How to Create Cinematic Real Estate Walkthroughs: Editing Techniques That Sell",
     description: "Learn cinematic real estate video editing techniques that sell properties faster. Discover pacing, color, transitions, and why outsourced post-production wins.",
