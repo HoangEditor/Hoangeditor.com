@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-create-cinematic-real-estate-walkthroughs-editing-tec",
+    title: "How to Create Cinematic Real Estate Walkthroughs: Editing Techniques That Sell",
+    description: "Learn cinematic real estate video editing techniques that sell properties faster. Discover pacing, color, transitions, and why outsourced post-production wins.",
+    date: "2026-08-17",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "from-solo-shooter-to-full-production-company-a-growth-roadma",
     title: "From Solo Shooter to Full Production Company: A Growth Roadmap for Real Estate Videographers",
     description: "Learn how solo real estate videographers can scale into a full production company by outsourcing video post-production and building a reliable team.",
