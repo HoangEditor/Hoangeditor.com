@@ -1,6 +1,6 @@
 /**
- * Hoang Editor Blog ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Post Manifest
- * Sorted newest ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ oldest. Add new posts here and they appear automatically.
+ * Hoang Editor Blog — Post Manifest
+ * Sorted newest → oldest. Add new posts here and they appear automatically.
  */
 var BLOG_POSTS = [
   {
@@ -24,7 +24,7 @@ var BLOG_POSTS = [
   {
     slug: "how-to-create-a-consistent-look-across-all-your-real-estate-",
     title: "How to Create a Consistent Look Across All Your Real Estate Videos",
-    description: "...",
+    description: "Learn how to build a consistent visual style across all your real estate videos with color grading, presets, and a reliable outsourced video editing workflow.",
     date: "2026-08-15",
     readTime: "4 min read",
     category: "Real Estate Video Editing",
@@ -145,15 +145,6 @@ var BLOG_POSTS = [
     date: "2026-08-05",
     readTime: "4 min read",
     category: "Real Estate Video Business",
-    icon: "fa-file-lines"
-  },
-  {
-    slug: "",
-    title: "...",
-    description: "...",
-    date: "2026-08-04",
-    readTime: "4 min read",
-    category: "...",
     icon: "fa-file-lines"
   },
   {
@@ -393,7 +384,7 @@ var BLOG_POSTS = [
   {
     slug: "outsourcing-video-editing-guide",
     title: "The Ultimate Guide to Outsourcing Real Estate Video Editing",
-    description: "Everything you need to know before handing off your footage to an editing partner ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ workflows, quality standards, and what to expect.",
+    description: "Everything you need to know before handing off your footage to an editing partner — workflows, quality standards, and what to expect.",
     date: "2026-07-08",
     readTime: "4 min read",
     category: "Guide",

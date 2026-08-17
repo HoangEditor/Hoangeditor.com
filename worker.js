@@ -139,6 +139,13 @@ async function runAutoPost(env) {
     const topic = topics[Math.floor(Math.random() * topics.length)];
     console.log('Selected topic:', topic);
 
+    // Dedup: skip if a similar post already exists
+    const existingTitles = await fetchExistingTitles(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO);
+    if (isDuplicate(topic, existingTitles)) {
+      console.log('Duplicate topic detected, skipping:', topic);
+      return;
+    }
+
     // 2. Generate post via DeepSeek
     const post = await generatePost(env.DEEPSEEK_KEY, topic);
     console.log('Generated post:', post.title);
@@ -399,6 +406,51 @@ ${post.content || ''}
 </script>
 </body>
 </html>`;
+}
+
+function keywordsOf(text) {
+  const stopwords = new Set(['how','to','for','the','a','an','and','or','of','in','on','that','your','with','without','what','why','from','vs','guide','tips','complete','ultimate','essential','mastering','master','boost','transform','scale','scaling','scales','fast','faster','more','best','top','pro','quick','easy','simple','key','ways','difference','between','good','great','need','know','must','should','will','can','different','types','packages','services','business','video','videos','editing','editor','real','estate','property','properties','listing','listings','shoot','shooter','shooters','videographer','videographers','videography','production','post','team','partner','client','clients','workflow','footage','tour','tours','content','media','social','marketing','seo','2026','2027']);
+  return text.toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .split(/\s+/)
+    .filter(w => w.length > 2 && !stopwords.has(w));
+}
+
+function isDuplicate(topic, existingTitles) {
+  const topicWords = keywordsOf(topic);
+  if (topicWords.length === 0) return false;
+  for (const title of existingTitles) {
+    const titleWords = keywordsOf(title);
+    if (titleWords.length === 0) continue;
+    // Count overlap of significant words
+    let overlap = 0;
+    for (const w of topicWords) {
+      if (titleWords.includes(w)) overlap++;
+    }
+    const ratio = overlap / Math.min(topicWords.length, titleWords.length);
+    // If 60%+ of the shorter keyword set overlaps, treat as duplicate
+    if (ratio >= 0.6) return true;
+  }
+  return false;
+}
+
+async function fetchExistingTitles(token, user, repo) {
+  try {
+    const resp = await fetch(
+      `https://api.github.com/repos/${user}/${repo}/contents/blog/posts-data.js`,
+      { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" } }
+    );
+    if (!resp.ok) return [];
+    const data = await resp.json();
+    const content = fromBase64(data.content);
+    const titles = [];
+    const re = /title:\s*"([^"]+)"/g;
+    let m;
+    while ((m = re.exec(content)) !== null) titles.push(m[1]);
+    return titles;
+  } catch (e) {
+    return [];
+  }
 }
 
 async function updatePostsData(token, user, repo, post) {
