@@ -227,10 +227,9 @@ End the "content" field with: <div class="post-cta"><h3>Ready to scale your vide
 Also produce:
 1. "faq": 3-4 question/answer pairs (common buyer questions) as [{q, a}] — each answer 1-2 sentences with a keyword.
 2. "socialSnippets": 3 short catchy captions (under 200 chars each) for Pinterest/Twitter/LinkedIn promotion.
-3. "videoScript": a 45-60 second vertical video script (hook, 3 key points, CTA) as a single string with line breaks.
 
 Output ONLY valid JSON, no other text:
-{"title":"...","description":"120-155 char meta description...","tags":"Tag1, Tag2, Tag3","date":"${today}","readTime":"4 min read","content":"<full HTML body with H2/H3 tags ending in CTA>","faq":[{"q":"...","a":"..."}],"socialSnippets":["...","...","..."],"videoScript":"..."}`;
+{"title":"...","description":"120-155 char meta description...","tags":"Tag1, Tag2, Tag3","date":"${today}","readTime":"4 min read","content":"<full HTML body with H2/H3 tags ending in CTA>","faq":[{"q":"...","a":"..."}],"socialSnippets":["...","...","..."]}`;
 
   const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {
     method: "POST",
@@ -379,12 +378,6 @@ function buildHTML(post, slug, imageUrl, relatedPosts) {
       '</div></section>';
   }
 
-  // Build video script section
-  let videoHtml = '';
-  if (post.videoScript) {
-    videoHtml = '<section class="post-video-script"><h2>🎬 Video Script (60s)</h2><p class="vs-hint">Use this vertical video script for TikTok, Reels or Shorts.</p><pre>' + (post.videoScript || '').replace(/[<>]/g,'') + '</pre></section>';
-  }
-
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -459,7 +452,6 @@ ${post.content || ''}
 
 ${faqHtml}
 ${relatedHtml}
-${videoHtml}
 
 <div class="post-author-box">
 <div class="author-avatar-lg">HE</div>

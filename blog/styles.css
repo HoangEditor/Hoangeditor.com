@@ -228,12 +228,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-he
 .faq-item h3{font-size:.9rem;font-weight:700;margin-bottom:.4rem;color:var(--gold-400)}
 .faq-item p{font-size:.825rem;color:var(--text-muted);line-height:1.6}
 
-/* Video script */
-.post-video-script{margin-top:3rem;padding:1.5rem;background:var(--bg-elevated);border:1px solid var(--border-gold);border-radius:var(--radius)}
-.post-video-script h2{font-size:1.15rem;font-weight:700;margin-bottom:.5rem;letter-spacing:-.01em}
-.post-video-script .vs-hint{font-size:.7rem;color:var(--text-muted);margin-bottom:.75rem}
-.post-video-script pre{white-space:pre-wrap;font-family:SF Mono,Monaco,monospace;font-size:.78rem;line-height:1.6;color:var(--text-secondary);background:var(--bg);padding:1rem;border-radius:8px;border:1px solid var(--border)}
-
 /* ═══ Footer ═══ */
 .blog-footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--border);position:relative;z-index:10}
 .blog-footer p{font-size:.75rem;color:var(--text-muted)}
