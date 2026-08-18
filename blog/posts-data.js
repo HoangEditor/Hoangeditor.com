@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-speed-up-real-estate-video-turnaround-without-sacrifi",
+    title: "How to Speed Up Real Estate Video Turnaround Without Sacrificing Quality",
+    description: "Discover how to speed up real estate video turnaround while keeping top quality. Explore editing workflows, outsourcing tips, and production team strategies.",
+    date: "2026-08-18",
+    readTime: "4 min read",
+    category: "Real Estate Video",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-what-sets-them-apart",
     title: "Good vs. Great Real Estate Video Editing: What Sets Them Apart?",
     description: "Discover the difference between good and great real estate video editing. Learn how storytelling, pacing, and post-production elevate property tours.",
