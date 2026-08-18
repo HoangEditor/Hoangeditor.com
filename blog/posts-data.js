@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-real-estate-video-editing-what-sets-them-apart",
+    title: "Good vs. Great Real Estate Video Editing: What Sets Them Apart?",
+    description: "Discover the difference between good and great real estate video editing. Learn how storytelling, pacing, and post-production elevate property tours.",
+    date: "2026-08-18",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "voiceover-and-music-selection-for-real-estate-video-edits-be",
     title: "Voiceover and Music Selection for Real Estate Video Edits: Best Practices",
     description: "Learn how to choose the right voiceover and music for real estate video edits. Elevate property tours with these video post-production best practices.",
