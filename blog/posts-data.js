@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-real-estate-video-editing-the-critical-differe",
+    title: "Good vs. Great Real Estate Video Editing: The Critical Difference",
+    description: "Good editing sells a house. Great editing sells a lifestyle. Discover how professional real estate video editing transforms property tours and boosts your brand.",
+    date: "2026-08-19",
+    readTime: "4 min read",
+    category: "Real Estate Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-speed-up-real-estate-video-turnaround-without-sacrifi",
     title: "How to Speed Up Real Estate Video Turnaround Without Sacrificing Quality",
     description: "Discover how to speed up real estate video turnaround while keeping top quality. Explore editing workflows, outsourcing tips, and production team strategies.",
