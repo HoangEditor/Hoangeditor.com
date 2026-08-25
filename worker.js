@@ -59,10 +59,13 @@ export default {
         }
 
         const prompt = `Cinematic wide photograph for a blog. ${topic}. Warm golden hour lighting, luxury real estate interior or exterior, shallow depth of field, professional architectural photography style, 8K quality, photorealistic. No text, no typography, no words, no captions, no logos, no watermarks, clean image only.`;
-        const aiResp = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", { prompt, num_steps: 4, width: 1024, height: 576 });
-        const stream = (aiResp && aiResp.image) ? aiResp.image : aiResp;
-        const text = await new Response(stream).text();
-        const binaryStr = atob(text.replace(/^data:image\/\w+;base64,/, ''));
+        const aiResp = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", { prompt, steps: 4 });
+        let base64;
+        if (typeof aiResp === 'string') base64 = aiResp;
+        else if (aiResp && typeof aiResp === 'object' && typeof aiResp.image === 'string') base64 = aiResp.image;
+        else if (aiResp && aiResp.image) base64 = await new Response(aiResp.image).text();
+        else base64 = await new Response(aiResp).text();
+        const binaryStr = atob(base64.replace(/^data:image\/\w+;base64,/, ''));
         const bytes = new Uint8Array(binaryStr.length);
         for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
         await env.BLOG_IMAGES.put(filename, bytes, {
@@ -238,13 +241,14 @@ Output ONLY valid JSON, no other text:
       "Authorization": "Bearer " + apiKey
     },
     body: JSON.stringify({
-      model: "deepseek-v4-flash",
+      model: "deepseek-v4-pro",
       messages: [
         { role: "system", content: sysPrompt },
         { role: "user", content: "Write a blog post about: " + topic }
       ],
       temperature: 0.7,
-      max_tokens: 4000
+      max_tokens: 4000,
+      response_format: { type: "json_object" }
     })
   });
 
@@ -255,17 +259,24 @@ Output ONLY valid JSON, no other text:
   const data = await resp.json();
   const choice = data.choices?.[0] || {};
   const msg = choice.message || {};
-  // Try multiple possible content locations for different model versions
-  const text = msg.content || msg.reasoning_content || choice.text || '';
-  console.log('Content length:', text.length);
+  // DeepSeek V4 may put reasoning in reasoning_content and answer in content
+  const content = msg.content || '';
+  const reasoning = msg.reasoning_content || '';
+  const text = content || reasoning || choice.text || '';
+  console.log('Content length:', content.length, 'reasoning length:', reasoning.length);
 
-  // Extract JSON from response — handle markdown code blocks
-  let jsonText = text;
-  const codeMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
-  if (codeMatch) jsonText = codeMatch[1];
-  const match = jsonText.match(/\{[\s\S]*\}/);
-  if (!match) throw new Error("Could not parse JSON from AI response. Raw: " + text.substring(0, 200));
-  return JSON.parse(match[0]);
+  // Extract JSON — try content first, then reasoning, then combined
+  function extractJSON(s) {
+    if (!s) return null;
+    // Prefer markdown code block
+    const codeMatch = s.match(/```(?:json)?\s*([\s\S]*?)```/);
+    const candidate = codeMatch ? codeMatch[1] : s;
+    const m = candidate.match(/\{[\s\S]*\}/);
+    return m ? m[0] : null;
+  }
+  let jsonStr = extractJSON(content) || extractJSON(reasoning) || extractJSON(text);
+  if (!jsonStr) throw new Error("Could not parse JSON from AI response. Raw: " + text.substring(0, 300));
+  return JSON.parse(jsonStr);
 }
 
 async function generateImage(ai, bucket, topic, post) {
@@ -274,29 +285,29 @@ async function generateImage(ai, bucket, topic, post) {
 
   const inputs = {
     prompt: prompt,
-    num_steps: 4,
-    width: 1024,
-    height: 576  // 16:9 aspect ratio
+    steps: 4
   };
 
   const response = await ai.run("@cf/black-forest-labs/flux-1-schnell", inputs);
 
-  // Flux returns { image: ReadableStream<Uint8Array> } or ReadableStream directly
-  let imageStream;
-  if (response && typeof response === 'object' && response.image) {
-    // Object wrapper: { image: ReadableStream }
-    imageStream = response.image;
-  } else if (response && typeof response.pipeTo === 'function') {
-    // ReadableStream directly
-    imageStream = response;
+  // Flux returns { image: base64string } or a base64 string directly
+  let base64;
+  if (typeof response === 'string') {
+    base64 = response;
+  } else if (response && typeof response === 'object' && response.image) {
+    if (typeof response.image === 'string') {
+      base64 = response.image;
+    } else {
+      // Might still be a stream in some versions
+      const text = await new Response(response.image).text();
+      base64 = text;
+    }
   } else {
-    throw new Error("Unexpected AI response format: " + JSON.stringify(Object.keys(response || {})));
+    throw new Error("Unexpected AI response format: " + typeof response);
   }
 
-  // Read the stream as text (AI returns base64-encoded JPEG)
-  const text = await new Response(imageStream).text();
   // Decode base64 to binary
-  const binaryStr = atob(text.replace(/^data:image\/\w+;base64,/, ''));
+  const binaryStr = atob(base64.replace(/^data:image\/\w+;base64,/, ''));
   const bytes = new Uint8Array(binaryStr.length);
   for (let i = 0; i < binaryStr.length; i++) {
     bytes[i] = binaryStr.charCodeAt(i);
@@ -734,7 +745,7 @@ async function suggestTopics(apiKey) {
   const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey },
-    body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "system", content: sys }, { role: "user", content: "Suggest 10 new blog topics." }], temperature: 0.8, max_tokens: 1000 })
+    body: JSON.stringify({ model: "deepseek-v4-pro", messages: [{ role: "system", content: sys }, { role: "user", content: "Suggest 10 new blog topics." }], temperature: 0.8, max_tokens: 1000 })
   });
   const data = await resp.json();
   const text = data.choices?.[0]?.message?.content || '';
