@@ -230,9 +230,10 @@ End the "content" field with: <div class="post-cta"><h3>Ready to scale your vide
 Also produce:
 1. "faq": 3-4 question/answer pairs (common buyer questions) as [{q, a}] — each answer 1-2 sentences with a keyword.
 2. "socialSnippets": 3 short catchy captions (under 200 chars each) for Pinterest/Twitter/LinkedIn promotion.
+3. "imagePrompt": a 1-2 sentence English visual description for a blog featured image that is SPECIFIC to this article's subject (not a generic luxury home). Example: for drone → "aerial drone shot of a house"; for color grading → "a video editor adjusting color on a screen"; for speed ramping → "motion blur of a home interior walkthrough"; for client retention → "a videographer shaking hands with a real estate agent". Describe a photorealistic scene, no text/words/watermarks.
 
 Output ONLY valid JSON, no other text:
-{"title":"...","description":"120-155 char meta description...","tags":"Tag1, Tag2, Tag3","date":"${today}","readTime":"4 min read","content":"<full HTML body with H2/H3 tags ending in CTA>","faq":[{"q":"...","a":"..."}],"socialSnippets":["...","...","..."]}`;
+{"title":"...","description":"120-155 char meta description...","tags":"Tag1, Tag2, Tag3","date":"${today}","readTime":"4 min read","content":"<full HTML body with H2/H3 tags ending in CTA>","faq":[{"q":"...","a":"..."}],"socialSnippets":["...","...","..."],"imagePrompt":"..."}`;
 
   const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {
     method: "POST",
@@ -247,7 +248,7 @@ Output ONLY valid JSON, no other text:
         { role: "user", content: "Write a blog post about: " + topic }
       ],
       temperature: 0.7,
-      max_tokens: 4000,
+      max_tokens: 8000,
       response_format: { type: "json_object" }
     })
   });
@@ -279,8 +280,9 @@ Output ONLY valid JSON, no other text:
 }
 
 async function generateImage(ai, bucket, topic, post) {
-  // Build a descriptive prompt for the featured image
-  const prompt = `Cinematic wide photograph for a blog. ${topic}. Warm golden hour lighting, luxury real estate interior or exterior, shallow depth of field, professional architectural photography style, 8K quality, photorealistic. No text, no typography, no words, no captions, no logos, no watermarks, clean image only.`;
+  // Build a descriptive prompt for the featured image — use the AI's specific imagePrompt when available
+  const base = (post.imagePrompt && post.imagePrompt.length > 5) ? post.imagePrompt : `cinematic real estate video editing theme related to ${topic}`;
+  const prompt = `${base}. Professional photorealistic photography, shallow depth of field, warm cinematic lighting, high quality 8K. No text, no typography, no words, no captions, no logos, no watermarks, clean image only.`;
 
   const inputs = {
     prompt: prompt,
