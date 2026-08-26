@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-edit-agent-branding-videos-that-convert-viewers-to-cl",
+    title: "How to Edit Agent Branding Videos That Convert Viewers to Clients",
+    description: "Learn how strategic real estate video editing turns agent branding videos into client magnets. Expert tips for videographers and production teams.",
+    date: "2026-08-26",
+    readTime: "4 min read",
+    category: "real estate video editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-the-critical-differe",
     title: "Good vs. Great Real Estate Video Editing: The Critical Difference",
     description: "Good editing sells a house. Great editing sells a lifestyle. Discover how professional real estate video editing transforms property tours and boosts your brand.",
