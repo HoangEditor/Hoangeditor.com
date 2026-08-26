@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "top-5-editing-styles-for-luxury-real-estate-videos-in-2025",
+    title: "Top 5 Editing Styles for Luxury Real Estate Videos in 2025",
+    description: "Discover the top 5 luxury real estate video editing styles for 2025, from cinematic drone shots to day-to-dusk transitions, and learn how outsourcing can elevate your property tours.",
+    date: "2026-08-26",
+    readTime: "4 min read",
+    category: "luxury real estate",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-edit-agent-branding-videos-that-convert-viewers-to-cl",
     title: "How to Edit Agent Branding Videos That Convert Viewers to Clients",
     description: "Learn how strategic real estate video editing turns agent branding videos into client magnets. Expert tips for videographers and production teams.",
