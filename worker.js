@@ -263,7 +263,6 @@ Output ONLY valid JSON, no other text:
   const content = msg.content || '';
   const reasoning = msg.reasoning_content || '';
   const text = content || reasoning || choice.text || '';
-  console.log('Content length:', content.length, 'reasoning length:', reasoning.length);
 
   // Extract JSON — try content first, then reasoning, then combined
   function extractJSON(s) {
@@ -275,7 +274,7 @@ Output ONLY valid JSON, no other text:
     return m ? m[0] : null;
   }
   let jsonStr = extractJSON(content) || extractJSON(reasoning) || extractJSON(text);
-  if (!jsonStr) throw new Error("Could not parse JSON from AI response. Raw: " + text.substring(0, 300));
+  if (!jsonStr) throw new Error("Could not parse JSON. contentLen=" + content.length + " reasoningLen=" + reasoning.length + " Raw: " + text.substring(0, 300));
   return JSON.parse(jsonStr);
 }
 
