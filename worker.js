@@ -567,6 +567,16 @@ function findRelatedPosts(currentTopic, allPosts, limit) {
     .slice(0, limit);
 }
 
+function categorizePost(title, tags) {
+  const t = ((title || '') + ' ' + (tags || '')).toLowerCase();
+  if (t.includes('drone') || t.includes('aerial')) return 'Drone & Aerial';
+  if (t.includes('outsourc')) return 'Outsourcing';
+  if (/seo|social media|trends|ai tool|branding|stand out|youtube|instagram|tiktok|google/.test(t)) return 'Marketing & SEO';
+  if (/scale|6-figure|business|retention|pric|profit|turnaround|solo shooter|production company|growth/.test(t)) return 'Business Growth';
+  if (/lighting|photography/.test(t)) return 'Filming & Production';
+  return 'Video Editing';
+}
+
 async function updatePostsData(token, user, repo, post) {
   const slug = post.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 60);
   const entry = `  {
@@ -575,7 +585,7 @@ async function updatePostsData(token, user, repo, post) {
     description: "${(post.description || '').replace(/"/g, '\\"')}",
     date: "${post.date}",
     readTime: "${post.readTime || '4 min read'}",
-    category: "${(post.tags || '').split(',')[0].trim() || 'General'}",
+    category: "${categorizePost(post.title, post.tags)}",
     icon: "fa-file-lines"
   },\n`;
 

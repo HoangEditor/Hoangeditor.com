@@ -1168,6 +1168,33 @@ body { -ms-overflow-style: none; scrollbar-width: none; }
   letter-spacing: 0.04em;
 }
 
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.social-link:hover {
+  color: var(--gold-400);
+  border-color: var(--gold-400);
+  transform: translateY(-2px);
+}
+
 /* ═══════════════════════════════════════════════════════════════
    ANIMATION UTILITIES
    ═══════════════════════════════════════════════════════════════ */

@@ -9,7 +9,7 @@ var BLOG_POSTS = [
     description: "Discover the top 5 luxury real estate video editing styles for 2025, from cinematic drone shots to day-to-dusk transitions, and learn how outsourcing can elevate your property tours.",
     date: "2026-08-26",
     readTime: "4 min read",
-    category: "luxury real estate",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -18,7 +18,7 @@ var BLOG_POSTS = [
     description: "Learn how strategic real estate video editing turns agent branding videos into client magnets. Expert tips for videographers and production teams.",
     date: "2026-08-26",
     readTime: "4 min read",
-    category: "real estate video editing",
+    category: "Marketing & SEO",
     icon: "fa-file-lines"
   },
   {
@@ -27,7 +27,7 @@ var BLOG_POSTS = [
     description: "Good editing sells a house. Great editing sells a lifestyle. Discover how professional real estate video editing transforms property tours and boosts your brand.",
     date: "2026-08-19",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -36,7 +36,7 @@ var BLOG_POSTS = [
     description: "Discover how to speed up real estate video turnaround while keeping top quality. Explore editing workflows, outsourcing tips, and production team strategies.",
     date: "2026-08-18",
     readTime: "4 min read",
-    category: "Real Estate Video",
+    category: "Business Growth",
     icon: "fa-file-lines"
   },
   {
@@ -45,7 +45,7 @@ var BLOG_POSTS = [
     description: "Discover the difference between good and great real estate video editing. Learn how storytelling, pacing, and post-production elevate property tours.",
     date: "2026-08-18",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -54,7 +54,7 @@ var BLOG_POSTS = [
     description: "Learn how to choose the right voiceover and music for real estate video edits. Elevate property tours with these video post-production best practices.",
     date: "2026-08-17",
     readTime: "4 min read",
-    category: "Voiceover",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -63,7 +63,7 @@ var BLOG_POSTS = [
     description: "Learn cinematic real estate video editing techniques that sell properties faster. Discover pacing, color, transitions, and why outsourced post-production wins.",
     date: "2026-08-17",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -72,7 +72,7 @@ var BLOG_POSTS = [
     description: "Learn how solo real estate videographers can scale into a full production company by outsourcing video post-production and building a reliable team.",
     date: "2026-08-17",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Business Growth",
     icon: "fa-file-lines"
   },
   {
@@ -81,7 +81,7 @@ var BLOG_POSTS = [
     description: "Learn the basics of color grading for real estate footage. Make property tours look natural and inviting with these simple steps.",
     date: "2026-08-16",
     readTime: "4 min read",
-    category: "Color Grading",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -90,7 +90,7 @@ var BLOG_POSTS = [
     description: "Learn how to build a consistent visual style across all your real estate videos with color grading, presets, and a reliable outsourced video editing workflow.",
     date: "2026-08-15",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -99,7 +99,7 @@ var BLOG_POSTS = [
     description: "Learn how speed ramping can transform property tour videos into cinematic experiences. Discover techniques, pitfalls, and when to outsource real estate video editing.",
     date: "2026-08-15",
     readTime: "4 min read",
-    category: "Speed Ramping",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -108,7 +108,7 @@ var BLOG_POSTS = [
     description: "Discover top AI tools for real estate video editing, from automated property tours to smart post-production. Learn how to boost your workflow today.",
     date: "2026-08-14",
     readTime: "4 min read",
-    category: "AI video tools",
+    category: "Marketing & SEO",
     icon: "fa-file-lines"
   },
   {
@@ -117,7 +117,7 @@ var BLOG_POSTS = [
     description: "Learn how to transition from real estate photography to videography. Upgrade your gear, master motion, and leverage real estate video editing to grow your business.",
     date: "2026-08-13",
     readTime: "4 min read",
-    category: "Real Estate Videography",
+    category: "Filming & Production",
     icon: "fa-file-lines"
   },
   {
@@ -126,7 +126,7 @@ var BLOG_POSTS = [
     description: "Skip the overhead of hiring an in-house editor. Learn how outsourced video post-production can help you scale to six figures faster.",
     date: "2026-08-12",
     readTime: "4 min read",
-    category: "Real Estate Video Business",
+    category: "Business Growth",
     icon: "fa-file-lines"
   },
   {
@@ -135,7 +135,7 @@ var BLOG_POSTS = [
     description: "Learn how speed ramping can transform your property tour videos. Discover techniques, shooting tips, and why outsourced editing benefits your production team.",
     date: "2026-08-11",
     readTime: "4 min read",
-    category: "Speed Ramping",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -144,7 +144,7 @@ var BLOG_POSTS = [
     description: "Learn how to create shot lists that streamline real estate video editing. Boost efficiency for your property tour projects and impress your clients.",
     date: "2026-08-10",
     readTime: "4 min read",
-    category: "Shot List",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -153,7 +153,7 @@ var BLOG_POSTS = [
     description: "Learn how real estate videographers can retain clients with quality, speed, and outsourced video editing. Build a loyal client base today.",
     date: "2026-08-09",
     readTime: "4 min read",
-    category: "Client Retention",
+    category: "Business Growth",
     icon: "fa-file-lines"
   },
   {
@@ -162,7 +162,7 @@ var BLOG_POSTS = [
     description: "Learn how offering fast real estate video editing turnaround times can help videographers win more clients, build trust, and grow their production business.",
     date: "2026-08-08",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Business Growth",
     icon: "fa-file-lines"
   },
   {
@@ -171,7 +171,7 @@ var BLOG_POSTS = [
     description: "Discover 5 proven ways to make your property tours unforgettable and attract more clients. Learn how real estate video editing can transform your work.",
     date: "2026-08-08",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Marketing & SEO",
     icon: "fa-file-lines"
   },
   {
@@ -180,7 +180,7 @@ var BLOG_POSTS = [
     description: "Avoid these 5 real estate video editing mistakes that cheapen property tours. Learn how professional video post-production elevates listings.",
     date: "2026-08-07",
     readTime: "4 min read",
-    category: "real estate video editing",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -189,7 +189,7 @@ var BLOG_POSTS = [
     description: "Discover the real estate video trends shaping 2027—from AI editing to interactive tours—and how to stay ahead with the right video editing partner.",
     date: "2026-08-07",
     readTime: "4 min read",
-    category: "Real Estate Video Trends",
+    category: "Marketing & SEO",
     icon: "fa-file-lines"
   },
   {
@@ -198,7 +198,7 @@ var BLOG_POSTS = [
     description: "Want property tours that actually get views? These real estate video editing tips will help you create scroll-stopping social media content.",
     date: "2026-08-06",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Marketing & SEO",
     icon: "fa-file-lines"
   },
   {
@@ -207,7 +207,7 @@ var BLOG_POSTS = [
     description: "Learn how to scale your real estate video business to six figures by outsourcing editing. Focus on shooting and winning clients while a video editing partner handles post-production.",
     date: "2026-08-05",
     readTime: "4 min read",
-    category: "Real Estate Video Business",
+    category: "Business Growth",
     icon: "fa-file-lines"
   },
   {
@@ -216,7 +216,7 @@ var BLOG_POSTS = [
     description: "Master real estate video audio post-production: cleanup, leveling, mixing, and sound design tips. Learn when to outsource and elevate your property tours.",
     date: "2026-08-03",
     readTime: "4 min read",
-    category: "real estate video editing",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -225,7 +225,7 @@ var BLOG_POSTS = [
     description: "Discover why outsourcing real estate video editing is the smartest move for your production team. Save time, scale faster, and boost profits with expert video post-production.",
     date: "2026-08-03",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Outsourcing",
     icon: "fa-file-lines"
   },
   {
@@ -234,7 +234,7 @@ var BLOG_POSTS = [
     description: "Ready to add video to your real estate services? Learn how to transition from photography to videography with gear, workflow, and editing tips.",
     date: "2026-08-02",
     readTime: "4 min read",
-    category: "Real Estate Photography",
+    category: "Filming & Production",
     icon: "fa-file-lines"
   },
   {
@@ -243,7 +243,7 @@ var BLOG_POSTS = [
     description: "Learn how to optimize property tour videos for YouTube and Google. Discover SEO strategies for real estate videographers and the value of outsourcing video editing.",
     date: "2026-08-01",
     readTime: "4 min read",
-    category: "Real Estate Video SEO",
+    category: "Marketing & SEO",
     icon: "fa-file-lines"
   },
   {
@@ -252,7 +252,7 @@ var BLOG_POSTS = [
     description: "Discover how outsourcing your real estate video editing can help you scale your video business, deliver faster property tours, and free up time for shooting.",
     date: "2026-08-01",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Outsourcing",
     icon: "fa-file-lines"
   },
   {
@@ -261,7 +261,7 @@ var BLOG_POSTS = [
     description: "Learn how to use speed ramping to create cinematic property walkthroughs. Discover shooting tips & editing tricks for real estate video editing success.",
     date: "2026-07-31",
     readTime: "4 min read",
-    category: "Speed Ramping",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -270,7 +270,7 @@ var BLOG_POSTS = [
     description: "Learn how to price real estate video services for higher profit. Explore pricing models, add-ons, and outsourced video editing to boost your margins.",
     date: "2026-07-31",
     readTime: "4 min read",
-    category: "Real Estate Video Pricing",
+    category: "Business Growth",
     icon: "fa-file-lines"
   },
   {
@@ -279,7 +279,7 @@ var BLOG_POSTS = [
     description: "Learn how to select the perfect soundtrack for luxury homes, family properties, commercial spaces, and more. Tips for real estate videographers and outsourced editing teams.",
     date: "2026-07-30",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -288,7 +288,7 @@ var BLOG_POSTS = [
     description: "Master color grading for real estate videos with this beginner's guide. Learn to enhance property tours and save time with professional outsourced video editing.",
     date: "2026-07-30",
     readTime: "4 min read",
-    category: "Color Grading",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -297,7 +297,7 @@ var BLOG_POSTS = [
     description: "Learn how to scale from solo real estate videographer to a full production team. Tips on outsourcing video editing, building systems, and leveraging a video editing partner.",
     date: "2026-07-29",
     readTime: "5 min read",
-    category: "Real Estate Video Editing",
+    category: "Business Growth",
     icon: "fa-file-lines"
   },
   {
@@ -306,7 +306,7 @@ var BLOG_POSTS = [
     description: "Discover why leading real estate videographers are outsourcing post-production in 2026 to scale their business, improve turnaround, and deliver polished property tours.",
     date: "2026-07-29",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Outsourcing",
     icon: "fa-file-lines"
   },
   {
@@ -315,7 +315,7 @@ var BLOG_POSTS = [
     description: "Learn how to price standard property tours and luxury listing videos. Discover tiered packages, editing costs, and how outsourced video editing boosts margins.",
     date: "2026-07-28",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Business Growth",
     icon: "fa-file-lines"
   },
   {
@@ -324,7 +324,7 @@ var BLOG_POSTS = [
     description: "Learn how to edit vertical real estate videos for Instagram and TikTok. Expert tips from a video editing partner to boost views, leads, and property tours.",
     date: "2026-07-28",
     readTime: "4 min read",
-    category: "Real estate video editing",
+    category: "Marketing & SEO",
     icon: "fa-file-lines"
   },
   {
@@ -333,7 +333,7 @@ var BLOG_POSTS = [
     description: "Master lighting for real estate videography. Compare natural vs artificial light, get practical tips, and learn how post-production can save your footage.",
     date: "2026-07-27",
     readTime: "5 min read",
-    category: "Real Estate Video Editing",
+    category: "Filming & Production",
     icon: "fa-file-lines"
   },
   {
@@ -342,7 +342,7 @@ var BLOG_POSTS = [
     description: "Learn how real estate videographers can retain clients by leveraging real estate video editing, outsourced video editing, and a reliable video editing partner. Boost your production team’s success.",
     date: "2026-07-27",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Business Growth",
     icon: "fa-file-lines"
   },
   {
@@ -351,7 +351,7 @@ var BLOG_POSTS = [
     description: "Discover the psychology behind property video that makes listings sell faster. Learn how real estate video editing and storytelling impact buyer decisions.",
     date: "2026-07-27",
     readTime: "4 min read",
-    category: "Real Estate Video Editing",
+    category: "Video Editing",
     icon: "fa-file-lines"
   },
   {
@@ -360,7 +360,7 @@ var BLOG_POSTS = [
     description: "Learn essential color grading techniques for real estate video editing. This guide helps videographers and property tour editors achieve stunning, consistent results with outsourced editing.",
     date: "2026-07-27",
     readTime: "4 min read",
-    category: "Editing",
+    category: "Video Editing",
     icon: "fa-palette"
   },
   {
@@ -369,7 +369,7 @@ var BLOG_POSTS = [
     description: "Learn how to use speed ramping to transform your real estate walkthroughs into cinematic masterpieces. Tips, techniques, and tools included.",
     date: "2026-07-23",
     readTime: "4 min read",
-    category: "Editing",
+    category: "Video Editing",
     icon: "fa-film"
   },
   {
@@ -378,7 +378,7 @@ var BLOG_POSTS = [
     description: "Master lighting for real estate videography with expert tips. Learn to use natural light, artificial setups, and HDR to make properties shine.",
     date: "2026-07-23",
     readTime: "4 min read",
-    category: "Filming",
+    category: "Filming & Production",
     icon: "fa-lightbulb"
   },
   {
@@ -387,7 +387,7 @@ var BLOG_POSTS = [
     description: "Learn the step-by-step strategy to scale your real estate video editing business to six figures. From niching down to client retention, this blueprint covers it all.",
     date: "2026-07-23",
     readTime: "4 min read",
-    category: "Business",
+    category: "Business Growth",
     icon: "fa-building-columns"
   },
   {
@@ -396,7 +396,7 @@ var BLOG_POSTS = [
     description: "Learn proven strategies to keep real estate agents coming back to you for video content. From communication hacks to value-add services, this guide helps videographers build lasting client relationships.",
     date: "2026-07-23",
     readTime: "4 min read",
-    category: "Business",
+    category: "Business Growth",
     icon: "fa-handshake"
   },
   {
@@ -414,7 +414,7 @@ var BLOG_POSTS = [
     description: "Learn how to price your real estate video services with confidence. This guide covers pricing models, factors to consider, and tips for maximizing profit while delivering quality property tours.",
     date: "2026-07-23",
     readTime: "4 min read",
-    category: "Guide",
+    category: "Business Growth",
     icon: "fa-tag"
   },
   {
@@ -423,7 +423,7 @@ var BLOG_POSTS = [
     description: "Discover the most common editing mistakes in real estate videos and learn how to avoid them to create stunning property listings that sell faster.",
     date: "2026-07-23",
     readTime: "4 min read",
-    category: "Editing",
+    category: "Video Editing",
     icon: "fa-wand-magic-sparkles"
   },
   {
@@ -432,7 +432,7 @@ var BLOG_POSTS = [
     description: "Discover the top 10 drone shots for luxury real estate listings that captivate high-end buyers. Learn how aerial cinematography elevates property value and drives faster sales.",
     date: "2026-07-23",
     readTime: "4 min read",
-    category: "Drone",
+    category: "Drone & Aerial",
     icon: "fa-drone"
   },
   {
@@ -441,7 +441,7 @@ var BLOG_POSTS = [
     description: "Learn the framework top real estate videographers use to scale production without sacrificing quality or sanity.",
     date: "2026-07-15",
     readTime: "4 min read",
-    category: "Scaling",
+    category: "Business Growth",
     icon: "fa-chart-line"
   },
   {
@@ -450,7 +450,7 @@ var BLOG_POSTS = [
     description: "Everything you need to know before handing off your footage to an editing partner — workflows, quality standards, and what to expect.",
     date: "2026-07-08",
     readTime: "4 min read",
-    category: "Guide",
+    category: "Outsourcing",
     icon: "fa-file-lines"
   },
   {
@@ -459,7 +459,7 @@ var BLOG_POSTS = [
     description: "The right color grade can make a property feel like a million dollars. These five trends are what top luxury videographers are using right now.",
     date: "2026-06-28",
     readTime: "3 min read",
-    category: "Editing",
+    category: "Marketing & SEO",
     icon: "fa-palette"
   }
 ];
