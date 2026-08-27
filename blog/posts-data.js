@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-deliver-raw-real-estate-footage-to-an-editor-a-checkl",
+    title: "How to Deliver Raw Real Estate Footage to an Editor: A Checklist for Videographers",
+    description: "Streamline your outsourced video editing workflow with this practical checklist. Learn how to organize, transfer, and communicate raw property tour footage effectively.",
+    date: "2026-08-27",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-edit-twilight-and-evening-property-tours-for-impact",
     title: "How to Edit Twilight and Evening Property Tours for Impact",
     description: "Learn pro editing techniques for twilight property tours—color grading, exposure balancing, and pacing—to create cinematic listings that sell.",
