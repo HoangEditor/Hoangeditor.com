@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-edit-twilight-and-evening-property-tours-for-impact",
+    title: "How to Edit Twilight and Evening Property Tours for Impact",
+    description: "Learn pro editing techniques for twilight property tours—color grading, exposure balancing, and pacing—to create cinematic listings that sell.",
+    date: "2026-08-27",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "top-5-editing-styles-for-luxury-real-estate-videos-in-2025",
     title: "Top 5 Editing Styles for Luxury Real Estate Videos in 2025",
     description: "Discover the top 5 luxury real estate video editing styles for 2025, from cinematic drone shots to day-to-dusk transitions, and learn how outsourcing can elevate your property tours.",
