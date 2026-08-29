@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-edit-real-estate-videos-for-different-platforms-youtu",
+    title: "How to Edit Real Estate Videos for Different Platforms (YouTube, Instagram, Realtor Sites)",
+    description: "Learn platform-specific real estate video editing for YouTube, Instagram, and realtor sites. Optimize video post-production to boost engagement and save time.",
+    date: "2026-08-29",
+    readTime: "5 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "essential-equipment-for-real-estate-videographers-2026-must-",
     title: "Essential Equipment for Real Estate Videographers 2026: Must-Have Gear for Stunning Property Tours",
     description: "Discover the must-have cameras, gimbals, lighting, and audio gear for real estate videographers in 2026—plus how to streamline post-production.",
