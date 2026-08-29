@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "essential-equipment-for-real-estate-videographers-2026-must-",
+    title: "Essential Equipment for Real Estate Videographers 2026: Must-Have Gear for Stunning Property Tours",
+    description: "Discover the must-have cameras, gimbals, lighting, and audio gear for real estate videographers in 2026—plus how to streamline post-production.",
+    date: "2026-08-29",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "difference-between-good-and-great-real-estate-video-editing-",
     title: "Difference Between Good and Great Real Estate Video Editing: What Separates the Pros",
     description: "Discover what separates decent edits from stunning property tours. Learn how a reliable video editing partner transforms your real estate videography.",
