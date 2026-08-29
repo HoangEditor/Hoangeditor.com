@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "difference-between-good-and-great-real-estate-video-editing",
+    title: "Difference Between Good and Great Real Estate Video Editing",
+    description: "Discover what separates good from great real estate video editing—cinematic pacing, storytelling, and detail—and why outsourcing elevates your property tours.",
+    date: "2026-08-29",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-edit-real-estate-videos-for-different-platforms-youtu",
     title: "How to Edit Real Estate Videos for Different Platforms (YouTube, Instagram, Realtor Sites)",
     description: "Learn platform-specific real estate video editing for YouTube, Instagram, and realtor sites. Optimize video post-production to boost engagement and save time.",
