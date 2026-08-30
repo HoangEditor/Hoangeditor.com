@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-video-editing-software-premiere-pro-vs-davinci-r",
+    title: "Real Estate Video Editing Software: Premiere Pro vs. DaVinci Resolve",
+    description: "Discover the pros and cons of Adobe Premiere Pro and DaVinci Resolve for real estate video editing. Learn which software fits your property tour workflow and when to outsource video post-production.",
+    date: "2026-08-30",
+    readTime: "5 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-complete-guide-to-real-estate-video-editing-ultimate-res",
     title: "The Complete Guide to Real Estate Video Editing (Ultimate Resource)",
     description: "Master real estate video editing with our ultimate guide. Learn workflows, tools, and outsourcing strategies for property tours that win listings.",
