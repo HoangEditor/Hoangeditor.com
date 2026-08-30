@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-complete-guide-to-real-estate-video-editing-ultimate-res",
+    title: "The Complete Guide to Real Estate Video Editing (Ultimate Resource)",
+    description: "Master real estate video editing with our ultimate guide. Learn workflows, tools, and outsourcing strategies for property tours that win listings.",
+    date: "2026-08-30",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "difference-between-good-and-great-real-estate-video-editing",
     title: "Difference Between Good and Great Real Estate Video Editing",
     description: "Discover what separates good from great real estate video editing—cinematic pacing, storytelling, and detail—and why outsourcing elevates your property tours.",
