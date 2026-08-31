@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-choose-the-right-real-estate-video-editing-service-fo",
+    title: "How to Choose the Right Real Estate Video Editing Service for Your Production Team",
+    description: "Learn how to choose the right real estate video editing service for your production team. Tips on experience, workflow, turnaround, and quality.",
+    date: "2026-08-31",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-video-editing-pricing-what-should-videographers-",
     title: "Real Estate Video Editing Pricing: What Should Videographers Expect to Pay in 2026?",
     description: "Discover 2026 real estate video editing pricing: flat rates, hourly, and factors that affect cost. Learn what videographers should pay for outsourced property tours.",
