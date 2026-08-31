@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-video-editing-pricing-what-should-videographers-",
+    title: "Real Estate Video Editing Pricing: What Should Videographers Expect to Pay in 2026?",
+    description: "Discover 2026 real estate video editing pricing: flat rates, hourly, and factors that affect cost. Learn what videographers should pay for outsourced property tours.",
+    date: "2026-08-31",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-role-of-sound-design-in-luxury-real-estate-video-editing",
     title: "The Role of Sound Design in Luxury Real Estate Video Editing: Why Audio Makes the Difference",
     description: "Discover how professional sound design elevates luxury property tours and why real estate videographers should prioritize audio in video post-production.",
