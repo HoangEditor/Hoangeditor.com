@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-role-of-sound-design-in-luxury-real-estate-video-editing",
+    title: "The Role of Sound Design in Luxury Real Estate Video Editing: Why Audio Makes the Difference",
+    description: "Discover how professional sound design elevates luxury property tours and why real estate videographers should prioritize audio in video post-production.",
+    date: "2026-08-31",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-video-editing-software-premiere-pro-vs-davinci-r",
     title: "Real Estate Video Editing Software: Premiere Pro vs. DaVinci Resolve",
     description: "Discover the pros and cons of Adobe Premiere Pro and DaVinci Resolve for real estate video editing. Learn which software fits your property tour workflow and when to outsource video post-production.",
