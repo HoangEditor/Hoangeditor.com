@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-the-real-difference-in-real-estate-video-editi",
+    title: "Good vs. Great: The Real Difference in Real Estate Video Editing",
+    description: "Discover what separates good from great real estate video editing—pacing, color, sound design, and storytelling. Learn how outsourcing can elevate your property tours.",
+    date: "2026-09-01",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-edit-real-estate-videos-with-drone-footage-a-step-by-",
     title: "How to Edit Real Estate Videos with Drone Footage: A Step-by-Step Workflow",
     description: "Learn a proven drone footage editing workflow for real estate videographers. From import to final export, master video post-production for property tours.",
