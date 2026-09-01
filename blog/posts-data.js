@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-edit-real-estate-videos-with-drone-footage-a-step-by-",
+    title: "How to Edit Real Estate Videos with Drone Footage: A Step-by-Step Workflow",
+    description: "Learn a proven drone footage editing workflow for real estate videographers. From import to final export, master video post-production for property tours.",
+    date: "2026-09-01",
+    readTime: "5 min read",
+    category: "Drone & Aerial",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-what-separates-average-real-estate-video-editi",
     title: "Good vs. Great: What Separates Average Real Estate Video Editing from Exceptional Work",
     description: "Discover the subtle but critical differences between good and great real estate video editing. Learn how pacing, sound design, color grading, and storytelling elevate property tours.",
