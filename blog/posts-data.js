@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "common-real-estate-video-editing-mistakes-that-hurt-your-lis",
+    title: "Common Real Estate Video Editing Mistakes That Hurt Your Listing's First Impression",
+    description: "Avoid these 7 real estate video editing mistakes that make property tours look unprofessional. Learn how outsourced video editing fixes them fast.",
+    date: "2026-09-03",
+    readTime: "5 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-difference-between-good-and-great-real-estate-video-edit",
     title: "The Difference Between Good and Great Real Estate Video Editing",
     description: "See the key elements that separate good from great real estate video editing: storytelling, pacing, color, sound, and the right outsourced partner.",
