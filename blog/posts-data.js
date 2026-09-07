@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-edit-fast-paced-real-estate-videos-that-keep-buyers-w",
+    title: "How to Edit Fast-Paced Real Estate Videos That Keep Buyers Watching",
+    description: "Learn how to edit fast-paced real estate videos that capture buyer attention. Essential techniques for real estate videographers and production teams to create engaging property tours.",
+    date: "2026-09-07",
+    readTime: "5 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-what-sets-the-best-a",
     title: "Good vs. Great Real Estate Video Editing: What Sets the Best Apart",
     description: "Learn the key differences between good and great real estate video editing, and how outsourcing can elevate your property tours. 4 min read.",
