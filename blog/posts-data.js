@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-video-editing-for-twilight-shots-enhancing-mood-",
+    title: "Real Estate Video Editing for Twilight Shots: Enhancing Mood Without Overexposing",
+    description: "Master twilight property tours with professional real estate video editing. Learn techniques to balance exposure, enhance mood, and avoid overexposure in your real estate videography.",
+    date: "2026-09-07",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-edit-fast-paced-real-estate-videos-that-keep-buyers-w",
     title: "How to Edit Fast-Paced Real Estate Videos That Keep Buyers Watching",
     description: "Learn how to edit fast-paced real estate videos that capture buyer attention. Essential techniques for real estate videographers and production teams to create engaging property tours.",
