@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "virtual-staging-and-text-overlays-in-real-estate-video-editi",
+    title: "Virtual Staging and Text Overlays in Real Estate Video Editing: Do's and Don'ts",
+    description: "Learn the do's and don'ts of using virtual staging and text overlays in real estate video editing. Boost property tours with professional video post-production.",
+    date: "2026-09-08",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "vertical-vs-horizontal-real-estate-video-editing-which-forma",
     title: "Vertical vs Horizontal Real Estate Video Editing: Which Format Wins for Social Media?",
     description: "Discover the pros and cons of vertical vs horizontal real estate video editing for social media. Learn how outsourced video editing can help you deliver both formats efficiently.",
