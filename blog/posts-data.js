@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "vertical-vs-horizontal-real-estate-video-editing-which-forma",
+    title: "Vertical vs Horizontal Real Estate Video Editing: Which Format Wins for Social Media?",
+    description: "Discover the pros and cons of vertical vs horizontal real estate video editing for social media. Learn how outsourced video editing can help you deliver both formats efficiently.",
+    date: "2026-09-08",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-best-export-settings-for-real-estate-videos-on-youtube-i",
     title: "The Best Export Settings for Real Estate Videos on YouTube, Instagram, and MLS",
     description: "Learn the optimal export settings for real estate videos on YouTube, Instagram, and MLS. Avoid rejected uploads and poor quality with our expert guide.",
