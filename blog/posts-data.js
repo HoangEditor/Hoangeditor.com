@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-best-export-settings-for-real-estate-videos-on-youtube-i",
+    title: "The Best Export Settings for Real Estate Videos on YouTube, Instagram, and MLS",
+    description: "Learn the optimal export settings for real estate videos on YouTube, Instagram, and MLS. Avoid rejected uploads and poor quality with our expert guide.",
+    date: "2026-09-08",
+    readTime: "5 min read",
+    category: "Marketing & SEO",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-video-editing-for-twilight-shots-enhancing-mood-",
     title: "Real Estate Video Editing for Twilight Shots: Enhancing Mood Without Overexposing",
     description: "Master twilight property tours with professional real estate video editing. Learn techniques to balance exposure, enhance mood, and avoid overexposure in your real estate videography.",
