@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-thin-line-good-vs-great-real-estate-video-editing",
+    title: "The Thin Line: Good vs. Great Real Estate Video Editing",
+    description: "Discover what separates good from great real estate video editing. Learn how outsourced video editing can elevate your property tours and grow your business.",
+    date: "2026-09-09",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "virtual-staging-and-text-overlays-in-real-estate-video-editi",
     title: "Virtual Staging and Text Overlays in Real Estate Video Editing: Do's and Don'ts",
     description: "Learn the do's and don'ts of using virtual staging and text overlays in real estate video editing. Boost property tours with professional video post-production.",
