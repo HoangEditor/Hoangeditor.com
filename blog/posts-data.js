@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "editing-drone-footage-for-real-estate-videos-seamless-integr",
+    title: "Editing Drone Footage for Real Estate Videos: Seamless Integration",
+    description: "Learn how professional editing integrates drone footage seamlessly into real estate videos. Outsource to Hoang Editor for polished property tours.",
+    date: "2026-09-14",
+    readTime: "4 min read",
+    category: "Drone & Aerial",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-what-separates-profe",
     title: "Good vs. Great Real Estate Video Editing: What Separates Professionals",
     description: "Discover the key differences between good and great real estate video editing—from color grading to pacing—and how to elevate your property tours.",
