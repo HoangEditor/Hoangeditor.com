@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "automate-real-estate-video-editing-keyboard-shortcuts-that-s",
+    title: "Automate Real Estate Video Editing: Keyboard Shortcuts That Save Hours",
+    description: "Speed up real estate video editing with keyboard shortcuts. Automate repetitive post-production tasks for property tours and grow your video business.",
+    date: "2026-09-14",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "editing-drone-footage-for-real-estate-videos-seamless-integr",
     title: "Editing Drone Footage for Real Estate Videos: Seamless Integration",
     description: "Learn how professional editing integrates drone footage seamlessly into real estate videos. Outsource to Hoang Editor for polished property tours.",
