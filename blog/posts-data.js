@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-real-estate-video-editing-the-difference-that-",
+    title: "Good vs. Great Real Estate Video Editing: The Difference That Sells",
+    description: "Discover what separates a clean edit from a cinematic property tour that commands top dollar. Learn how great real estate video editing transforms listings.",
+    date: "2026-09-14",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "automate-real-estate-video-editing-keyboard-shortcuts-that-s",
     title: "Automate Real Estate Video Editing: Keyboard Shortcuts That Save Hours",
     description: "Speed up real estate video editing with keyboard shortcuts. Automate repetitive post-production tasks for property tours and grow your video business.",
