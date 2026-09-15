@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "creating-high-impact-social-media-teasers-from-full-real-est",
+    title: "Creating High-Impact Social Media Teasers from Full Real Estate Videos",
+    description: "Learn how to turn full property tours into scroll-stopping social media teasers. Tips for real estate videographers on editing, pacing, and outsourcing.",
+    date: "2026-09-15",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-the-difference-that-",
     title: "Good vs. Great Real Estate Video Editing: The Difference That Sells",
     description: "Discover what separates a clean edit from a cinematic property tour that commands top dollar. Learn how great real estate video editing transforms listings.",
