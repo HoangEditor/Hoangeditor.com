@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "a-complete-pre-delivery-checklist-for-real-estate-video-edit",
+    title: "A Complete Pre-Delivery Checklist for Real Estate Video Editors",
+    description: "Avoid costly mistakes and deliver flawless property tours. This pre-delivery checklist covers technical quality, content accuracy, client requirements, and final export for real estate video editors.",
+    date: "2026-09-15",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "fixing-low-light-real-estate-footage-in-post-production-a-st",
     title: "Fixing Low-Light Real Estate Footage in Post-Production: A Step-by-Step Guide",
     description: "Dark property tour footage? Learn step-by-step video post-production techniques to rescue low-light real estate videos and when to outsource editing.",
