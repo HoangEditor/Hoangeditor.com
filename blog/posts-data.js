@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "fixing-low-light-real-estate-footage-in-post-production-a-st",
+    title: "Fixing Low-Light Real Estate Footage in Post-Production: A Step-by-Step Guide",
+    description: "Dark property tour footage? Learn step-by-step video post-production techniques to rescue low-light real estate videos and when to outsource editing.",
+    date: "2026-09-15",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "creating-high-impact-social-media-teasers-from-full-real-est",
     title: "Creating High-Impact Social Media Teasers from Full Real Estate Videos",
     description: "Learn how to turn full property tours into scroll-stopping social media teasers. Tips for real estate videographers on editing, pacing, and outsourcing.",
