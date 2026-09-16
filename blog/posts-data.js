@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-real-estate-video-editing-what-separates-top-p",
+    title: "Good vs. Great Real Estate Video Editing: What Separates Top Property Tours",
+    description: "Good editing makes a listing presentable. Great editing sells the lifestyle. Learn the subtle differences that separate top real estate video editing.",
+    date: "2026-09-16",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "a-complete-pre-delivery-checklist-for-real-estate-video-edit",
     title: "A Complete Pre-Delivery Checklist for Real Estate Video Editors",
     description: "Avoid costly mistakes and deliver flawless property tours. This pre-delivery checklist covers technical quality, content accuracy, client requirements, and final export for real estate video editors.",
