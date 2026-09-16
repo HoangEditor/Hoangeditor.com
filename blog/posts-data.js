@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "mastering-keyboard-shortcuts-for-faster-real-estate-video-ed",
+    title: "Mastering Keyboard Shortcuts for Faster Real Estate Video Editing",
+    description: "Speed up your real estate video editing with essential keyboard shortcuts. Learn how to automate property tour workflows and know when to outsource video post-production.",
+    date: "2026-09-16",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-what-separates-top-p",
     title: "Good vs. Great Real Estate Video Editing: What Separates Top Property Tours",
     description: "Good editing makes a listing presentable. Great editing sells the lifestyle. Learn the subtle differences that separate top real estate video editing.",
