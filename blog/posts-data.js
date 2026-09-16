@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "enhancing-real-estate-videos-with-virtual-staging-editing-ti",
+    title: "Enhancing Real Estate Videos with Virtual Staging: Editing Tips and Tricks",
+    description: "Learn virtual staging techniques for real estate video editing. Tips for property tours, post-production workflows, and outsourcing to a video editing partner.",
+    date: "2026-09-16",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "mastering-keyboard-shortcuts-for-faster-real-estate-video-ed",
     title: "Mastering Keyboard Shortcuts for Faster Real Estate Video Editing",
     description: "Speed up your real estate video editing with essential keyboard shortcuts. Learn how to automate property tour workflows and know when to outsource video post-production.",
