@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-best-transitions-for-real-estate-video-walkthroughs-avoi",
+    title: "The Best Transitions for Real Estate Video Walkthroughs (Avoid These 3)",
+    description: "Discover the best transitions for real estate video walkthroughs and learn which 3 to avoid. Improve your property tours with professional video post-production.",
+    date: "2026-09-17",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "enhancing-real-estate-videos-with-virtual-staging-editing-ti",
     title: "Enhancing Real Estate Videos with Virtual Staging: Editing Tips and Tricks",
     description: "Learn virtual staging techniques for real estate video editing. Tips for property tours, post-production workflows, and outsourcing to a video editing partner.",
