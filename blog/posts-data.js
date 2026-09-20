@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-video-editing-for-twilight-shoots-enhancing-mood",
+    title: "Real Estate Video Editing for Twilight Shoots: Enhancing Moody Exteriors",
+    description: "Learn how professional video post-production transforms twilight real estate footage into stunning property tours. Discover key editing techniques and why outsourcing twilight video editing is a smart move for videographers.",
+    date: "2026-09-20",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-best-transitions-for-real-estate-video-walkthroughs-avoi",
     title: "The Best Transitions for Real Estate Video Walkthroughs (Avoid These 3)",
     description: "Discover the best transitions for real estate video walkthroughs and learn which 3 to avoid. Improve your property tours with professional video post-production.",
