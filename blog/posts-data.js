@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "mastering-text-overlays-and-lower-thirds-in-real-estate-vide",
+    title: "Mastering Text Overlays and Lower Thirds in Real Estate Video Marketing",
+    description: "Learn how text overlays and lower thirds elevate property tours, convey key details, and strengthen brand identity. Discover best practices for real estate video editing.",
+    date: "2026-09-20",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-video-editing-for-twilight-shoots-enhancing-mood",
     title: "Real Estate Video Editing for Twilight Shoots: Enhancing Moody Exteriors",
     description: "Learn how professional video post-production transforms twilight real estate footage into stunning property tours. Discover key editing techniques and why outsourcing twilight video editing is a smart move for videographers.",
