@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-handle-difficult-lighting-conditions-in-real-estate-v",
+    title: "How to Handle Difficult Lighting Conditions in Real Estate Video Editing",
+    description: "Struggling with blown-out windows or dark rooms in your property tours? Learn how professional real estate video editing fixes tough lighting and why outsourcing saves time.",
+    date: "2026-09-21",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-future-of-real-estate-video-editing-ai-tools-and-automat",
     title: "The Future of Real Estate Video Editing: AI Tools and Automation",
     description: "Discover how AI tools and automation are transforming real estate video editing. Learn what every real estate videographer needs to know about the future of property tours.",
