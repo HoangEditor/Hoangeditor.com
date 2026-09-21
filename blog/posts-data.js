@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-future-of-real-estate-video-editing-ai-tools-and-automat",
+    title: "The Future of Real Estate Video Editing: AI Tools and Automation",
+    description: "Discover how AI tools and automation are transforming real estate video editing. Learn what every real estate videographer needs to know about the future of property tours.",
+    date: "2026-09-21",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-3d-floor-plans-and-motion-graphics-elevate-real-estate-v",
     title: "How 3D Floor Plans and Motion Graphics Elevate Real Estate Videos",
     description: "Discover how 3D floor plans and motion graphics enhance property tours, boost engagement, and help real estate videographers win more clients with outsourced video editing.",
