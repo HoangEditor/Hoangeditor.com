@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-3d-floor-plans-and-motion-graphics-elevate-real-estate-v",
+    title: "How 3D Floor Plans and Motion Graphics Elevate Real Estate Videos",
+    description: "Discover how 3D floor plans and motion graphics enhance property tours, boost engagement, and help real estate videographers win more clients with outsourced video editing.",
+    date: "2026-09-21",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "mastering-text-overlays-and-lower-thirds-in-real-estate-vide",
     title: "Mastering Text Overlays and Lower Thirds in Real Estate Video Marketing",
     description: "Learn how text overlays and lower thirds elevate property tours, convey key details, and strengthen brand identity. Discover best practices for real estate video editing.",
