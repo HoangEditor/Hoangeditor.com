@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "batch-editing-real-estate-videos-strategies-for-high-volume-",
+    title: "Batch Editing Real Estate Videos: Strategies for High-Volume Production Teams",
+    description: "Learn batch editing strategies to streamline real estate video post-production for high-volume teams. Boost efficiency, maintain quality, and scale your property tour output.",
+    date: "2026-09-22",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "case-study-before-and-after-real-estate-video-edits-that-inc",
     title: "Case Study: Before and After Real Estate Video Edits That Increased Engagement",
     description: "See how Hoang Editor transformed a raw property tour into a polished video that boosted views, engagement, and leads for a real estate videographer. Learn the editing techniques behind the results.",
