@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "editing-real-estate-videos-for-different-platforms-aspect-ra",
+    title: "Editing Real Estate Videos for Different Platforms: Aspect Ratios and Durations",
+    description: "Learn how to optimize real estate videos for YouTube, Instagram, TikTok, and Facebook with correct aspect ratios and durations.",
+    date: "2026-09-22",
+    readTime: "4 min read",
+    category: "Marketing & SEO",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-handle-difficult-lighting-conditions-in-real-estate-v",
     title: "How to Handle Difficult Lighting Conditions in Real Estate Video Editing",
     description: "Struggling with blown-out windows or dark rooms in your property tours? Learn how professional real estate video editing fixes tough lighting and why outsourcing saves time.",
