@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-what-separates-top-real-estate-video-editors",
+    title: "Good vs. Great: What Separates Top Real Estate Video Editors",
+    description: "Discover the key differences between good and great real estate video editing—from pacing to color grading—and how an outsourced video editing partner elevates property tours.",
+    date: "2026-09-24",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "batch-editing-real-estate-videos-strategies-for-high-volume-",
     title: "Batch Editing Real Estate Videos: Strategies for High-Volume Production Teams",
     description: "Learn batch editing strategies to streamline real estate video post-production for high-volume teams. Boost efficiency, maintain quality, and scale your property tour output.",
