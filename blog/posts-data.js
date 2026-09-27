@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-add-professional-lower-thirds-and-property-details-to",
+    title: "How to Add Professional Lower Thirds and Property Details to Real Estate Videos",
+    description: "Learn to add professional lower thirds and property details to real estate videos. Boost engagement with clean post-production, property tour graphics, and outsourced video editing.",
+    date: "2026-09-27",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "what-separates-good-from-great-real-estate-video-editing",
     title: "What Separates Good from Great Real Estate Video Editing?",
     description: "Discover the key differences between good and great real estate video editing and learn how outsourcing to a video editing partner can elevate your property tours.",
