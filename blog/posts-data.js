@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-real-estate-video-editing-what-sets-top-produc",
+    title: "Good vs. Great Real Estate Video Editing: What Sets Top Productions Apart",
+    description: "Discover the key differences between good and great real estate video editing—from pacing and color to sound and detail—and how an outsourced editing partner can help.",
+    date: "2026-09-28",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-add-professional-lower-thirds-and-property-details-to",
     title: "How to Add Professional Lower Thirds and Property Details to Real Estate Videos",
     description: "Learn to add professional lower thirds and property details to real estate videos. Boost engagement with clean post-production, property tour graphics, and outsourced video editing.",
