@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-video-speed-ramping-when-and-how-to-use-it-effec",
+    title: "Real Estate Video Speed Ramping: When and How to Use It Effectively",
+    description: "Learn when and how to use speed ramping in real estate video editing to create dynamic property tours that capture attention and drive engagement.",
+    date: "2026-09-28",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-batch-edit-50-real-estate-videos-without-sacrificing-",
     title: "How to Batch Edit 50 Real Estate Videos Without Sacrificing Quality",
     description: "Learn how to batch edit 50 real estate videos without sacrificing quality. Proven workflows for real estate videographers and production teams.",
