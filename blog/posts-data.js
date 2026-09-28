@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-batch-edit-50-real-estate-videos-without-sacrificing-",
+    title: "How to Batch Edit 50 Real Estate Videos Without Sacrificing Quality",
+    description: "Learn how to batch edit 50 real estate videos without sacrificing quality. Proven workflows for real estate videographers and production teams.",
+    date: "2026-09-28",
+    readTime: "5 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-what-sets-top-produc",
     title: "Good vs. Great Real Estate Video Editing: What Sets Top Productions Apart",
     description: "Discover the key differences between good and great real estate video editing—from pacing and color to sound and detail—and how an outsourced editing partner can help.",
