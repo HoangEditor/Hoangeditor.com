@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-edit-day-to-dusk-real-estate-videos-for-high-end-list",
+    title: "How to Edit Day-to-Dusk Real Estate Videos for High-End Listings",
+    description: "Learn professional day-to-dusk real estate video editing techniques to create cinematic property tours that capture luxury listings at twilight. Perfect for videographers and production teams.",
+    date: "2026-09-29",
+    readTime: "5 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-video-speed-ramping-when-and-how-to-use-it-effec",
     title: "Real Estate Video Speed Ramping: When and How to Use It Effectively",
     description: "Learn when and how to use speed ramping in real estate video editing to create dynamic property tours that capture attention and drive engagement.",
