@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-video-editing-workflow-from-raw-footage-to-clien",
+    title: "Real Estate Video Editing Workflow: From Raw Footage to Client Delivery",
+    description: "Learn a proven real estate video editing workflow that takes raw property tour footage to polished client-ready videos. Perfect for videographers and production teams.",
+    date: "2026-09-29",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-edit-aerial-drone-footage-for-luxury-property-listing",
     title: "How to Edit Aerial Drone Footage for Luxury Property Listings",
     description: "Master aerial drone video editing for luxury listings. Pro tips on stabilization, color grading, and speed ramping to create cinematic property tours.",
