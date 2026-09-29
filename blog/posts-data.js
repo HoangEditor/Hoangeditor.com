@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-edit-aerial-drone-footage-for-luxury-property-listing",
+    title: "How to Edit Aerial Drone Footage for Luxury Property Listings",
+    description: "Master aerial drone video editing for luxury listings. Pro tips on stabilization, color grading, and speed ramping to create cinematic property tours.",
+    date: "2026-09-29",
+    readTime: "5 min read",
+    category: "Drone & Aerial",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-edit-day-to-dusk-real-estate-videos-for-high-end-list",
     title: "How to Edit Day-to-Dusk Real Estate Videos for High-End Listings",
     description: "Learn professional day-to-dusk real estate video editing techniques to create cinematic property tours that capture luxury listings at twilight. Perfect for videographers and production teams.",
