@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-real-estate-video-editing-the-details-that-win",
+    title: "Good vs. Great Real Estate Video Editing: The Details That Win Listings",
+    description: "Discover the key differences between good and great real estate video editing—from storytelling to color grading—and how outsourcing elevates your property tours.",
+    date: "2026-10-01",
+    readTime: "6 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-video-editing-workflow-from-raw-footage-to-clien",
     title: "Real Estate Video Editing Workflow: From Raw Footage to Client Delivery",
     description: "Learn a proven real estate video editing workflow that takes raw property tour footage to polished client-ready videos. Perfect for videographers and production teams.",
