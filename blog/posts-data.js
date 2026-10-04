@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "twilight-real-estate-video-editing-techniques-for-golden-hou",
+    title: "Twilight Real Estate Video Editing: Techniques for Golden Hour and Dusk Listings",
+    description: "Master twilight real estate video editing with color grading, sky replacement, and pacing tips for golden hour and dusk property tours that captivate buyers.",
+    date: "2026-10-04",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-video-editing-pricing-per-project-vs-monthly-ret",
     title: "Real Estate Video Editing Pricing: Per Project vs Monthly Retainer for Videographers",
     description: "Discover whether per project or monthly retainer pricing works best for your real estate video editing business. Learn how outsourced video editing can boost your profits.",
