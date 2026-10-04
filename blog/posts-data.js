@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-video-editing-pricing-per-project-vs-monthly-ret",
+    title: "Real Estate Video Editing Pricing: Per Project vs Monthly Retainer for Videographers",
+    description: "Discover whether per project or monthly retainer pricing works best for your real estate video editing business. Learn how outsourced video editing can boost your profits.",
+    date: "2026-10-04",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-the-subtle-art-that-",
     title: "Good vs. Great Real Estate Video Editing: The Subtle Art That Sells Homes Faster",
     description: "Discover the key differences between good and great real estate video editing—from pacing and color to storytelling—and how outsourcing can elevate your listings.",
