@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "sky-replacement-in-real-estate-videos-when-to-edit-skies-for",
+    title: "Sky Replacement in Real Estate Videos: When to Edit Skies for Better Listings",
+    description: "Learn when sky replacement in real estate video editing can elevate property tours, boost curb appeal, and help real estate videographers deliver stunning listings.",
+    date: "2026-10-05",
+    readTime: "5 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-outsource-real-estate-video-editing-without-losing-yo",
     title: "How to Outsource Real Estate Video Editing Without Losing Your Style",
     description: "Learn how to outsource real estate video editing while keeping your unique look. Tips for videographers and production teams to maintain style and quality.",
