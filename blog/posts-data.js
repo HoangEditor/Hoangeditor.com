@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "export-settings-for-real-estate-videos-codecs-resolutions-an",
+    title: "Export Settings for Real Estate Videos: Codecs, Resolutions, and Delivery Specs",
+    description: "Master real estate video export settings. Learn the best codecs, resolutions, and delivery specs to ensure crisp property tours on every platform.",
+    date: "2026-10-05",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "twilight-real-estate-video-editing-techniques-for-golden-hou",
     title: "Twilight Real Estate Video Editing: Techniques for Golden Hour and Dusk Listings",
     description: "Master twilight real estate video editing with color grading, sky replacement, and pacing tips for golden hour and dusk property tours that captivate buyers.",
