@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-outsource-real-estate-video-editing-without-losing-yo",
+    title: "How to Outsource Real Estate Video Editing Without Losing Your Style",
+    description: "Learn how to outsource real estate video editing while keeping your unique look. Tips for videographers and production teams to maintain style and quality.",
+    date: "2026-10-05",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "export-settings-for-real-estate-videos-codecs-resolutions-an",
     title: "Export Settings for Real Estate Videos: Codecs, Resolutions, and Delivery Specs",
     description: "Master real estate video export settings. Learn the best codecs, resolutions, and delivery specs to ensure crisp property tours on every platform.",
