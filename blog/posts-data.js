@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "motion-graphics-for-real-estate-videos-lower-thirds-titles-a",
+    title: "Motion Graphics for Real Estate Videos: Lower Thirds, Titles, and Animated Maps",
+    description: "Learn how lower thirds, animated titles, and map animations make your property tours more professional and informative. Tips for seamless real estate video editing.",
+    date: "2026-10-06",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "sky-replacement-in-real-estate-videos-when-to-edit-skies-for",
     title: "Sky Replacement in Real Estate Videos: When to Edit Skies for Better Listings",
     description: "Learn when sky replacement in real estate video editing can elevate property tours, boost curb appeal, and help real estate videographers deliver stunning listings.",
