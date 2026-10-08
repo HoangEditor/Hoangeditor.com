@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-real-estate-video-editing-what-sets-your-work-",
+    title: "Good vs. Great Real Estate Video Editing: What Sets Your Work Apart",
+    description: "Discover the key differences between good and great real estate video editing. Learn how outsourced video editing can elevate your property tours and brand.",
+    date: "2026-10-08",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "motion-graphics-for-real-estate-videos-lower-thirds-titles-a",
     title: "Motion Graphics for Real Estate Videos: Lower Thirds, Titles, and Animated Maps",
     description: "Learn how lower thirds, animated titles, and map animations make your property tours more professional and informative. Tips for seamless real estate video editing.",
