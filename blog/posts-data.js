@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-real-estate-video-editing-mistake-checklist-15-fixes-for",
+    title: "The Real Estate Video Editing Mistake Checklist: 15 Fixes for Cleaner Cuts",
+    description: "Discover 15 common real estate video editing mistakes and fixes for cleaner property tour videos. Improve cuts with these expert tips from Hoang Editor.",
+    date: "2026-10-11",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-elevate-your-propert",
     title: "Good vs. Great Real Estate Video Editing: Elevate Your Property Tours",
     description: "Discover the subtle shifts that separate good from great real estate video editing—and how an outsourced video editing partner can transform your property tours.",
