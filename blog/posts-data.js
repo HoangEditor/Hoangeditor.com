@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "mastering-twilight-real-estate-video-editing-the-key-to-sell",
+    title: "Mastering Twilight Real Estate Video Editing: The Key to Selling Luxury Listings",
+    description: "Learn professional twilight real estate video editing techniques for luxury property tours. Enhance colors, balance exposure, and create cinematic appeal with an outsourced video editing partner.",
+    date: "2026-10-11",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-real-estate-video-editing-mistake-checklist-15-fixes-for",
     title: "The Real Estate Video Editing Mistake Checklist: 15 Fixes for Cleaner Cuts",
     description: "Discover 15 common real estate video editing mistakes and fixes for cleaner property tour videos. Improve cuts with these expert tips from Hoang Editor.",
