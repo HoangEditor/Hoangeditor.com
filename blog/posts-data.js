@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "ai-tools-for-real-estate-video-editing-hype-vs-practical-use",
+    title: "AI Tools for Real Estate Video Editing: Hype vs Practical Use Cases",
+    description: "Separate AI hype from real workflow wins for real estate video editing. Learn which tools save time on property tours without compromising quality.",
+    date: "2026-10-12",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-what-elevates-a-prop",
     title: "Good vs. Great Real Estate Video Editing: What Elevates a Property Tour?",
     description: "Discover the key differences between good and great real estate video editing—from color grading to storytelling—and how a video editing partner helps.",
