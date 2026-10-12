@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-edit-real-estate-videos-with-drone-footage-and-smooth",
+    title: "How to Edit Real Estate Videos with Drone Footage and Smooth Transitions",
+    description: "Master drone footage editing and smooth transitions for stunning property tours. Learn techniques and outsource to a top video editing partner.",
+    date: "2026-10-12",
+    readTime: "6 min read",
+    category: "Drone & Aerial",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "ai-tools-for-real-estate-video-editing-hype-vs-practical-use",
     title: "AI Tools for Real Estate Video Editing: Hype vs Practical Use Cases",
     description: "Separate AI hype from real workflow wins for real estate video editing. Learn which tools save time on property tours without compromising quality.",
