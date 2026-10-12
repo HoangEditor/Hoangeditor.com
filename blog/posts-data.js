@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-real-estate-video-editing-what-elevates-a-prop",
+    title: "Good vs. Great Real Estate Video Editing: What Elevates a Property Tour?",
+    description: "Discover the key differences between good and great real estate video editing—from color grading to storytelling—and how a video editing partner helps.",
+    date: "2026-10-12",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "mastering-twilight-real-estate-video-editing-the-key-to-sell",
     title: "Mastering Twilight Real Estate Video Editing: The Key to Selling Luxury Listings",
     description: "Learn professional twilight real estate video editing techniques for luxury property tours. Enhance colors, balance exposure, and create cinematic appeal with an outsourced video editing partner.",
