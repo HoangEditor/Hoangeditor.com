@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "vertical-vs-horizontal-real-estate-videos-editing-for-instag",
+    title: "Vertical vs Horizontal Real Estate Videos: Editing for Instagram Reels and YouTube",
+    description: "Learn how to edit vertical and horizontal real estate videos for Reels and YouTube. Tips for property tours, aspect ratios, and outsourcing post-production.",
+    date: "2026-10-13",
+    readTime: "4 min read",
+    category: "Marketing & SEO",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-edit-real-estate-videos-with-drone-footage-and-smooth",
     title: "How to Edit Real Estate Videos with Drone Footage and Smooth Transitions",
     description: "Master drone footage editing and smooth transitions for stunning property tours. Learn techniques and outsource to a top video editing partner.",
