@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "how-to-edit-real-estate-videos-for-instagram-reels-and-tikto",
+    title: "How to Edit Real Estate Videos for Instagram Reels and TikTok Without Losing Quality",
+    description: "Learn vertical video editing techniques for real estate videographers to create stunning Instagram Reels and TikTok property tours that won't lose quality.",
+    date: "2026-10-18",
+    readTime: "4 min read",
+    category: "Marketing & SEO",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "before-and-after-how-professional-editing-transforms-raw-rea",
     title: "Before and After: How Professional Editing Transforms Raw Real Estate Footage",
     description: "See how professional real estate video editing turns shaky, flat clips into polished property tours that win listings. Explore key transformation stages and benefits.",
