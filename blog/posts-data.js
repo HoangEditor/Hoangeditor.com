@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-real-estate-video-editing-what-separates-them",
+    title: "Good vs Great Real Estate Video Editing: What Separates Them",
+    description: "Discover the key differences between good and great real estate video editing. Learn what elevates a property tour and when to consider outsourced video editing.",
+    date: "2026-10-18",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-what-s-the-differenc",
     title: "Good vs. Great Real Estate Video Editing: What’s the Difference?",
     description: "Discover what separates good from great real estate video editing. Learn how outsourced video editing can transform your property tours and win more clients.",
