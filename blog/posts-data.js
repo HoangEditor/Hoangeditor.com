@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "creating-consistent-branded-real-estate-videos-luts-lower-th",
+    title: "Creating Consistent Branded Real Estate Videos: LUTs, Lower Thirds, and Intro Templates",
+    description: "Learn how LUTs, lower thirds, and intro templates build a consistent brand for your real estate video editing and boost client recognition.",
+    date: "2026-10-19",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "how-to-edit-real-estate-videos-for-instagram-reels-and-tikto",
     title: "How to Edit Real Estate Videos for Instagram Reels and TikTok Without Losing Quality",
     description: "Learn vertical video editing techniques for real estate videographers to create stunning Instagram Reels and TikTok property tours that won't lose quality.",
