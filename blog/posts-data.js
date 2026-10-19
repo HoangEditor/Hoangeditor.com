@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "vertical-vs-horizontal-real-estate-videos-what-agents-actual",
+    title: "Vertical vs Horizontal Real Estate Videos: What Agents Actually Need in 2025",
+    description: "Discover why agents need vertical and horizontal real estate videos in 2025. Learn how outsourced video editing delivers both formats efficiently.",
+    date: "2026-10-19",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "creating-consistent-branded-real-estate-videos-luts-lower-th",
     title: "Creating Consistent Branded Real Estate Videos: LUTs, Lower Thirds, and Intro Templates",
     description: "Learn how LUTs, lower thirds, and intro templates build a consistent brand for your real estate video editing and boost client recognition.",
