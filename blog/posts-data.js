@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "day-to-night-real-estate-photo-and-video-editing-a-complete-",
+    title: "Day-to-Night Real Estate Photo and Video Editing: A Complete Workflow for Production Teams",
+    description: "Master day-to-night real estate editing with this production team workflow. Learn techniques for seamless transitions, color grading, and outsourcing.",
+    date: "2026-10-25",
+    readTime: "6 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "vertical-vs-horizontal-real-estate-videos-what-agents-actual",
     title: "Vertical vs Horizontal Real Estate Videos: What Agents Actually Need in 2025",
     description: "Discover why agents need vertical and horizontal real estate videos in 2025. Learn how outsourced video editing delivers both formats efficiently.",
