@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "real-estate-video-editing-pricing-models-per-video-vs-hourly",
+    title: "Real Estate Video Editing Pricing Models: Per Video vs. Hourly vs. Subscription for Videographers",
+    description: "Compare per video, hourly, and subscription pricing for real estate video editing. Find the best cost model for your videography business and production team.",
+    date: "2026-10-25",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "day-to-night-real-estate-photo-and-video-editing-a-complete-",
     title: "Day-to-Night Real Estate Photo and Video Editing: A Complete Workflow for Production Teams",
     description: "Master day-to-night real estate editing with this production team workflow. Learn techniques for seamless transitions, color grading, and outsourcing.",
