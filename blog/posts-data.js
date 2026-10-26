@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "top-10-real-estate-video-transitions-that-make-listings-look",
+    title: "Top 10 Real Estate Video Transitions That Make Listings Look Cinematic",
+    description: "Discover the top 10 transitions that turn real estate videos into cinematic property tours. Learn how to elevate your listings with expert video post-production.",
+    date: "2026-10-26",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "scaling-your-real-estate-video-business-with-white-label-edi",
     title: "Scaling Your Real Estate Video Business with White-Label Editing Services",
     description: "Discover how white-label video editing services help real estate videographers scale faster, save time, and deliver consistent property tours without hiring in-house editors.",
