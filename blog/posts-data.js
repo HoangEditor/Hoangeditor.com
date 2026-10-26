@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "scaling-your-real-estate-video-business-with-white-label-edi",
+    title: "Scaling Your Real Estate Video Business with White-Label Editing Services",
+    description: "Discover how white-label video editing services help real estate videographers scale faster, save time, and deliver consistent property tours without hiring in-house editors.",
+    date: "2026-10-26",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "real-estate-video-editing-pricing-models-per-video-vs-hourly",
     title: "Real Estate Video Editing Pricing Models: Per Video vs. Hourly vs. Subscription for Videographers",
     description: "Compare per video, hourly, and subscription pricing for real estate video editing. Find the best cost model for your videography business and production team.",
