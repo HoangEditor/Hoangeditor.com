@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "good-vs-great-real-estate-video-editing-5-differences-that-w",
+    title: "Good vs. Great Real Estate Video Editing: 5 Differences That Win Listings",
+    description: "Discover the 5 key differences between good and great real estate video editing. Elevate your property tours with cinematic pacing, color, and sound design",
+    date: "2026-10-27",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "top-10-real-estate-video-transitions-that-make-listings-look",
     title: "Top 10 Real Estate Video Transitions That Make Listings Look Cinematic",
     description: "Discover the top 10 transitions that turn real estate videos into cinematic property tours. Learn how to elevate your listings with expert video post-production.",
