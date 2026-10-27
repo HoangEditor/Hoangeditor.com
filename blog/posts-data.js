@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-role-of-sound-design-in-real-estate-videos-music-ambienc",
+    title: "The Role of Sound Design in Real Estate Videos: Music, Ambience, and Voiceover Editing",
+    description: "Discover how sound design—music, ambience, and voiceover—transforms property tours. Learn why outsourced video editing can perfect your audio mix.",
+    date: "2026-10-27",
+    readTime: "4 min read",
+    category: "Outsourcing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "good-vs-great-real-estate-video-editing-5-differences-that-w",
     title: "Good vs. Great Real Estate Video Editing: 5 Differences That Win Listings",
     description: "Discover the 5 key differences between good and great real estate video editing. Elevate your property tours with cinematic pacing, color, and sound design",
