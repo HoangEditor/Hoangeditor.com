@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "elevate-your-real-estate-videos-good-vs-great-editing",
+    title: "Elevate Your Real Estate Videos: Good vs Great Editing",
+    description: "Discover the difference between good and great real estate video editing and how it impacts your business",
+    date: "2026-11-09",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-role-of-sound-design-in-real-estate-videos-music-ambienc",
     title: "The Role of Sound Design in Real Estate Videos: Music, Ambience, and Voiceover Editing",
     description: "Discover how sound design—music, ambience, and voiceover—transforms property tours. Learn why outsourced video editing can perfect your audio mix.",
