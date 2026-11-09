@@ -83,8 +83,60 @@ export default {
       }
     }
 
+    // CORS preflight
+    if (request.method === "OPTIONS") {
+      return new Response(null, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization"
+        }
+      });
+    }
+
+    // Diagnostics endpoint: GET /__diagnostics
+    if (url.pathname === "/__diagnostics") {
+      const results = {};
+      try {
+        const gh = await fetchExistingPosts(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO);
+        results.github = { ok: true, postsCount: gh.length };
+      } catch (e) {
+        results.github = { ok: false, error: e.message };
+      }
+      if (env.DEEPSEEK_KEY) {
+        try {
+          const dsResp = await fetch("https://api.deepseek.com/models", {
+            headers: { Authorization: "Bearer " + env.DEEPSEEK_KEY.trim() }
+          });
+          results.deepseek = { ok: dsResp.ok, status: dsResp.status };
+        } catch (e) {
+          results.deepseek = { ok: false, error: e.message };
+        }
+      } else {
+        results.deepseek = { ok: false, reason: "DEEPSEEK_KEY secret not set" };
+      }
+      try {
+        const aiTest = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+          prompt: "Say OK in one word.",
+          max_tokens: 5
+        });
+        results.workersAI = { ok: true, response: (aiTest?.response || "").trim() };
+      } catch (e) {
+        results.workersAI = { ok: false, error: e.message };
+      }
+      try {
+        await env.BLOG_IMAGES.list({ limit: 1 });
+        results.r2 = { ok: true };
+      } catch (e) {
+        results.r2 = { ok: false, error: e.message };
+      }
+      return new Response(JSON.stringify(results, null, 2), {
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+      });
+    }
+
     // Manual triggers for testing
-    if (request.method === "POST") {
+    if (request.method === "POST" || request.method === "GET") {
       const handlers = {
         "/__trigger": () => runAutoPost(env),
         "/__topics": () => runSmartTopics(env),
@@ -95,9 +147,15 @@ export default {
       if (handlers[url.pathname]) {
         try {
           await handlers[url.pathname]();
-          return new Response("OK — done!", { status: 200 });
+          return new Response(JSON.stringify({ success: true, message: "OK — done!" }), {
+            status: 200,
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+          });
         } catch (e) {
-          return new Response("Error: " + e.message, { status: 500 });
+          return new Response(JSON.stringify({ success: false, error: e.message }), {
+            status: 500,
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+          });
         }
       }
     }
@@ -172,17 +230,39 @@ async function runAutoPost(env) {
         break;
       }
     }
+
+    // Auto-replenish if all topics exhausted
     if (!topic) {
-      console.log('All topics exhausted — no non-duplicate topic available. Run smart topics to add more.');
-      return;
+      console.log('All topics exhausted — generating fresh topics on the fly...');
+      const freshTopics = await suggestTopics(env);
+      for (const candidate of freshTopics) {
+        if (!isDuplicate(candidate, existingTitles)) {
+          topic = candidate;
+          break;
+        }
+      }
+      if (freshTopics.length > 0) {
+        await saveTopicsPool(env, freshTopics);
+      }
+    }
+
+    // Ultimate fallback if still no topic found
+    if (!topic) {
+      const fallbackAngles = [
+        "Workflow Optimization", "Color Grading Strategies", "Pricing and Packaging",
+        "Cinematic Camera Movement", "Audio & Sound Design", "Client Retention Tactics",
+        "Turnaround Speed Techniques", "High-End Luxury Listing Edits", "Social Media Cutdowns"
+      ];
+      const randomAngle = fallbackAngles[Math.floor(Math.random() * fallbackAngles.length)];
+      topic = `Real Estate Video Editing: Master Guide to ${randomAngle}`;
     }
     console.log('Selected topic:', topic);
 
     // Internal linking: find related posts
     const relatedPosts = findRelatedPosts(topic, existingPosts, 3);
 
-    // 2. Generate post via DeepSeek
-    const post = await generatePost(env.DEEPSEEK_KEY, topic);
+    // 2. Generate post via DeepSeek or Workers AI fallback
+    const post = await generatePost(env, topic);
     console.log('Generated post:', post.title);
 
     // 3. Generate featured image via Workers AI (cron has enough time)
@@ -216,7 +296,29 @@ async function runAutoPost(env) {
   }
 }
 
-async function generatePost(apiKey, topic) {
+function extractJSON(s) {
+  if (!s) return null;
+  if (typeof s !== 'string') {
+    if (Array.isArray(s)) {
+      s = s.map(part => (typeof part === 'string' ? part : part?.text || '')).join('');
+    } else if (typeof s === 'object') {
+      if (s.title && s.content) return JSON.stringify(s);
+      if (typeof s.response === 'string') s = s.response;
+      else if (typeof s.text === 'string') s = s.text;
+      else {
+        try { s = JSON.stringify(s); } catch (e) { return null; }
+      }
+    } else {
+      s = String(s);
+    }
+  }
+  const codeMatch = s.match(/```(?:json)?\s*([\s\S]*?)```/);
+  const candidate = codeMatch ? codeMatch[1] : s;
+  const m = candidate.match(/\{[\s\S]*\}/);
+  return m ? m[0] : null;
+}
+
+async function generatePost(env, topic) {
   const today = new Date().toISOString().split('T')[0];
 
   const sysPrompt = `You are an expert SEO blog writer for Hoang Editor, a professional real estate video editing service. Our audience: real estate video shooters, videographers, and production teams who want to outsource post-production.
@@ -235,48 +337,78 @@ Also produce:
 Output ONLY valid JSON, no other text:
 {"title":"...","description":"120-155 char meta description...","tags":"Tag1, Tag2, Tag3","date":"${today}","readTime":"4 min read","content":"<full HTML body with H2/H3 tags ending in CTA>","faq":[{"q":"...","a":"..."}],"socialSnippets":["...","...","..."],"imagePrompt":"..."}`;
 
-  const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + apiKey
-    },
-    body: JSON.stringify({
-      model: "deepseek-v4-pro",
+  // 1. Try DeepSeek API if DEEPSEEK_KEY is set
+  if (env.DEEPSEEK_KEY && env.DEEPSEEK_KEY.trim()) {
+    try {
+      console.log('Attempting post generation via DeepSeek API for topic:', topic);
+      const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + env.DEEPSEEK_KEY.trim()
+        },
+        body: JSON.stringify({
+          model: "deepseek-v4-pro",
+          messages: [
+            { role: "system", content: sysPrompt },
+            { role: "user", content: "Write a blog post about: " + topic }
+          ],
+          temperature: 0.7,
+          max_tokens: 8000,
+          response_format: { type: "json_object" }
+        })
+      });
+
+      if (!resp.ok) {
+        const errText = await resp.text();
+        console.warn(`DeepSeek API error (status ${resp.status}): ${errText}. Falling back to Workers AI.`);
+      } else {
+        const data = await resp.json();
+        const choice = data.choices?.[0] || {};
+        const msg = choice.message || {};
+        const content = msg.content || '';
+        const reasoning = msg.reasoning_content || '';
+        const text = content || reasoning || choice.text || '';
+        const jsonStr = extractJSON(content) || extractJSON(reasoning) || extractJSON(text);
+        if (jsonStr) {
+          const parsed = JSON.parse(jsonStr);
+          if (parsed && parsed.title && parsed.content) {
+            return parsed;
+          }
+        }
+      }
+    } catch (e) {
+      console.warn("DeepSeek generation failed:", e.message, ". Falling back to Workers AI.");
+    }
+  }
+
+  // 2. Fallback to Cloudflare Workers AI (Built-in, zero cost, always available)
+  if (env.AI) {
+    console.log('Generating post via Cloudflare Workers AI (@cf/meta/llama-3.3-70b-instruct-fp8-fast)...');
+    const aiResp = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
       messages: [
         { role: "system", content: sysPrompt },
-        { role: "user", content: "Write a blog post about: " + topic }
+        { role: "user", content: "Write a blog post about: " + topic + ". Output ONLY valid raw JSON." }
       ],
-      temperature: 0.7,
-      max_tokens: 8000,
-      response_format: { type: "json_object" }
-    })
-  });
+      max_tokens: 4000,
+      temperature: 0.7
+    });
 
-  if (!resp.ok) {
-    throw new Error("DeepSeek API error: " + resp.status + " " + (await resp.text()));
+    const text = aiResp?.response || (typeof aiResp === 'string' ? aiResp : JSON.stringify(aiResp));
+    const jsonStr = extractJSON(text);
+    if (!jsonStr) {
+      throw new Error("Could not parse JSON from Workers AI. Raw: " + text.substring(0, 300));
+    }
+    const parsed = JSON.parse(jsonStr);
+    if (!parsed.title) parsed.title = topic;
+    if (!parsed.date) parsed.date = today;
+    if (!parsed.readTime) parsed.readTime = '4 min read';
+    if (!parsed.tags) parsed.tags = 'Video Editing, Real Estate';
+    if (!parsed.content) throw new Error("Workers AI output had empty content field.");
+    return parsed;
   }
 
-  const data = await resp.json();
-  const choice = data.choices?.[0] || {};
-  const msg = choice.message || {};
-  // DeepSeek V4 may put reasoning in reasoning_content and answer in content
-  const content = msg.content || '';
-  const reasoning = msg.reasoning_content || '';
-  const text = content || reasoning || choice.text || '';
-
-  // Extract JSON — try content first, then reasoning, then combined
-  function extractJSON(s) {
-    if (!s) return null;
-    // Prefer markdown code block
-    const codeMatch = s.match(/```(?:json)?\s*([\s\S]*?)```/);
-    const candidate = codeMatch ? codeMatch[1] : s;
-    const m = candidate.match(/\{[\s\S]*\}/);
-    return m ? m[0] : null;
-  }
-  let jsonStr = extractJSON(content) || extractJSON(reasoning) || extractJSON(text);
-  if (!jsonStr) throw new Error("Could not parse JSON. contentLen=" + content.length + " reasoningLen=" + reasoning.length + " Raw: " + text.substring(0, 300));
-  return JSON.parse(jsonStr);
+  throw new Error("No AI provider available. Check DEEPSEEK_KEY or env.AI binding.");
 }
 
 async function generateImage(ai, bucket, topic, post) {
@@ -734,35 +866,72 @@ async function runWeekly(env) {
 }
 
 async function runSmartTopics(env) {
-  const topics = await suggestTopics(env.DEEPSEEK_KEY);
+  const topics = await suggestTopics(env);
   if (!topics || topics.length === 0) { console.log('No topics suggested'); return; }
-  // Save topics to a JSON file in GitHub
-  const content = JSON.stringify({ generated: new Date().toISOString(), topics }, null, 2);
-  const path = 'blog/topics-pool.json';
-  const getResp = await fetch(`https://api.github.com/repos/${env.GITHUB_USER}/${env.GITHUB_REPO}/contents/${path}`, {
-    headers: { Authorization: "Bearer " + env.GITHUB_TOKEN, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" }
-  });
-  const sha = getResp.ok ? (await getResp.json()).sha : undefined;
-  const resp = await fetch(`https://api.github.com/repos/${env.GITHUB_USER}/${env.GITHUB_REPO}/contents/${path}`, {
-    method: "PUT",
-    headers: { Authorization: "Bearer " + env.GITHUB_TOKEN, Accept: "application/vnd.github+json", "Content-Type": "application/json", "User-Agent": "HoangEditor" },
-    body: JSON.stringify({ message: "Update topics pool", content: toBase64(content), sha, branch: "main" })
-  });
-  console.log('Topics pool updated:', resp.status);
+  await saveTopicsPool(env, topics);
 }
 
-async function suggestTopics(apiKey) {
+async function saveTopicsPool(env, topics) {
+  try {
+    const content = JSON.stringify({ generated: new Date().toISOString(), topics }, null, 2);
+    const path = 'blog/topics-pool.json';
+    const getResp = await fetch(`https://api.github.com/repos/${env.GITHUB_USER}/${env.GITHUB_REPO}/contents/${path}`, {
+      headers: { Authorization: "Bearer " + env.GITHUB_TOKEN, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" }
+    });
+    const sha = getResp.ok ? (await getResp.json()).sha : undefined;
+    const resp = await fetch(`https://api.github.com/repos/${env.GITHUB_USER}/${env.GITHUB_REPO}/contents/${path}`, {
+      method: "PUT",
+      headers: { Authorization: "Bearer " + env.GITHUB_TOKEN, Accept: "application/vnd.github+json", "Content-Type": "application/json", "User-Agent": "HoangEditor" },
+      body: JSON.stringify({ message: "Update topics pool", content: toBase64(content), sha, branch: "main" })
+    });
+    console.log('Topics pool updated:', resp.status);
+  } catch (e) {
+    console.warn('saveTopicsPool failed:', e.message);
+  }
+}
+
+async function suggestTopics(env) {
   const sys = 'You are a real estate video editing content strategist. Suggest 10 fresh, non-duplicate blog topics for Hoang Editor (real estate video editing service for videographers and production teams). Topics must be specific and SEO-friendly. Output ONLY a JSON array of strings, no other text.';
-  const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey },
-    body: JSON.stringify({ model: "deepseek-v4-pro", messages: [{ role: "system", content: sys }, { role: "user", content: "Suggest 10 new blog topics." }], temperature: 0.8, max_tokens: 1000 })
-  });
-  const data = await resp.json();
-  const text = data.choices?.[0]?.message?.content || '';
-  const match = text.match(/\[[\s\S]*\]/);
-  if (!match) return [];
-  try { return JSON.parse(match[0]); } catch (e) { return []; }
+
+  if (env.DEEPSEEK_KEY && env.DEEPSEEK_KEY.trim()) {
+    try {
+      const resp = await fetch("https://api.deepseek.com/v1/chat/completions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + env.DEEPSEEK_KEY.trim() },
+        body: JSON.stringify({ model: "deepseek-v4-pro", messages: [{ role: "system", content: sys }, { role: "user", content: "Suggest 10 new blog topics." }], temperature: 0.8, max_tokens: 1000 })
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        let text = data.choices?.[0]?.message?.content || '';
+        if (typeof text !== 'string') text = JSON.stringify(text);
+        const match = text.match(/\[[\s\S]*\]/);
+        if (match) return JSON.parse(match[0]);
+      }
+    } catch (e) {
+      console.warn("DeepSeek suggestTopics failed:", e.message);
+    }
+  }
+
+  if (env.AI) {
+    try {
+      const resp = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+        messages: [
+          { role: "system", content: sys },
+          { role: "user", content: "Suggest 10 new blog topics as a JSON array." }
+        ],
+        max_tokens: 1000,
+        temperature: 0.8
+      });
+      let text = resp?.response || '';
+      if (typeof text !== 'string') text = JSON.stringify(text);
+      const match = text.match(/\[[\s\S]*\]/);
+      if (match) return JSON.parse(match[0]);
+    } catch (e) {
+      console.warn("Workers AI suggestTopics failed:", e.message);
+    }
+  }
+
+  return [];
 }
 
 async function runRefresh(env) {
@@ -771,7 +940,7 @@ async function runRefresh(env) {
   if (posts.length === 0) return;
   const oldest = posts[posts.length - 1]; // posts-data.js is sorted newest first
   console.log('Refreshing oldest post:', oldest.title);
-  const refreshed = await generatePost(env.DEEPSEEK_KEY, "Updated guide: " + oldest.title);
+  const refreshed = await generatePost(env, "Updated guide: " + oldest.title);
   const slug = oldest.slug;
   const html = buildHTML(refreshed, slug, null, findRelatedPosts(oldest.title, posts, 3));
   const getResp = await fetch(`https://api.github.com/repos/${env.GITHUB_USER}/${env.GITHUB_REPO}/contents/blog/posts/${slug}.html`, {
@@ -791,7 +960,7 @@ async function runPillar(env) {
   const posts = await fetchExistingPosts(env.GITHUB_TOKEN, env.GITHUB_USER, env.GITHUB_REPO);
   if (posts.length === 0) return;
   const topic = "The Complete Guide to Real Estate Video Editing (Ultimate Resource)";
-  const post = await generatePost(env.DEEPSEEK_KEY, topic);
+  const post = await generatePost(env, topic);
   // Add internal links to top posts inside the pillar content
   const links = posts.slice(0, 8).map(p => `<li><a href="${p.slug}.html">${p.title}</a></li>`).join('');
   post.content = (post.content || '') + `<h2>Explore More</h2><ul>${links}</ul>`;
