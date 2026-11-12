@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "elevating-real-estate-videos-the-difference-between-good-and",
+    title: "Elevating Real Estate Videos: The Difference Between Good and Great Editing",
+    description: "Discover the key differences between good and great real estate video editing and how it impacts your business",
+    date: "2026-11-12",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "elevate-your-real-estate-videos-good-vs-great-editing",
     title: "Elevate Your Real Estate Videos: Good vs Great Editing",
     description: "Discover the difference between good and great real estate video editing and how it impacts your business",
