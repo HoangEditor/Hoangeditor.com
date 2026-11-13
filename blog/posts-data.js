@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "orbit-vs-reveal-mastering-drone-shots-for-architectural-impa",
+    title: "Orbit vs Reveal: Mastering Drone Shots for Architectural Impact",
+    description: "Learn when to use orbit and reveal drone shots for maximum architectural impact in real estate video editing",
+    date: "2026-11-13",
+    readTime: "4 min read",
+    category: "Drone & Aerial",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "proxy-workflows-for-real-estate-4k-6k-footage-editing-withou",
     title: "Proxy Workflows for Real Estate 4K/6K Footage: Editing Without Timeline Lag",
     description: "Learn how to edit 4K/6K real estate footage without timeline lag using proxy workflows and outsourced video editing services.",
