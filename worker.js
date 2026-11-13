@@ -179,38 +179,86 @@ async function runAutoPost(env) {
   try {
     console.log('Auto-post cron triggered at', new Date().toISOString());
 
-    // 1. Pick a random topic
+    // 1. Pick a random topic from an expanded, high-value pool
     const topics = [
-      "How to Price Your Real Estate Video Services for Maximum Profit",
-      "10 Drone Shots That Make Luxury Listings Look Unforgettable",
-      "Real Estate Videographer Guide to Client Retention",
-      "How to Edit Property Tours That Get More Views on Social Media",
-      "5 Common Editing Mistakes That Make Listings Look Cheap",
-      "Why Top Videographers Are Outsourcing Post-Production in 2026",
-      "Speed Ramping for Cinematic Property Walkthroughs Guide",
-      "Lighting Tips for Real Estate Videography: Natural vs Artificial",
-      "Build a 6-Figure Real Estate Video Business Without In-House Editor",
-      "Best Music Choices for Different Types of Real Estate Videos",
-      "How to Edit Agent Branding Videos That Convert Viewers to Clients",
-      "Real Estate Video Trends That Will Dominate 2027",
-      "Beginner Guide to Color Grading Real Estate Footage",
-      "How to Scale from Solo Shooter to Full Production Company",
-      "Psychology of Property Video: Why Some Listings Sell Faster",
-      "Edit Vertical Videos for Instagram and TikTok Real Estate",
-      "Essential Equipment for Real Estate Videographers 2026",
-      "How to Write Shot Lists That Make Editing Twice as Fast",
-      "Difference Between Good and Great Real Estate Video Editing",
-      "How Fast Turnaround Times Win More Real Estate Clients",
-      "AI Tools to Enhance Real Estate Video Production Workflow",
-      "Complete Guide to Real Estate Video Audio Post-Production",
-      "How to Price Luxury vs Standard Real Estate Video Packages",
-      "5 Ways to Make Real Estate Videos Stand Out in Crowded Market",
-      "How to Edit Twilight and Evening Property Tours for Impact",
-      "Business Case for Outsourcing Real Estate Video Editing",
-      "How to Create Consistent Look Across All Real Estate Videos",
-      "Real Estate Video SEO: Rank Your Videos on YouTube and Google",
-      "How to Transition from Real Estate Photography to Videography",
-      "Why Outsourcing Your Video Editing Is the Key to Scaling Fast"
+      // Equipment & Camera Gear
+      "Best Cameras for Real Estate Videography in 2026: Full Frame vs APS-C",
+      "Why 16-35mm Is the Ultimate Lens Range for Property Walkthroughs",
+      "Gimbal Balancing Masterclass: Eliminating Footstep Shake in Real Estate Videos",
+      "ND Filters for Real Estate Video: How to Maintain 180-Degree Shutter Indoors and Outdoors",
+      "Audio Gear for Real Estate Videographers: Best Wireless Mics for Agent Walkthroughs",
+      "DJI Ronin vs Zhiyun Crane: Which Gimbal Delivers Smoother Real Estate Footage?",
+      "Sony FX3 vs A7S III for Real Estate Videography: Key Differences That Matter",
+
+      // Drone & Aerial Filming
+      "FPV Drones for Real Estate: How to Shoot Seamless Indoor-to-Outdoor One-Take Tours",
+      "10 Drone Moves Every Real Estate Videographer Must Master for Luxury Listings",
+      "How to Smooth Out Jerky Drone Footage in Post-Production",
+      "Part 107 Compliance: Safe Flying Rules for Commercial Real Estate Drone Shooters",
+      "Orbit vs Reveal: When to Use Which Drone Shot for Maximum Architectural Impact",
+      "Golden Hour Drone Shots: Editing Aerial Footage for Luxury Waterfront Properties",
+      "High-Wind Drone Filming: Post-Production Stabilization Secrets",
+
+      // Color Grading & Picture Profiles
+      "Sony S-Log3 to Rec.709: The Definitive Color Grading Workflow for Real Estate",
+      "Fixing Mixed Lighting in Property Videos: Tungsten Interior vs Daylight Windows",
+      "How to Achieve Clean Whites and Natural Wall Colors in Real Estate Video Edits",
+      "HDR vs SDR for Real Estate Video Delivery: What Platforms Actually Support",
+      "Canon C-Log3 vs Sony S-Log3: Color Grading Differences in Architectural Footage",
+      "LUTs for Real Estate Videographers: Why Custom Grades Beat Generic Presets",
+      "How to Match Colors Across Drone, Camera, and Phone Footage in One Edit",
+
+      // Speed Ramping & Motion Dynamics
+      "Speed Ramping Secrets: How to Make 4-Minute Walkthroughs Feel Like 60 Seconds",
+      "Whip Pans and Mask Transitions: When to Use Them and When They Look Cheap",
+      "Pacing Property Tours: How Cutting on the Beat Keeps Buyers Watching",
+      "Smooth Slow-Motion: Choosing 60fps vs 120fps for Luxury Real Estate Highlights",
+      "Creating Cinematic Transitions Between Small Bathrooms and Hallways",
+
+      // Lighting & Window Pulls
+      "Window Pull Techniques in Video: Balancing Bright Windows with Dark Interiors",
+      "Natural Light vs Video Lights: The Fastest Setup for Solo Real Estate Shooters",
+      "Day-to-Dusk Video Editing: Transforming Afternoon Footage into a Twilight Masterpiece",
+      "Sky Replacement in Real Estate Videos: How to Fix Overcast Skies Without Looking Fake",
+      "Shooting Tight Spaces: How to Light Powder Rooms and Closets for Clean Video Edits",
+
+      // Sound Design & Music Selection
+      "Sound Design Secrets for Luxury Real Estate: Adding Foley, Room Tone, and Whooshes",
+      "How to Choose Royalty-Free Music That Matches the Architecture of the Home",
+      "Audio Mixing for Agent Walkthroughs: EQ, Compression, and Background Music Ducking",
+      "Removing Air Conditioner and Refrigerator Hum from Real Estate Audio",
+      "Voiceover Recording Tips for Real Estate Agents: Getting Studio Quality On-Site",
+
+      // Short-Form & Social Media Formats
+      "Editing Vertical 9:16 Real Estate Videos for Instagram Reels and TikTok",
+      "The 3-Second Hook Rule: How to Stop the Scroll on Real Estate Social Video",
+      "How to Repurpose One Long Property Tour into 5 High-Performing Shorts",
+      "Adding Captions and Motion Graphics That Keep Social Media Viewers Engaged",
+      "Horizontal vs Vertical: How to Package Video Deliverables for Modern Agents",
+
+      // Agent Personal Branding
+      "How to Direct Hesitant Real Estate Agents On Camera for Brand Videos",
+      "Editing Agent Bio Videos That Convert Casual Viewers into High-End Listings",
+      "Teleprompter Workflows for Real Estate Agents: Shooting Fast Without Forgetting Lines",
+      "Layering B-Roll over Talking Heads: Keeping Agent Interviews Visually Dynamic",
+
+      // Business Growth & Scaling
+      "How to Price Real Estate Video Packages: Tiered Pricing from Standard to Ultra-Luxury",
+      "From Solo Videographer to 5-Figure Monthly Production Studio: The Growth Playbook",
+      "The Real Cost of Editing Your Own Footage: Why Outsourcing Unlocks Scaling",
+      "Client Retention for Real Estate Videographers: How to Keep Top Agents on Retainer",
+      "Fast Turnaround Guarantee: How Delivering Edits in 24 Hours Doubles Your Bookings",
+      "How to Write Real Estate Video Contracts That Protect Revisions and Copyright",
+      "Handling Scope Creep: What to Do When Agents Ask for Endless Video Revisions",
+      "Cold Outreach Scripts That Actually Book Meetings with Top Producing Real Estate Agents",
+
+      // Editing Workflow & Technical Post-Production
+      "Premiere Pro vs DaVinci Resolve: Which NLE Is Faster for Real Estate Turnarounds?",
+      "Proxy Workflows for Real Estate 4K/6K Footage: Editing Without Timeline Lag",
+      "File Organization and Project Templates: Cutting Your Edit Time in Half",
+      "Best Export Settings for Real Estate Videos on YouTube, Vimeo, and Instagram",
+      "Virtual Staging in Video: What Tools Actually Work for Moving Shots?",
+      "How to Add Animated Lower Thirds and Property Spec Highlights Seamlessly"
     ];
 
     // Fetch existing posts once (for dedup + internal linking)
@@ -287,7 +335,8 @@ async function runAutoPost(env) {
     console.log('Sitemap updated');
 
     // 7. Notify + auto-share (best effort, errors are swallowed)
-    const url = `https://hoangeditor.com/blog/posts/${slugify(post.title)}.html`;
+    const postSlug = post.slug || slugify(post.title);
+    const url = `https://hoangeditor.com/blog/posts/${postSlug}.html`;
     await notifyAndShare(env, post, url, imageUrl);
 
   } catch (e) {
@@ -464,13 +513,44 @@ async function generateImage(ai, bucket, topic, post) {
 }
 
 async function deployToGitHub(token, user, repo, post, imageUrl, relatedPosts) {
-  const slug = post.title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
-    .substring(0, 60);
+  let slug = (post.slug || slugify(post.title)).substring(0, 60);
 
+  // Check if file already exists on GitHub to avoid "sha wasn't supplied" error
+  let sha = undefined;
+  try {
+    const checkResp = await fetch(
+      `https://api.github.com/repos/${user}/${repo}/contents/blog/posts/${slug}.html`,
+      { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" } }
+    );
+    if (checkResp.ok) {
+      // If slug exists, add date suffix to create a unique new article
+      const datePart = (post.date || new Date().toISOString().split('T')[0]).replace(/-/g, '');
+      const suffixed = (slug.substring(0, 50) + '-' + datePart).substring(0, 60);
+      slug = suffixed;
+
+      // Check if suffixed slug also exists; if so, grab its sha to safely update
+      const checkAgain = await fetch(
+        `https://api.github.com/repos/${user}/${repo}/contents/blog/posts/${slug}.html`,
+        { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json", "User-Agent": "HoangEditor" } }
+      );
+      if (checkAgain.ok) {
+        const existingData = await checkAgain.json();
+        sha = existingData.sha;
+      }
+    }
+  } catch (e) {
+    console.warn("Slug pre-check error (ignoring):", e.message);
+  }
+
+  post.slug = slug; // Keep updated slug on post object
   const html = buildHTML(post, slug, imageUrl, relatedPosts);
+
+  const payload = {
+    message: "Auto-publish: " + post.title,
+    content: toBase64(html),
+    branch: "main"
+  };
+  if (sha) payload.sha = sha;
 
   const resp = await fetch(
     `https://api.github.com/repos/${user}/${repo}/contents/blog/posts/${slug}.html`,
@@ -482,11 +562,7 @@ async function deployToGitHub(token, user, repo, post, imageUrl, relatedPosts) {
         "Content-Type": "application/json",
         "User-Agent": "HoangEditor"
       },
-      body: JSON.stringify({
-        message: "Auto-publish: " + post.title,
-        content: toBase64(html),
-        branch: "main"
-      })
+      body: JSON.stringify(payload)
     }
   );
 
@@ -615,26 +691,46 @@ ${relatedHtml}
 }
 
 function keywordsOf(text) {
-  const stopwords = new Set(['how','to','for','the','a','an','and','or','of','in','on','that','your','with','without','what','why','from','vs','guide','tips','complete','ultimate','essential','mastering','master','boost','transform','scale','scaling','scales','fast','faster','more','best','top','pro','quick','easy','simple','key','ways','difference','between','good','great','need','know','must','should','will','can','different','types','packages','services','business','video','videos','editing','editor','real','estate','property','properties','listing','listings','shoot','shooter','shooters','videographer','videographers','videography','production','post','team','partner','client','clients','workflow','footage','tour','tours','content','media','social','marketing','seo','2026','2027']);
-  return text.toLowerCase()
+  const stopwords = new Set([
+    'how','to','for','the','a','an','and','or','of','in','on','that','your','with',
+    'without','what','why','from','vs','guide','tips','is','are','this','these','those',
+    'which','their','his','her','its','into','about','over','after'
+  ]);
+  return (text || '').toLowerCase()
     .replace(/[^a-z0-9\s]/g, ' ')
     .split(/\s+/)
     .filter(w => w.length > 2 && !stopwords.has(w));
 }
 
+function normalizeStr(s) {
+  return (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
 function isDuplicate(topic, existingTitles) {
+  const normTopic = normalizeStr(topic);
+  if (!normTopic) return true;
+
+  for (const title of existingTitles) {
+    const normTitle = normalizeStr(title);
+    if (!normTitle) continue;
+    if (normTopic === normTitle) return true;
+    if (normTopic.includes(normTitle) || normTitle.includes(normTopic)) {
+      const minLen = Math.min(normTopic.length, normTitle.length);
+      const maxLen = Math.max(normTopic.length, normTitle.length);
+      if (minLen / maxLen >= 0.75) return true;
+    }
+  }
+
   const topicWords = keywordsOf(topic);
-  if (topicWords.length === 0) return false;
+  if (topicWords.length === 0) return true;
   for (const title of existingTitles) {
     const titleWords = keywordsOf(title);
     if (titleWords.length === 0) continue;
-    // Count overlap of significant words
     let overlap = 0;
     for (const w of topicWords) {
       if (titleWords.includes(w)) overlap++;
     }
     const ratio = overlap / Math.min(topicWords.length, titleWords.length);
-    // If 60%+ of the shorter keyword set overlaps, treat as duplicate
     if (ratio >= 0.6) return true;
   }
   return false;
@@ -710,7 +806,7 @@ function categorizePost(title, tags) {
 }
 
 async function updatePostsData(token, user, repo, post) {
-  const slug = post.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 60);
+  const slug = post.slug || post.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 60);
   const entry = `  {
     slug: "${slug}",
     title: "${post.title.replace(/"/g, '\\"')}",
@@ -971,7 +1067,7 @@ async function runPillar(env) {
 }
 
 async function updateSitemap(token, user, repo, post) {
-  const slug = post.title
+  const slug = post.slug || post.title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "")
