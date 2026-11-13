@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "fixing-mixed-lighting-in-property-videos-tungsten-interior-v",
+    title: "Fixing Mixed Lighting in Property Videos: Tungsten Interior vs Daylight Windows",
+    description: "Learn how to fix mixed lighting in property videos with Hoang Editor's expert real estate video editing tips",
+    date: "2026-11-13",
+    readTime: "4 min read",
+    category: "Filming & Production",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "orbit-vs-reveal-mastering-drone-shots-for-architectural-impa",
     title: "Orbit vs Reveal: Mastering Drone Shots for Architectural Impact",
     description: "Learn when to use orbit and reveal drone shots for maximum architectural impact in real estate video editing",
