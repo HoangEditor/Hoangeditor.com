@@ -58,7 +58,10 @@
 <div class="blog-container"><div class="blog-layout">
 <main>
 <div class="posts-grid" id="postList"></div>
-<nav class="pagination" id="pagination"></nav>
+<div class="pagination-wrapper" id="paginationWrapper">
+  <div class="pagination-info" id="paginationInfo"></div>
+  <nav class="pagination" id="pagination" aria-label="Blog pagination"></nav>
+</div>
 </main>
 
 <aside class="blog-sidebar">
@@ -100,6 +103,8 @@ ALL_POSTS.forEach(function(p, idx) {
   var card = document.createElement('a');
   card.className = 'post-card' + (isFirst ? ' featured' : '');
   card.href = 'posts/' + p.slug + '.html';
+  card.setAttribute('data-category', p.category || 'General');
+  card.setAttribute('data-search', (p.title + ' ' + (p.description || '') + ' ' + (p.category || '')).toLowerCase());
   if (isFirst) card.setAttribute('data-featured', 'true');
 
   if (isFirst) {
@@ -132,6 +137,9 @@ try {
     var card = document.createElement('a');
     card.className = 'post-card';
     card.href = 'posts/dynamic.html#' + (p.slug || '');
+    var cat = (p.tags ? p.tags.split(',')[0].trim() : '') || 'General';
+    card.setAttribute('data-category', cat);
+    card.setAttribute('data-search', (p.title + ' ' + (p.description || '') + ' ' + cat).toLowerCase());
     card.innerHTML =
       '<div class="card-thumb"><i class="fas fa-file-lines"></i></div>' +
       '<div class="card-content"><div class="card-meta"><span>' + dateStr + '</span><span>·</span><span>' + (p.readTime || '4 min read') + '</span><span>·</span><span class="cat">' + (escHtml(p.tags ? p.tags.split(',')[0].trim() : '' ) || 'General') + '</span></div>' +
@@ -176,24 +184,6 @@ recentPosts.forEach(function(p) {
   recentList.appendChild(li);
 });
 
-// ===== SEARCH & FILTER =====
-window.filterPosts = function() {
-  var q = (document.getElementById('blogSearch').value || '').toLowerCase();
-  allCards.forEach(function(c) {
-    c.style.display = (c.textContent || '').toLowerCase().indexOf(q) >= 0 ? '' : 'none';
-  });
-};
-
-window.filterByCat = function(cat) {
-  document.querySelectorAll('.cat-list a').forEach(function(a) { a.style.fontWeight = ''; });
-  if (window.event && window.event.target) window.event.target.style.fontWeight = '700';
-  allCards.forEach(function(c) {
-    if (cat === 'all') { c.style.display = ''; return; }
-    var ce = c.querySelector('.cat');
-    c.style.display = ce && ce.textContent.trim() === cat ? '' : 'none';
-  });
-};
-
 window.showToast = function(m) {
   var t = document.createElement('div');
   t.textContent = m;
@@ -203,38 +193,162 @@ window.showToast = function(m) {
   setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2000);
 };
 
-// ===== PAGINATION =====
+// ===== SEARCH, FILTER & SMART PAGINATION =====
 var PER_PAGE = 10;
-var pagination = document.getElementById('pagination');
-if (pagination && allCards.length > 0) {
-  var totalPages = Math.ceil(allCards.length / PER_PAGE);
-  var currentPage = 1;
+var currentPage = 1;
+var currentCat = 'all';
+var searchQuery = '';
+var activeCards = allCards.slice();
 
-  function showPage(p) {
-    currentPage = Math.max(1, Math.min(p, totalPages));
-    allCards.forEach(function(c, i) {
-      c.style.display = Math.floor(i / PER_PAGE) + 1 === currentPage ? '' : 'none';
-      if (c.hasAttribute('data-featured') && currentPage === 1) c.style.display = '';
-    });
-    renderPagination();
-    window.scrollTo({ top: document.getElementById('postList').offsetTop - 120, behavior: 'smooth' });
+function getPaginationItems(current, total) {
+  if (total <= 7) {
+    var arr = [];
+    for (var i = 1; i <= total; i++) arr.push(i);
+    return arr;
   }
-
-  function renderPagination() {
-    var h = '<button class="page-btn' + (currentPage === 1 ? ' disabled' : '') + '" onclick="showPage(' + (currentPage - 1) + ')"><i class="fas fa-chevron-left"></i> Prev</button>';
-    for (var i = 1; i <= totalPages; i++)
-      h += '<button class="page-num' + (i === currentPage ? ' active' : '') + '" onclick="showPage(' + i + ')">' + i + '</button>';
-    h += '<button class="page-btn' + (currentPage === totalPages ? ' disabled' : '') + '" onclick="showPage(' + (currentPage + 1) + ')">Next <i class="fas fa-chevron-right"></i></button>';
-    pagination.innerHTML = h;
-  }
-
-  if (totalPages > 1) showPage(1);
-  else {
-    allCards.forEach(function(c) { c.style.display = ''; });
-    renderPagination();
-  }
-  window.showPage = showPage;
+  if (current <= 4) return [1, 2, 3, 4, 5, '...', total];
+  if (current >= total - 3) return [1, '...', total - 4, total - 3, total - 2, total - 1, total];
+  return [1, '...', current - 1, current, current + 1, '...', total];
 }
+
+function updateFilter(newCat, newQuery) {
+  if (newCat !== undefined) currentCat = newCat;
+  if (newQuery !== undefined) searchQuery = (newQuery || '').trim().toLowerCase();
+
+  activeCards = allCards.filter(function(card) {
+    var matchCat = (currentCat === 'all') || (card.getAttribute('data-category') === currentCat);
+    var matchSearch = !searchQuery || (card.getAttribute('data-search') || '').indexOf(searchQuery) >= 0;
+    return matchCat && matchSearch;
+  });
+
+  currentPage = 1;
+  renderView(false);
+}
+
+function showPage(p) {
+  var totalPages = Math.ceil(activeCards.length / PER_PAGE) || 1;
+  currentPage = Math.max(1, Math.min(p, totalPages));
+  renderView(true);
+}
+
+function renderView(shouldScroll) {
+  var total = activeCards.length;
+  var totalPages = Math.ceil(total / PER_PAGE) || 1;
+  if (currentPage > totalPages) currentPage = totalPages;
+
+  var startIndex = (currentPage - 1) * PER_PAGE;
+  var endIndex = Math.min(startIndex + PER_PAGE, total);
+
+  // Hide all cards
+  allCards.forEach(function(card) { card.style.display = 'none'; });
+
+  var emptyEl = document.getElementById('postsEmpty');
+  if (total === 0) {
+    if (!emptyEl) {
+      emptyEl = document.createElement('div');
+      emptyEl.id = 'postsEmpty';
+      emptyEl.className = 'posts-empty';
+      emptyEl.innerHTML = '<i class="fas fa-magnifying-glass"></i>' +
+        '<h3>No articles found</h3>' +
+        '<p>Try adjusting your search terms or browse all categories.</p>' +
+        '<button class="btn-reset" onclick="resetFilters()"><i class="fas fa-rotate-left"></i> Reset Filters</button>';
+      list.appendChild(emptyEl);
+    }
+    emptyEl.style.display = '';
+  } else {
+    if (emptyEl) emptyEl.style.display = 'none';
+    for (var i = startIndex; i < endIndex; i++) {
+      activeCards[i].style.display = '';
+    }
+  }
+
+  renderPaginationUI(total, totalPages, startIndex, endIndex);
+
+  if (shouldScroll) {
+    var postList = document.getElementById('postList');
+    if (postList) {
+      var topPos = postList.getBoundingClientRect().top + window.pageYOffset - 100;
+      window.scrollTo({ top: Math.max(0, topPos), behavior: 'smooth' });
+    }
+  }
+}
+
+function renderPaginationUI(total, totalPages, start, end) {
+  var wrapper = document.getElementById('paginationWrapper');
+  var infoEl = document.getElementById('paginationInfo');
+  var navEl = document.getElementById('pagination');
+  if (!wrapper || !infoEl || !navEl) return;
+
+  if (total === 0) {
+    wrapper.style.display = 'none';
+    return;
+  }
+
+  wrapper.style.display = 'flex';
+
+  if (totalPages <= 1) {
+    infoEl.innerHTML = 'Showing all <strong>' + total + '</strong> article' + (total === 1 ? '' : 's');
+    navEl.innerHTML = '';
+    navEl.style.display = 'none';
+    return;
+  }
+
+  navEl.style.display = 'flex';
+  infoEl.innerHTML = 'Showing <strong>' + (start + 1) + '–' + end + '</strong> of <strong>' + total + '</strong> articles · Page <strong>' + currentPage + '</strong> of <strong>' + totalPages + '</strong>';
+
+  var prevDisabled = (currentPage === 1);
+  var h = '<button class="page-btn' + (prevDisabled ? ' disabled' : '') + '" onclick="showPage(' + (currentPage - 1) + ')" aria-label="Previous Page"' + (prevDisabled ? ' disabled' : '') + '><i class="fas fa-arrow-left"></i> <span>Previous</span></button>';
+
+  h += '<div class="page-nums">';
+  var items = getPaginationItems(currentPage, totalPages);
+  for (var k = 0; k < items.length; k++) {
+    var it = items[k];
+    if (it === '...') {
+      h += '<span class="page-ellipsis" aria-hidden="true">&hellip;</span>';
+    } else {
+      var isActive = (it === currentPage);
+      h += '<button class="page-num' + (isActive ? ' active' : '') + '" onclick="showPage(' + it + ')" aria-label="Page ' + it + '"' + (isActive ? ' aria-current="page"' : '') + '>' + it + '</button>';
+    }
+  }
+  h += '</div>';
+
+  h += '<span class="pagination-mobile-info" aria-label="Current page">' + currentPage + ' / ' + totalPages + '</span>';
+
+  var nextDisabled = (currentPage === totalPages);
+  h += '<button class="page-btn' + (nextDisabled ? ' disabled' : '') + '" onclick="showPage(' + (currentPage + 1) + ')" aria-label="Next Page"' + (nextDisabled ? ' disabled' : '') + '><span>Next</span> <i class="fas fa-arrow-right"></i></button>';
+
+  navEl.innerHTML = h;
+}
+
+window.resetFilters = function() {
+  var searchInput = document.getElementById('blogSearch');
+  if (searchInput) searchInput.value = '';
+  document.querySelectorAll('.cat-list a').forEach(function(a) { a.style.fontWeight = ''; });
+  var allLink = document.querySelector('.cat-list a');
+  if (allLink) allLink.style.fontWeight = '700';
+  updateFilter('all', '');
+};
+
+window.filterPosts = function() {
+  var q = document.getElementById('blogSearch').value;
+  updateFilter(undefined, q);
+};
+
+window.filterByCat = function(cat) {
+  document.querySelectorAll('.cat-list a').forEach(function(a) { a.style.fontWeight = ''; });
+  if (window.event && window.event.target) {
+    var target = window.event.target.closest('a') || window.event.target;
+    target.style.fontWeight = '700';
+  }
+  updateFilter(cat, undefined);
+};
+
+window.showPage = showPage;
+
+// Highlight All Posts initially & render page 1
+var firstCatLink = document.querySelector('.cat-list a');
+if (firstCatLink) firstCatLink.style.fontWeight = '700';
+updateFilter('all', '');
 })();
 </script>
 </body>
