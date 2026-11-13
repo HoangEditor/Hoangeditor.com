@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "proxy-workflows-for-real-estate-4k-6k-footage-editing-withou",
+    title: "Proxy Workflows for Real Estate 4K/6K Footage: Editing Without Timeline Lag",
+    description: "Learn how to edit 4K/6K real estate footage without timeline lag using proxy workflows and outsourced video editing services.",
+    date: "2026-11-13",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "elevating-real-estate-videos-the-difference-between-good-and",
     title: "Elevating Real Estate Videos: The Difference Between Good and Great Editing",
     description: "Discover the key differences between good and great real estate video editing and how it impacts your business",
