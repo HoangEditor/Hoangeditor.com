@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "elevate-luxury-real-estate-videos-with-sound-design-secrets",
+    title: "Elevate Luxury Real Estate Videos with Sound Design Secrets",
+    description: "Discover sound design secrets for luxury real estate videos, including adding foley, room tone, and whooshes to create an immersive experience",
+    date: "2026-11-14",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "elevate-your-real-estate-videos-audio-mixing-for-agent-walkt",
     title: "Elevate Your Real Estate Videos: Audio Mixing for Agent Walkthroughs",
     description: "Improve real estate video editing with expert audio mixing techniques, including EQ, compression, and background music ducking for agent walkthroughs.",
