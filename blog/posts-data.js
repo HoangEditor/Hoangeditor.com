@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "elevate-your-real-estate-videos-audio-mixing-for-agent-walkt",
+    title: "Elevate Your Real Estate Videos: Audio Mixing for Agent Walkthroughs",
+    description: "Improve real estate video editing with expert audio mixing techniques, including EQ, compression, and background music ducking for agent walkthroughs.",
+    date: "2026-11-14",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "directing-hesitant-real-estate-agents-on-camera-for-brand-vi",
     title: "Directing Hesitant Real Estate Agents On Camera for Brand Videos",
     description: "Learn how to direct hesitant real estate agents on camera for compelling brand videos that showcase their personality and expertise",
