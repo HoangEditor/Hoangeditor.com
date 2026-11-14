@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "directing-hesitant-real-estate-agents-on-camera-for-brand-vi",
+    title: "Directing Hesitant Real Estate Agents On Camera for Brand Videos",
+    description: "Learn how to direct hesitant real estate agents on camera for compelling brand videos that showcase their personality and expertise",
+    date: "2026-11-14",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "fixing-mixed-lighting-in-property-videos-tungsten-interior-v",
     title: "Fixing Mixed Lighting in Property Videos: Tungsten Interior vs Daylight Windows",
     description: "Learn how to fix mixed lighting in property videos with Hoang Editor's expert real estate video editing tips",
