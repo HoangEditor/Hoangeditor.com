@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-complete-guide-to-real-estate-video-editing",
+    title: "The Complete Guide to Real Estate Video Editing",
+    description: "Discover the ultimate resource for real estate video editing, covering post-production, property tours, and outsourced editing solutions.",
+    date: "2026-11-15",
+    readTime: "6 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "horizontal-vs-vertical-video-deliverables-for-modern-agents",
     title: "Horizontal vs Vertical: Video Deliverables for Modern Agents",
     description: "Learn how to package video deliverables for modern real estate agents, including horizontal and vertical formats for social media and property tours.",
