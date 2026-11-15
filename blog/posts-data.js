@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "horizontal-vs-vertical-video-deliverables-for-modern-agents",
+    title: "Horizontal vs Vertical: Video Deliverables for Modern Agents",
+    description: "Learn how to package video deliverables for modern real estate agents, including horizontal and vertical formats for social media and property tours.",
+    date: "2026-11-15",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "elevate-luxury-real-estate-videos-with-sound-design-secrets",
     title: "Elevate Luxury Real Estate Videos with Sound Design Secrets",
     description: "Discover sound design secrets for luxury real estate videos, including adding foley, room tone, and whooshes to create an immersive experience",
