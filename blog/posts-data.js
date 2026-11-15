@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "fpv-drones-for-real-estate-seamless-indoor-to-outdoor-tours",
+    title: "FPV Drones for Real Estate: Seamless Indoor-to-Outdoor Tours",
+    description: "Discover how to capture seamless indoor-to-outdoor one-take tours with FPV drones for real estate video production",
+    date: "2026-11-15",
+    readTime: "4 min read",
+    category: "Drone & Aerial",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "removing-air-conditioner-and-refrigerator-hum-from-real-esta",
     title: "Removing Air Conditioner and Refrigerator Hum from Real Estate Audio",
     description: "Learn how to remove unwanted hums from air conditioners and refrigerators in real estate video audio",
