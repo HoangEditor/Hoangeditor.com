@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "removing-air-conditioner-and-refrigerator-hum-from-real-esta",
+    title: "Removing Air Conditioner and Refrigerator Hum from Real Estate Audio",
+    description: "Learn how to remove unwanted hums from air conditioners and refrigerators in real estate video audio",
+    date: "2026-11-15",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-complete-guide-to-real-estate-video-editing",
     title: "The Complete Guide to Real Estate Video Editing",
     description: "Discover the ultimate resource for real estate video editing, covering post-production, property tours, and outsourced editing solutions.",
