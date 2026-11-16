@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "perfecting-audio-for-real-estate-videos-a-guide-to-eq-compre",
+    title: "Perfecting Audio for Real Estate Videos: A Guide to EQ, Compression, and Music Ducking",
+    description: "Learn how to enhance audio for real estate agent walkthroughs with EQ, compression, and background music ducking techniques",
+    date: "2026-11-16",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "fpv-drones-for-real-estate-seamless-indoor-to-outdoor-tours",
     title: "FPV Drones for Real Estate: Seamless Indoor-to-Outdoor Tours",
     description: "Discover how to capture seamless indoor-to-outdoor one-take tours with FPV drones for real estate video production",
