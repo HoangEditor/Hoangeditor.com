@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "handling-scope-creep-what-to-do-when-agents-ask-for-endless-",
+    title: "Handling Scope Creep: What to Do When Agents Ask for Endless Video Revisions",
+    description: "Learn how to manage scope creep in real estate video editing and maintain a healthy relationship with your clients",
+    date: "2026-11-16",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "canon-c-log3-vs-sony-s-log3-color-grading-differences-in-arc",
     title: "Canon C-Log3 vs Sony S-Log3: Color Grading Differences in Architectural Footage",
     description: "Discover the color grading differences between Canon C-Log3 and Sony S-Log3 in architectural footage for real estate video editing",
