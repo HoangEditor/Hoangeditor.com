@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "canon-c-log3-vs-sony-s-log3-color-grading-differences-in-arc",
+    title: "Canon C-Log3 vs Sony S-Log3: Color Grading Differences in Architectural Footage",
+    description: "Discover the color grading differences between Canon C-Log3 and Sony S-Log3 in architectural footage for real estate video editing",
+    date: "2026-11-16",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "perfecting-audio-for-real-estate-videos-a-guide-to-eq-compre",
     title: "Perfecting Audio for Real Estate Videos: A Guide to EQ, Compression, and Music Ducking",
     description: "Learn how to enhance audio for real estate agent walkthroughs with EQ, compression, and background music ducking techniques",
