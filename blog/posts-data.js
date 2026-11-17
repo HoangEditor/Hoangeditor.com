@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "boost-engagement-with-captions-and-motion-graphics-in-real-e",
+    title: "Boost Engagement with Captions and Motion Graphics in Real Estate Videos",
+    description: "Learn how to add captions and motion graphics to real estate videos to increase viewer engagement on social media",
+    date: "2026-11-17",
+    readTime: "4 min read",
+    category: "Marketing & SEO",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "elevate-your-real-estate-videos-with-professional-audio-mixi",
     title: "Elevate Your Real Estate Videos with Professional Audio Mixing",
     description: "Learn how to enhance your agent walkthroughs with expert audio mixing techniques, including EQ, compression, and background music ducking",
