@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "elevate-your-real-estate-videos-with-professional-audio-mixi",
+    title: "Elevate Your Real Estate Videos with Professional Audio Mixing",
+    description: "Learn how to enhance your agent walkthroughs with expert audio mixing techniques, including EQ, compression, and background music ducking",
+    date: "2026-11-17",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "fast-turnaround-guarantee-boosting-bookings-with-24-hour-edi",
     title: "Fast Turnaround Guarantee: Boosting Bookings with 24-Hour Edits",
     description: "Discover how a 24-hour turnaround guarantee can double your real estate video bookings and grow your business",
