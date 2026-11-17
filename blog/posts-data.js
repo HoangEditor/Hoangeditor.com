@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "fast-turnaround-guarantee-boosting-bookings-with-24-hour-edi",
+    title: "Fast Turnaround Guarantee: Boosting Bookings with 24-Hour Edits",
+    description: "Discover how a 24-hour turnaround guarantee can double your real estate video bookings and grow your business",
+    date: "2026-11-17",
+    readTime: "4 min read",
+    category: "Business Growth",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "handling-scope-creep-what-to-do-when-agents-ask-for-endless-",
     title: "Handling Scope Creep: What to Do When Agents Ask for Endless Video Revisions",
     description: "Learn how to manage scope creep in real estate video editing and maintain a healthy relationship with your clients",
