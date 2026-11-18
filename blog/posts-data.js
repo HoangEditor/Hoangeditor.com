@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "smooth-slow-motion-choosing-60fps-vs-120fps-for-luxury-real-",
+    title: "Smooth Slow-Motion: Choosing 60fps vs 120fps for Luxury Real Estate Highlights",
+    description: "Discover the best frame rate for luxury real estate video highlights, comparing 60fps and 120fps for smooth slow-motion footage",
+    date: "2026-11-18",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "luts-for-real-estate-videographers-elevating-property-tours-",
     title: "LUTs for Real Estate Videographers: Elevating Property Tours with Custom Grades",
     description: "Discover how custom LUTs can enhance real estate video editing and property tours, outshining generic presets",
