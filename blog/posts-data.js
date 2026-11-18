@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "luts-for-real-estate-videographers-elevating-property-tours-",
+    title: "LUTs for Real Estate Videographers: Elevating Property Tours with Custom Grades",
+    description: "Discover how custom LUTs can enhance real estate video editing and property tours, outshining generic presets",
+    date: "2026-11-18",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "why-16-35mm-is-the-ultimate-lens-range-for-property-walkthro",
     title: "Why 16-35mm Is the Ultimate Lens Range for Property Walkthroughs",
     description: "Discover the benefits of using 16-35mm lenses for real estate video production and property walkthroughs",
