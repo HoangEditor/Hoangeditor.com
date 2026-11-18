@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "why-16-35mm-is-the-ultimate-lens-range-for-property-walkthro",
+    title: "Why 16-35mm Is the Ultimate Lens Range for Property Walkthroughs",
+    description: "Discover the benefits of using 16-35mm lenses for real estate video production and property walkthroughs",
+    date: "2026-11-18",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "boost-engagement-with-captions-and-motion-graphics-in-real-e",
     title: "Boost Engagement with Captions and Motion Graphics in Real Estate Videos",
     description: "Learn how to add captions and motion graphics to real estate videos to increase viewer engagement on social media",
