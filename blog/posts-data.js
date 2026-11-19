@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "perfecting-audio-for-real-estate-videos-a-guide-to-20261119",
+    title: "Perfecting Audio for Real Estate Videos: A Guide to EQ, Compression, and Music Ducking",
+    description: "Learn how to enhance audio quality in real estate videos with EQ, compression, and background music ducking techniques for professional results",
+    date: "2026-11-19",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "smoothing-out-jerky-drone-footage-in-post-production",
     title: "Smoothing Out Jerky Drone Footage in Post-Production",
     description: "Learn how to stabilize jerky drone footage in video post-production for smoother real estate videos",
