@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "smoothing-out-jerky-drone-footage-in-post-production",
+    title: "Smoothing Out Jerky Drone Footage in Post-Production",
+    description: "Learn how to stabilize jerky drone footage in video post-production for smoother real estate videos",
+    date: "2026-11-19",
+    readTime: "4 min read",
+    category: "Drone & Aerial",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "color-matching-for-real-estate-video-editing-a-guide",
     title: "Color Matching for Real Estate Video Editing: A Guide",
     description: "Learn how to match colors across drone, camera, and phone footage for a cohesive real estate video edit",
