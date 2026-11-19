@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "color-matching-for-real-estate-video-editing-a-guide",
+    title: "Color Matching for Real Estate Video Editing: A Guide",
+    description: "Learn how to match colors across drone, camera, and phone footage for a cohesive real estate video edit",
+    date: "2026-11-19",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "smooth-slow-motion-choosing-60fps-vs-120fps-for-luxury-real-",
     title: "Smooth Slow-Motion: Choosing 60fps vs 120fps for Luxury Real Estate Highlights",
     description: "Discover the best frame rate for luxury real estate video highlights, comparing 60fps and 120fps for smooth slow-motion footage",
