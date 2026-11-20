@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "pacing-property-tours-how-cutting-on-the-beat-keeps-buyers-w",
+    title: "Pacing Property Tours: How Cutting on the Beat Keeps Buyers Watching",
+    description: "Learn how to pace property tours with music to keep buyers engaged. Discover the importance of cutting on the beat in real estate video editing.",
+    date: "2026-11-20",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "gimbal-balancing-masterclass-eliminating-footstep-shake-in-r",
     title: "Gimbal Balancing Masterclass: Eliminating Footstep Shake in Real Estate Videos",
     description: "Learn how to balance your gimbal for smooth real estate video footage, eliminating footstep shake and improving video quality",
