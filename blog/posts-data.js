@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "gimbal-balancing-masterclass-eliminating-footstep-shake-in-r",
+    title: "Gimbal Balancing Masterclass: Eliminating Footstep Shake in Real Estate Videos",
+    description: "Learn how to balance your gimbal for smooth real estate video footage, eliminating footstep shake and improving video quality",
+    date: "2026-11-20",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "perfecting-audio-for-real-estate-videos-a-guide-to-20261119",
     title: "Perfecting Audio for Real Estate Videos: A Guide to EQ, Compression, and Music Ducking",
     description: "Learn how to enhance audio quality in real estate videos with EQ, compression, and background music ducking techniques for professional results",
