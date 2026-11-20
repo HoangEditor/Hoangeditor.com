@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "cold-outreach-scripts-for-real-estate-agents",
+    title: "Cold Outreach Scripts for Real Estate Agents",
+    description: "Learn effective cold outreach scripts to book meetings with top producing real estate agents and grow your video business",
+    date: "2026-11-20",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "pacing-property-tours-how-cutting-on-the-beat-keeps-buyers-w",
     title: "Pacing Property Tours: How Cutting on the Beat Keeps Buyers Watching",
     description: "Learn how to pace property tours with music to keep buyers engaged. Discover the importance of cutting on the beat in real estate video editing.",
