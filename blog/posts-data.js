@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "voiceover-recording-tips-for-real-estate-agents-getting-stud",
+    title: "Voiceover Recording Tips for Real Estate Agents: Getting Studio Quality On-Site",
+    description: "Learn how to achieve studio-quality voiceovers on-site for real estate videos with expert tips and techniques",
+    date: "2026-11-21",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "repurpose-one-long-property-tour-into-5-high-performing-shor",
     title: "Repurpose One Long Property Tour into 5 High-Performing Shorts",
     description: "Boost your real estate video marketing with 5 high-performing shorts from one long property tour. Learn how to repurpose your footage with expert tips.",
