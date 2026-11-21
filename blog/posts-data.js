@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "elevate-your-real-estate-videos-with-pro-audio-mixing",
+    title: "Elevate Your Real Estate Videos with Pro Audio Mixing",
+    description: "Learn expert audio mixing techniques for real estate agent walkthroughs, including EQ, compression, and background music ducking",
+    date: "2026-11-21",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "voiceover-recording-tips-for-real-estate-agents-getting-stud",
     title: "Voiceover Recording Tips for Real Estate Agents: Getting Studio Quality On-Site",
     description: "Learn how to achieve studio-quality voiceovers on-site for real estate videos with expert tips and techniques",
