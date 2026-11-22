@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "dji-ronin-vs-zhiyun-crane-which-gimbal-delivers-smoother-rea",
+    title: "DJI Ronin vs Zhiyun Crane: Which Gimbal Delivers Smoother Real Estate Footage?",
+    description: "Compare DJI Ronin and Zhiyun Crane for smooth real estate video footage. Learn which gimbal is best for your production team.",
+    date: "2026-11-22",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "elevate-your-real-estate-videos-with-pro-audio-mixing",
     title: "Elevate Your Real Estate Videos with Pro Audio Mixing",
     description: "Learn expert audio mixing techniques for real estate agent walkthroughs, including EQ, compression, and background music ducking",
