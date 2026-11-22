@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "streamline-your-real-estate-video-editing-file-organization-",
+    title: "Streamline Your Real Estate Video Editing: File Organization and Project Templates",
+    description: "Learn how to cut your edit time in half with proper file organization and project templates for real estate video editing",
+    date: "2026-11-22",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "teleprompter-workflows-for-real-estate-agents-shooting-fast-",
     title: "Teleprompter Workflows for Real Estate Agents: Shooting Fast Without Forgetting Lines",
     description: "Boost your real estate video production with efficient teleprompter workflows, helping agents deliver smooth property tours and presentations.",
