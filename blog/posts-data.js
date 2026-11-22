@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "teleprompter-workflows-for-real-estate-agents-shooting-fast-",
+    title: "Teleprompter Workflows for Real Estate Agents: Shooting Fast Without Forgetting Lines",
+    description: "Boost your real estate video production with efficient teleprompter workflows, helping agents deliver smooth property tours and presentations.",
+    date: "2026-11-22",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-complete-guide-to-real-estate-video-editing-20261122",
     title: "The Complete Guide to Real Estate Video Editing",
     description: "Learn the ins and outs of real estate video editing and how to outsource post-production effectively to scale your video business",
