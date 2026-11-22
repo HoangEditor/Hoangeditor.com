@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "the-complete-guide-to-real-estate-video-editing-20261122",
+    title: "The Complete Guide to Real Estate Video Editing",
+    description: "Learn the ins and outs of real estate video editing and how to outsource post-production effectively to scale your video business",
+    date: "2026-11-22",
+    readTime: "6 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "dji-ronin-vs-zhiyun-crane-which-gimbal-delivers-smoother-rea",
     title: "DJI Ronin vs Zhiyun Crane: Which Gimbal Delivers Smoother Real Estate Footage?",
     description: "Compare DJI Ronin and Zhiyun Crane for smooth real estate video footage. Learn which gimbal is best for your production team.",
