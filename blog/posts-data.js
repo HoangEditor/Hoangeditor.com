@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "day-to-dusk-video-editing-transforming-afternoon-footage-int",
+    title: "Day-to-Dusk Video Editing: Transforming Afternoon Footage into a Twilight Masterpiece",
+    description: "Learn how to transform afternoon footage into a stunning twilight property tour with expert real estate video editing techniques.",
+    date: "2026-11-23",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "color-matching-for-real-estate-video-editing-a-gui-20261123",
     title: "Color Matching for Real Estate Video Editing: A Guide",
     description: "Learn how to match colors across drone, camera, and phone footage in real estate video editing for a cohesive look",
