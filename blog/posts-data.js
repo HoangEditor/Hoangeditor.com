@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "choosing-royalty-free-music-for-real-estate-videos",
+    title: "Choosing Royalty-Free Music for Real Estate Videos",
+    description: "Learn how to select royalty-free music that complements the architecture of a home in your real estate videos",
+    date: "2026-11-23",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "day-to-dusk-video-editing-transforming-afternoon-footage-int",
     title: "Day-to-Dusk Video Editing: Transforming Afternoon Footage into a Twilight Masterpiece",
     description: "Learn how to transform afternoon footage into a stunning twilight property tour with expert real estate video editing techniques.",
