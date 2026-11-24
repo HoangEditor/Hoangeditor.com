@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "color-consistency-in-real-estate-video-editing-a-guide",
+    title: "Color Consistency in Real Estate Video Editing: A Guide",
+    description: "Learn how to match colors across drone, camera, and phone footage in one edit for stunning real estate videos",
+    date: "2026-11-24",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "choosing-royalty-free-music-for-real-estate-videos",
     title: "Choosing Royalty-Free Music for Real Estate Videos",
     description: "Learn how to select royalty-free music that complements the architecture of a home in your real estate videos",
