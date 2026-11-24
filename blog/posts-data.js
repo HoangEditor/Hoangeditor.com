@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "elevating-real-estate-videos-cinematic-transitions-for-bathr",
+    title: "Elevating Real Estate Videos: Cinematic Transitions for Bathrooms and Hallways",
+    description: "Learn how to create seamless cinematic transitions between small bathrooms and hallways in real estate video editing for a professional look",
+    date: "2026-11-24",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "color-consistency-in-real-estate-video-editing-a-guide",
     title: "Color Consistency in Real Estate Video Editing: A Guide",
     description: "Learn how to match colors across drone, camera, and phone footage in one edit for stunning real estate videos",
