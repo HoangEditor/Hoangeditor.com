@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "shooting-tight-spaces-tips-for-lighting-powder-rooms-and-clo",
+    title: "Shooting Tight Spaces: Tips for Lighting Powder Rooms and Closets",
+    description: "Learn how to light small spaces like powder rooms and closets for clean real estate video edits and enhance your property tour videos.",
+    date: "2026-11-24",
+    readTime: "4 min read",
+    category: "Filming & Production",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "elevating-real-estate-videos-cinematic-transitions-for-bathr",
     title: "Elevating Real Estate Videos: Cinematic Transitions for Bathrooms and Hallways",
     description: "Learn how to create seamless cinematic transitions between small bathrooms and hallways in real estate video editing for a professional look",
