@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "perfecting-audio-for-real-estate-videos-a-guide-to-20261125",
+    title: "Perfecting Audio for Real Estate Videos: A Guide to EQ, Compression, and Music Ducking",
+    description: "Learn how to enhance audio in real estate videos with EQ, compression, and background music ducking techniques for professional results",
+    date: "2026-11-25",
+    readTime: "5 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "boost-engagement-with-captions-and-motion-graphics-20261125",
     title: "Boost Engagement with Captions and Motion Graphics in Real Estate Videos",
     description: "Learn how to keep social media viewers engaged with captions and motion graphics in real estate video editing",
