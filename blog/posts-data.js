@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "boost-engagement-with-captions-and-motion-graphics-20261125",
+    title: "Boost Engagement with Captions and Motion Graphics in Real Estate Videos",
+    description: "Learn how to keep social media viewers engaged with captions and motion graphics in real estate video editing",
+    date: "2026-11-25",
+    readTime: "4 min read",
+    category: "Marketing & SEO",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "shooting-tight-spaces-tips-for-lighting-powder-rooms-and-clo",
     title: "Shooting Tight Spaces: Tips for Lighting Powder Rooms and Closets",
     description: "Learn how to light small spaces like powder rooms and closets for clean real estate video edits and enhance your property tour videos.",
