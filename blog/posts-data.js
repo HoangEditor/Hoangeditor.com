@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "color-consistency-in-real-estate-video-editing",
+    title: "Color Consistency in Real Estate Video Editing",
+    description: "Learn how to match colors across drone, camera, and phone footage in one edit for stunning real estate videos",
+    date: "2026-11-26",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "the-real-cost-of-editing-your-own-footage-why-outsourcing-un",
     title: "The Real Cost of Editing Your Own Footage: Why Outsourcing Unlocks Scaling",
     description: "Discover the benefits of outsourcing real estate video editing to scale your business and increase productivity.",
