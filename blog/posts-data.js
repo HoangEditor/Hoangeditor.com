@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "whip-pans-and-mask-transitions-in-real-estate-video-editing-",
+    title: "Whip Pans and Mask Transitions in Real Estate Video Editing: Best Practices",
+    description: "Learn when to use whip pans and mask transitions in real estate video editing to enhance your property tours without looking cheap.",
+    date: "2026-11-26",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "color-consistency-in-real-estate-video-editing",
     title: "Color Consistency in Real Estate Video Editing",
     description: "Learn how to match colors across drone, camera, and phone footage in one edit for stunning real estate videos",
