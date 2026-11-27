@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "elevating-real-estate-videos-cinematic-transitions-for-small",
+    title: "Elevating Real Estate Videos: Cinematic Transitions for Small Bathrooms and Hallways",
+    description: "Learn how to create seamless cinematic transitions between small bathrooms and hallways in real estate videos with expert video post-production tips.",
+    date: "2026-11-27",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "speed-ramping-secrets-for-real-estate-videographers",
     title: "Speed Ramping Secrets for Real Estate Videographers",
     description: "Learn how to apply speed ramping techniques to make 4-minute property tours feel like 60 seconds, enhancing viewer engagement and retention.",
