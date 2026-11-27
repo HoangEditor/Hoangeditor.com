@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "color-matching-for-real-estate-video-editing-a-gui-20261127",
+    title: "Color Matching for Real Estate Video Editing: A Guide",
+    description: "Learn how to match colors across drone, camera, and phone footage in real estate video editing for a cohesive look",
+    date: "2026-11-27",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "whip-pans-and-mask-transitions-in-real-estate-video-editing-",
     title: "Whip Pans and Mask Transitions in Real Estate Video Editing: Best Practices",
     description: "Learn when to use whip pans and mask transitions in real estate video editing to enhance your property tours without looking cheap.",
