@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "speed-ramping-secrets-for-real-estate-videographers",
+    title: "Speed Ramping Secrets for Real Estate Videographers",
+    description: "Learn how to apply speed ramping techniques to make 4-minute property tours feel like 60 seconds, enhancing viewer engagement and retention.",
+    date: "2026-11-27",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "color-matching-for-real-estate-video-editing-a-gui-20261127",
     title: "Color Matching for Real Estate Video Editing: A Guide",
     description: "Learn how to match colors across drone, camera, and phone footage in real estate video editing for a cohesive look",
