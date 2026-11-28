@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "streamline-your-real-estate-video-editing-with-file-organiza",
+    title: "Streamline Your Real Estate Video Editing with File Organization and Project Templates",
+    description: "Learn how to cut your real estate video edit time in half with proper file organization and project templates",
+    date: "2026-11-28",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "color-matching-for-real-estate-video-editing-a-gui-20261128",
     title: "Color Matching for Real Estate Video Editing: A Guide",
     description: "Learn how to match colors across drone, camera, and phone footage for seamless real estate video editing",
