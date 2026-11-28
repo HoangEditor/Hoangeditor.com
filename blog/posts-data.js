@@ -4,6 +4,15 @@
  */
 var BLOG_POSTS = [
   {
+    slug: "color-matching-for-real-estate-video-editing-a-gui-20261128",
+    title: "Color Matching for Real Estate Video Editing: A Guide",
+    description: "Learn how to match colors across drone, camera, and phone footage for seamless real estate video editing",
+    date: "2026-11-28",
+    readTime: "4 min read",
+    category: "Video Editing",
+    icon: "fa-file-lines"
+  },
+  {
     slug: "speed-ramping-secrets-for-real-estate-videos",
     title: "Speed Ramping Secrets for Real Estate Videos",
     description: "Learn how to apply speed ramping techniques to make 4-minute property tours feel like 60 seconds, enhancing viewer engagement and retention",
